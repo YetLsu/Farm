@@ -1,0 +1,24 @@
+//
+//  farmPrefix.pch
+//  farm
+//
+//  Created by wyy on 2016/11/12.
+//  Copyright © 2016年 WYY. All rights reserved.
+//
+
+#ifndef farmPrefix_pch
+#define farmPrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "YYFarmDefine.h"
+
+#import "UIView+Extension.h"
+#import "Masonry.h"
+#import "BlocksKit+UIKit.h"
+#import "NSString+YYString.h"
+#import "NSDate+YYWeek.h"
+
+static NSString *homeMarkCollectionID = @"YYHomeMarkCollectionViewCell";
+static NSString *homePlayCollectionID = @"YYHomePlayCollectionViewCell";
+#endif /* farmPrefix_pch */
