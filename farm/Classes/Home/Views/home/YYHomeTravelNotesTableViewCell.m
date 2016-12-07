@@ -157,7 +157,12 @@
 - (void)setModel:(YYHomeTravelNotesModel *)model{
     _model = model;
     if (model) {
-        self.travelTagLabel.backgroundColor = kRGBAColor(248, 100, 0, 1);
+        if (model.travelTag) {
+            self.travelTagLabel.backgroundColor = kRGBAColor(248, 100, 0, 1);
+        }
+        else{
+            self.travelTagLabel.backgroundColor = [UIColor clearColor];
+        }
         self.travelTimeImageView.image = [UIImage imageNamed:@"home_time_icon"];
         self.travelVisitNumImageView.image = [UIImage imageNamed:@"home_visitNum_icon"];
         

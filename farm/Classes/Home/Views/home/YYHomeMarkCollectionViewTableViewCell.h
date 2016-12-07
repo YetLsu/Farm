@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class YYHomeCollectionViewCellModel;
 @interface YYHomeMarkCollectionViewTableViewCell : UITableViewCell
 
 - (instancetype)initWithModelsArray:(NSArray *)modelsArray;
 
+@property (nonatomic, copy) void (^YYCollectionViewCellClickBlock)(YYHomeCollectionViewCellModel *model);
 @end

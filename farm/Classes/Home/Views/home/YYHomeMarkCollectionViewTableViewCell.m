@@ -13,14 +13,13 @@
 #import "YYHomeViewModel.h"
 
 
-@interface YYHomeMarkCollectionViewTableViewCell (){
+@interface YYHomeMarkCollectionViewTableViewCell ()<UICollectionViewDelegate, UICollectionViewDataSource>{
     
 }
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSArray *marksModelArray;
-@property (nonatomic, strong) YYHomeViewModel *viewModel;
 
 @end
 
@@ -53,18 +52,35 @@
         }];
         [collectionView registerNib:[UINib nibWithNibName:@"YYHomeMarkCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:homeMarkCollectionID];
         
-        self.viewModel = [[YYHomeViewModel alloc] initCollectionViewModelWithMarkModelsArray:modelsArray];
-        [self.viewModel setYYCollectionViewCellClickBlock:^{
-            YYLog(@"mdzz");
-        }];
-        collectionView.delegate = self.viewModel;
-        collectionView.dataSource = self.viewModel;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
 
     }
     return self;
 }
 
+#pragma mark collectionView的数据源方法
+- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.marksModelArray.count;
+}
 
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    YYHomeMarkCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:homeMarkCollectionID forIndexPath:indexPath];
+    cell.model = self.marksModelArray[indexPath.item];
+    return cell;
+}
+#pragma mark collectionView的代理方法
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    YYHomeCollectionViewCellModel *model = self.marksModelArray[indexPath.item];
+//    YYLog(@"%@", model.markName);
+    if (self.YYCollectionViewCellClickBlock) {
+        self.YYCollectionViewCellClickBlock(model);
+    }
+
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

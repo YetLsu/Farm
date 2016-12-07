@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (YYString)
-- (CGFloat)calculateStringWithAttr:(NSDictionary *)attr andMaxHeight:(CGFloat)maxHeight andMaxWidth:(CGFloat)maxWidth;
+- (CGFloat)calculateHeightStringWithAttr:(NSDictionary *)attr andMaxWidth:(CGFloat)maxWidth andMaxHeight:(CGFloat)maxHeight;
 
+- (CGFloat)calculateWidthStringWithAttr:(NSDictionary *)attr andMaxWidth:(CGFloat)maxWidth andMaxHeight:(CGFloat)maxHeight;
++ (instancetype)distanceStrWithDistanceStr:(NSString *)distanceStr;
 @end

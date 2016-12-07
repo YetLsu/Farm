@@ -47,7 +47,7 @@
 }
 
 - (void)addChildControllerWithChildController:(UIViewController *)vc image:(UIImage *)image selectImage:(UIImage *)selImage title:(NSString *)title{
-    YYLog(@"%@",title);
+//    YYLog(@"%@",title);
     vc.tabBarItem.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [selImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     

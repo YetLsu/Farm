@@ -18,11 +18,11 @@
     [super viewDidLoad];
     
     UINavigationBar *navBar = [UINavigationBar appearance];
-    [navBar setBarTintColor:kNavColor];
+    [navBar setBarTintColor:[UIColor whiteColor]];
     
-    navBar.tintColor = [UIColor whiteColor];
-    navBar.barStyle = UIBarStyleBlack;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    navBar.tintColor = [UIColor blackColor];
+    navBar.barStyle = UIBarStyleDefault;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 }
 

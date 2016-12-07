@@ -149,7 +149,7 @@
                                };
         [attributedStr addAttributes:attr range:NSMakeRange(0, attributedStr.length)];
         
-        CGFloat contentLabelH = [model.content calculateStringWithAttr:attr andMaxHeight:self.contentLabelMaxH andMaxWidth:self.contentLabelMaxW];
+        CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:self.contentLabelMaxW andMaxHeight:self.contentLabelMaxH];
         [self.discoverContentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(contentLabelH);
         }];

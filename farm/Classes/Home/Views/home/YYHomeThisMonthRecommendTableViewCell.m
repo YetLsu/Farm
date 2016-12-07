@@ -138,7 +138,7 @@
         [attributesStr addAttributes:attr range:NSMakeRange(0, model.cityContent.length)];
         
         
-        CGFloat contentLabelH = [model.cityContent calculateStringWithAttr:attr andMaxHeight:self.contentLabelMaxH andMaxWidth:self.contentLabelMaxH];
+        CGFloat contentLabelH = [model.cityContent calculateHeightStringWithAttr:attr andMaxWidth:self.contentLabelMaxH andMaxHeight:self.contentLabelMaxH];
         [self.cityContentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(contentLabelH);
         }];

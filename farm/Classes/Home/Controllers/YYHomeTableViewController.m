@@ -12,6 +12,7 @@
 #import <SDCycleScrollView.h>
 
 #import "YYHomeMarkCollectionViewTableViewCell.h"
+#import "YYHomeCollectionViewCellModel.h"
 
 #import "YYHomeThisMonthRecommendModel.h"
 #import "YYHomeThisMonthRecommendTableViewCell.h"
@@ -23,6 +24,8 @@
 
 #import "YYHomeTravelNotesModel.h"
 #import "YYHomeTravelNotesTableViewCell.h"
+
+#import "YYHomeMarkTableViewController.h"
 
 @interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) UITableView *tableView;
@@ -40,6 +43,8 @@
 @property (nonatomic, strong) NSArray <YYHomeTravelNotesModel *>*travelNotesrModelsArray;
 
 @property (nonatomic, strong) YYHomeThisMonthRecommendModel *recommendModel;
+
+@property (nonatomic, assign) BOOL dark;
 @end
 
 @implementation YYHomeTableViewController
@@ -189,7 +194,8 @@
             [self.homeNavView.richScanBtn setImage:[UIImage imageNamed:@"home_richScan_black"] forState:UIControlStateNormal];
             [self.homeNavView.searchBar setLeftImageViewWithImage:[UIImage imageNamed:@"search_home_icon_black"]];
             [self.homeNavView.searchBar setLabelTextColor:kBlack38Color];
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+
+            self.dark = YES;
         }
         else{
             CGFloat alpha = (contentOffsetY + 20) > 0?  (contentOffsetY + 20)/50 : 0;
@@ -198,11 +204,19 @@
             [self.homeNavView.richScanBtn setImage:[UIImage imageNamed:@"home_richScan"] forState:UIControlStateNormal];
             [self.homeNavView.searchBar setLeftImageViewWithImage:[UIImage imageNamed:@"search_home_icon"]];
             [self.homeNavView.searchBar setLabelTextColor:[UIColor whiteColor]];
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+
+            self.dark = NO;
+            
         }
+        [self setNeedsStatusBarAppearanceUpdate];
     }
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    if (self.dark) {
+        return UIStatusBarStyleDefault;
+    }
+    return UIStatusBarStyleLightContent;
+}
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 5;
@@ -219,6 +233,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         YYHomeMarkCollectionViewTableViewCell *cell = [[YYHomeMarkCollectionViewTableViewCell alloc] initWithModelsArray:self.markModelsArray];
+        //cell中的collectionViewItem被点击
+        [cell setYYCollectionViewCellClickBlock:^(YYHomeCollectionViewCellModel *model) {
+            
+            YYHomeMarkTableViewController *markVC = [[YYHomeMarkTableViewController alloc] initWithMarkCollectionModel:model];
+            
+            [self.navigationController pushViewController:markVC animated:YES];
+        }];
         return cell;
     }
     else if (indexPath.section == 1){

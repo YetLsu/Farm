@@ -21,6 +21,8 @@
 		755675D11DF113850050BB66 /* YYHomeDiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675D01DF113850050BB66 /* YYHomeDiscoverModel.m */; };
 		755675D41DF152630050BB66 /* YYHomeTravelNotesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675D31DF152630050BB66 /* YYHomeTravelNotesModel.m */; };
 		755675D71DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675D61DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m */; };
+		755A0B661DF66492008F6AE8 /* YYSightSpotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 755A0B651DF66492008F6AE8 /* YYSightSpotTagsView.m */; };
+		755A0B6C1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755A0B6B1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.m */; };
 		755AE4F11DE7E828005C2140 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 755AE4F01DE7E828005C2140 /* main.m */; };
 		755AE4FA1DE7E828005C2140 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755AE4F81DE7E828005C2140 /* Main.storyboard */; };
 		755AE4FF1DE7E828005C2140 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755AE4FD1DE7E828005C2140 /* LaunchScreen.storyboard */; };
@@ -43,11 +45,16 @@
 		755AE5671DE7E8D5005C2140 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 755AE5571DE7E8D5005C2140 /* Assets.xcassets */; };
 		755AE56E1DE804A4005C2140 /* WYYSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 755AE56D1DE804A4005C2140 /* WYYSearchBar.m */; };
 		755AE5721DE80651005C2140 /* YYHomeNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 755AE5711DE80651005C2140 /* YYHomeNavView.m */; };
+		755BE7AE1DF277D2004D3886 /* YYHomeMarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755BE7AD1DF277D2004D3886 /* YYHomeMarkTableViewController.m */; };
 		757446111DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757446101DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m */; };
 		757446151DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757446131DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.m */; };
 		757446161DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757446141DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.xib */; };
 		7574461A1DEC12990032F5C8 /* YYHomeCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757446191DEC12990032F5C8 /* YYHomeCollectionViewCellModel.m */; };
 		7577A7461DE9569000051C9B /* YYHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7577A7451DE9569000051C9B /* YYHomeViewModel.m */; };
+		757AF1E91DF5502E004A55C0 /* YYSightSpotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757AF1E81DF5502E004A55C0 /* YYSightSpotModel.m */; };
+		757AF1EE1DF55159004A55C0 /* YYSightSpotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757AF1EC1DF55159004A55C0 /* YYSightSpotTableViewCell.m */; };
+		757AF1EF1DF55159004A55C0 /* YYSightSpotTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757AF1ED1DF55159004A55C0 /* YYSightSpotTableViewCell.xib */; };
+		757AF1F21DF56BEF004A55C0 /* YYHomeMarkViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757AF1F11DF56BEF004A55C0 /* YYHomeMarkViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +99,10 @@
 		755675D31DF152630050BB66 /* YYHomeTravelNotesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeTravelNotesModel.m; sourceTree = "<group>"; };
 		755675D51DF166EA0050BB66 /* YYHomeTravelNotesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeTravelNotesTableViewCell.h; sourceTree = "<group>"; };
 		755675D61DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeTravelNotesTableViewCell.m; sourceTree = "<group>"; };
+		755A0B641DF66492008F6AE8 /* YYSightSpotTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotTagsView.h; sourceTree = "<group>"; };
+		755A0B651DF66492008F6AE8 /* YYSightSpotTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotTagsView.m; sourceTree = "<group>"; };
+		755A0B6A1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotTagCollectionViewCell.h; sourceTree = "<group>"; };
+		755A0B6B1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotTagCollectionViewCell.m; sourceTree = "<group>"; };
 		755AE4EC1DE7E828005C2140 /* farm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = farm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		755AE4F01DE7E828005C2140 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		755AE4F91DE7E828005C2140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -137,6 +148,8 @@
 		755AE56D1DE804A4005C2140 /* WYYSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYYSearchBar.m; sourceTree = "<group>"; };
 		755AE5701DE80651005C2140 /* YYHomeNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeNavView.h; sourceTree = "<group>"; };
 		755AE5711DE80651005C2140 /* YYHomeNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeNavView.m; sourceTree = "<group>"; };
+		755BE7AC1DF277D2004D3886 /* YYHomeMarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeMarkTableViewController.h; sourceTree = "<group>"; };
+		755BE7AD1DF277D2004D3886 /* YYHomeMarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeMarkTableViewController.m; sourceTree = "<group>"; };
 		7574460F1DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeMarkCollectionViewTableViewCell.h; sourceTree = "<group>"; };
 		757446101DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeMarkCollectionViewTableViewCell.m; sourceTree = "<group>"; };
 		757446121DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeMarkCollectionViewCell.h; sourceTree = "<group>"; };
@@ -146,6 +159,13 @@
 		757446191DEC12990032F5C8 /* YYHomeCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeCollectionViewCellModel.m; sourceTree = "<group>"; };
 		7577A7441DE9569000051C9B /* YYHomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeViewModel.h; sourceTree = "<group>"; };
 		7577A7451DE9569000051C9B /* YYHomeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeViewModel.m; sourceTree = "<group>"; };
+		757AF1E71DF5502E004A55C0 /* YYSightSpotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotModel.h; sourceTree = "<group>"; };
+		757AF1E81DF5502E004A55C0 /* YYSightSpotModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotModel.m; sourceTree = "<group>"; };
+		757AF1EB1DF55159004A55C0 /* YYSightSpotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotTableViewCell.h; sourceTree = "<group>"; };
+		757AF1EC1DF55159004A55C0 /* YYSightSpotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotTableViewCell.m; sourceTree = "<group>"; };
+		757AF1ED1DF55159004A55C0 /* YYSightSpotTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYSightSpotTableViewCell.xib; sourceTree = "<group>"; };
+		757AF1F01DF56BEF004A55C0 /* YYHomeMarkViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeMarkViewModel.h; sourceTree = "<group>"; };
+		757AF1F11DF56BEF004A55C0 /* YYHomeMarkViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeMarkViewModel.m; sourceTree = "<group>"; };
 		7DF4E4D71A42A44F1F4ADA25 /* libPods-farm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-farm.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8038A765B8736386CEAB73 /* Pods-farm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-farm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-farm/Pods-farm.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,6 +314,8 @@
 			children = (
 				755AE52E1DE7E8D5005C2140 /* YYHomeTableViewController.h */,
 				755AE52F1DE7E8D5005C2140 /* YYHomeTableViewController.m */,
+				755BE7AC1DF277D2004D3886 /* YYHomeMarkTableViewController.h */,
+				755BE7AD1DF277D2004D3886 /* YYHomeMarkTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -301,6 +323,7 @@
 		755AE5301DE7E8D5005C2140 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				757AF1E61DF5502E004A55C0 /* sightSpot */,
 				757446171DEC127F0032F5C8 /* home */,
 			);
 			path = Models;
@@ -311,6 +334,8 @@
 			children = (
 				7577A7441DE9569000051C9B /* YYHomeViewModel.h */,
 				7577A7451DE9569000051C9B /* YYHomeViewModel.m */,
+				757AF1F01DF56BEF004A55C0 /* YYHomeMarkViewModel.h */,
+				757AF1F11DF56BEF004A55C0 /* YYHomeMarkViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -318,6 +343,7 @@
 		755AE5321DE7E8D5005C2140 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				757AF1EA1DF5503F004A55C0 /* sightSpot */,
 				755AE56F1DE8063D005C2140 /* home */,
 			);
 			path = Views;
@@ -533,6 +559,29 @@
 			path = home;
 			sourceTree = "<group>";
 		};
+		757AF1E61DF5502E004A55C0 /* sightSpot */ = {
+			isa = PBXGroup;
+			children = (
+				757AF1E71DF5502E004A55C0 /* YYSightSpotModel.h */,
+				757AF1E81DF5502E004A55C0 /* YYSightSpotModel.m */,
+			);
+			path = sightSpot;
+			sourceTree = "<group>";
+		};
+		757AF1EA1DF5503F004A55C0 /* sightSpot */ = {
+			isa = PBXGroup;
+			children = (
+				757AF1EB1DF55159004A55C0 /* YYSightSpotTableViewCell.h */,
+				757AF1EC1DF55159004A55C0 /* YYSightSpotTableViewCell.m */,
+				757AF1ED1DF55159004A55C0 /* YYSightSpotTableViewCell.xib */,
+				755A0B641DF66492008F6AE8 /* YYSightSpotTagsView.h */,
+				755A0B651DF66492008F6AE8 /* YYSightSpotTagsView.m */,
+				755A0B6A1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.h */,
+				755A0B6B1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.m */,
+			);
+			path = sightSpot;
+			sourceTree = "<group>";
+		};
 		E74DFA3D713128ECA433CCBE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +711,7 @@
 				757446161DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.xib in Resources */,
 				755675CE1DF113450050BB66 /* YYHomeDiscoverTableViewCell.xib in Resources */,
 				755AE5671DE7E8D5005C2140 /* Assets.xcassets in Resources */,
+				757AF1EF1DF55159004A55C0 /* YYSightSpotTableViewCell.xib in Resources */,
 				755AE5651DE7E8D5005C2140 /* YYProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +787,8 @@
 			files = (
 				7542BABF1DEFC4D800B85FD9 /* YYHomeTableViewHeaderView.m in Sources */,
 				7542BAD01DF0246C00B85FD9 /* YYHomePlayCollectionViewTableViewCell.m in Sources */,
+				757AF1F21DF56BEF004A55C0 /* YYHomeMarkViewModel.m in Sources */,
+				755BE7AE1DF277D2004D3886 /* YYHomeMarkTableViewController.m in Sources */,
 				755AE55D1DE7E8D5005C2140 /* YYHomeTableViewController.m in Sources */,
 				7542BAD41DF0254100B85FD9 /* YYHomePlayCollectionViewCell.m in Sources */,
 				755AE55F1DE7E8D5005C2140 /* YYTabBarController.m in Sources */,
@@ -745,19 +797,23 @@
 				7574461A1DEC12990032F5C8 /* YYHomeCollectionViewCellModel.m in Sources */,
 				755AE5631DE7E8D5005C2140 /* YYPlayViewController.m in Sources */,
 				755AE5721DE80651005C2140 /* YYHomeNavView.m in Sources */,
+				757AF1EE1DF55159004A55C0 /* YYSightSpotTableViewCell.m in Sources */,
 				755AE5611DE7E8D5005C2140 /* YYLcjFarmTool.m in Sources */,
 				755675D41DF152630050BB66 /* YYHomeTravelNotesModel.m in Sources */,
 				7577A7461DE9569000051C9B /* YYHomeViewModel.m in Sources */,
 				755675CD1DF113450050BB66 /* YYHomeDiscoverTableViewCell.m in Sources */,
 				7542BACA1DF00DEC00B85FD9 /* NSString+YYString.m in Sources */,
+				755A0B6C1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.m in Sources */,
 				757446151DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.m in Sources */,
 				755675D71DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m in Sources */,
 				757446111DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m in Sources */,
 				7542BAC21DEFEEFE00B85FD9 /* YYHomeThisMonthRecommendModel.m in Sources */,
 				755AE5661DE7E8D5005C2140 /* AppDelegate.m in Sources */,
+				757AF1E91DF5502E004A55C0 /* YYSightSpotModel.m in Sources */,
 				755AE5641DE7E8D5005C2140 /* YYProfileViewController.m in Sources */,
 				755AE5591DE7E8D5005C2140 /* NSDate+YYWeek.m in Sources */,
 				755AE55A1DE7E8D5005C2140 /* NSObject+YYNet.m in Sources */,
+				755A0B661DF66492008F6AE8 /* YYSightSpotTagsView.m in Sources */,
 				755AE56E1DE804A4005C2140 /* WYYSearchBar.m in Sources */,
 				755AE4F11DE7E828005C2140 /* main.m in Sources */,
 				755AE5601DE7E8D5005C2140 /* YYUserModel.m in Sources */,

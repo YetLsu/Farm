@@ -21,9 +21,7 @@
 
 @interface YYHomeViewModel ()
 
-/**
- 在创建collection View时markModelsArray中为nil，跟在controller中创建的Viewmodel是两个
- */
+
 @property (nonatomic, strong) NSArray *markModelsArray;
 
 @property (nonatomic, strong) NSArray *playModelsArray;
@@ -39,7 +37,7 @@
 #pragma mark 获取景点分类的数据
 - (void)getMarksArrayWithParameters:(NSDictionary *)parameters andCallback:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *, NSError *))callback{
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         YYHomeCollectionViewCellModel *model0 = [[YYHomeCollectionViewCellModel alloc] init];
         model0.markImgUrl = @"home_2";
@@ -83,7 +81,7 @@
  获取主题游的内容
  */
 - (void)getPlayModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *modelsArray,NSError *error)) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         YYHomeCollectionViewCellModel *model0 = [[YYHomeCollectionViewCellModel alloc] init];
         model0.markImgUrl = @"home_7";
@@ -109,7 +107,7 @@
  获取发现的内容
  */
 - (void)getDiscoverModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeDiscoverModel *> *modelsArray,NSError *error)) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         YYHomeDiscoverModel *model0 = [[YYHomeDiscoverModel alloc] init];
         model0.title = @"[眼空旷的路骑下去，然后狂欢]";
@@ -136,7 +134,7 @@
  获取游记的内容
  */
 - (void)getTravelNotesModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeTravelNotesModel *> *modelsArray,NSError *error)) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         YYHomeTravelNotesModel *model0 = [[YYHomeTravelNotesModel alloc] init];
         model0.travelTitle = @"[喜马拉雅风景区]";
         model0.travelOuterImgurl = @"home_12";
@@ -217,26 +215,5 @@
     }
     return 200 + kY12Margin + 12 + 10 + 10 + kY12Margin;
 }
-#pragma mark 第一个单元格中的collectionView的数据源方法
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
-}
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.markModelsArray.count;
-}
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    YYHomeMarkCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:homeMarkCollectionID forIndexPath:indexPath];
-    cell.model = self.markModelsArray[indexPath.item];
-    return cell;
-}
-#pragma mark 第一个单元格中的collectionView的代理方法
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    YYHomeCollectionViewCellModel *model = self.markModelsArray[indexPath.item];
-//    YYLog(@"%@", model.markName);
-    if (self.YYCollectionViewCellClickBlock) {
-        self.YYCollectionViewCellClickBlock();
-        
-    }
-}
 @end

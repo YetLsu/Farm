@@ -43,6 +43,17 @@
 #define kText26Font16Height [UIFont systemFontOfSize:16.0]
 #define kText30Font19Height [UIFont systemFontOfSize:19.0]
 #define kText40Font25Height [UIFont systemFontOfSize:25.0]
+//高度
+#define kHeightText14 (9.0)
+#define kHeightText16 (10.0)
+#define kHeightText18 (11.0)
+#define kHeightText20 (12.0)
+#define kHeightText22 (14.0)
+#define kHeightText24 (15.0)
+#define kHeightText26 (16.0)
+#define kHeightText30 (19.0)
+#define kHeightText40 (25.0)
+
 
 #ifdef DEBUG
 
