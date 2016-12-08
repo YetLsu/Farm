@@ -27,7 +27,11 @@
 
 #import "YYHomeMarkTableViewController.h"
 
-@interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource>
+#import "YYThisMonthCommendViewController.h"
+
+#import "YYHomeTableViewHeaderView.h"
+
+@interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView *tableView;
 
 @property (nonatomic, weak) YYHomeNavView *homeNavView;
@@ -128,7 +132,7 @@
         make.top.mas_equalTo(self.view).mas_offset(-20);
         make.bottom.mas_equalTo(self.view);
     }];
-    tableView.delegate = self.viewModel;
+    tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -265,4 +269,74 @@
     return cell;
 }
 
+#pragma mark tableView Delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return kY12Margin;
+    }
+    return 12 + 15 + 4.5 + 10 + 12;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return kY12Margin;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return nil;
+    }
+    YYHomeTableViewHeaderView *headerView = [YYHomeTableViewHeaderView homeTableViewHeaderView];
+    headerView.height = 53.5;
+    if (section == 1) {
+        headerView.titleContent = @"本月推荐";
+        NSString *month = [[[NSDate alloc] init] todayValueStrWithKeyStr:@"month" andDay:[NSDate date]];
+        headerView.detailContent = [NSString stringWithFormat:@"%@月最热门的地方", month];
+        
+    }
+    else if (section == 2){
+        headerView.titleContent = @"主题游";
+        headerView.detailContent = @"寻找最适合你的主题";
+        headerView.arrowHidden = NO;
+        [headerView setYYHeaderViewClickBlock:^{
+            YYLog(@"主题游");
+        }];
+    }
+    else if (section == 3){
+        headerView.titleContent = @"发现";
+        headerView.detailContent = @"为你精选热门新鲜事";
+        headerView.arrowHidden = NO;
+        [headerView setYYHeaderViewClickBlock:^{
+            YYLog(@"发现");
+        }];
+    }
+    else if (section == 4){
+        headerView.titleContent = @"游记";
+        headerView.detailContent = @"为你精选热门游记";
+        headerView.arrowHidden = NO;
+        [headerView setYYHeaderViewClickBlock:^{
+            YYLog(@"游记");
+        }];
+    }
+    return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        return 74 + kY12Margin * 2;
+    }
+    else if (indexPath.section == 1){
+        return 212;
+    }
+    else if (indexPath.section == 2){
+        return 96 + 12;
+    }
+    else if (indexPath.section == 3){
+        return 162;
+    }
+    return 200 + kY12Margin + 12 + 10 + 10 + kY12Margin;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        YYThisMonthCommendViewController *thisMonthController = [[YYThisMonthCommendViewController alloc] init];
+        [self.navigationController pushViewController:thisMonthController animated:YES];
+    }
+}
 @end

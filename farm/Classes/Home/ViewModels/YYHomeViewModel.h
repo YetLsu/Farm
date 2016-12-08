@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class YYHomeCollectionViewCellModel, YYHomeThisMonthRecommendModel, YYHomeDiscoverModel, YYHomeTravelNotesModel;
-@interface YYHomeViewModel : NSObject<UITableViewDelegate>
+@interface YYHomeViewModel : NSObject
 
 
 - (instancetype)initCollectionViewModelWithMarkModelsArray:(NSArray *)modelsArray;
