@@ -9,27 +9,59 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="YYThisMonthCommendCollectionViewCell" id="gTV-IL-0wX" customClass="YYThisMonthCommendCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="146"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="434"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="300" height="146"/>
+                <rect key="frame" x="0.0" y="0.0" width="300" height="434"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpM-xo-fdu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-3U-qdq">
+                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="300" height="275"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJB-Ju-IfD">
+                        <frame key="frameInset" minX="25" minY="293" width="251" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEn-gq-3iV">
+                        <frame key="frameInset" minX="30" minY="358" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hov-8C-gQV">
+                        <frame key="frameInset" minX="83" minY="356" width="12" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XC-5X-zMx">
+                        <frame key="frameInset" minX="112" minY="357" width="137" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gne-AB-U47" customClass="YYThisMonthCommendTagsView">
+                        <frame key="frameInset" minX="30" minY="399" width="240" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </view>
-            <constraints>
-                <constraint firstItem="FpM-xo-fdu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="PbO-1s-dUv"/>
-                <constraint firstItem="FpM-xo-fdu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hiU-28-zBP"/>
-                <constraint firstAttribute="bottom" secondItem="FpM-xo-fdu" secondAttribute="bottom" id="rFA-kf-KqA"/>
-                <constraint firstAttribute="trailing" secondItem="FpM-xo-fdu" secondAttribute="trailing" id="vJa-qa-Gbw"/>
-            </constraints>
-            <size key="customSize" width="300" height="146"/>
-            <point key="canvasLocation" x="89" y="-52"/>
+            <size key="customSize" width="300" height="434"/>
+            <connections>
+                <outlet property="addressLabel" destination="PEn-gq-3iV" id="eHq-Fl-35f"/>
+                <outlet property="distanceLabel" destination="8XC-5X-zMx" id="qIV-ea-lUE"/>
+                <outlet property="lineView" destination="hov-8C-gQV" id="SKF-ir-8uW"/>
+                <outlet property="nameLabel" destination="qJB-Ju-IfD" id="GUA-gw-ogh"/>
+                <outlet property="tagsView" destination="gne-AB-U47" id="0q0-zD-VjX"/>
+                <outlet property="topImageView" destination="iMf-3U-qdq" id="uEP-hF-Ina"/>
+            </connections>
+            <point key="canvasLocation" x="167" y="-48"/>
         </collectionViewCell>
     </objects>
 </document>

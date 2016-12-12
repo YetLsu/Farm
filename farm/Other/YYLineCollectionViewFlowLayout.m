@@ -39,7 +39,7 @@
 
 - (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{
     
-    NSArray *array = [super layoutAttributesForElementsInRect:rect];
+    NSArray *array = [[NSArray alloc] initWithArray:[super layoutAttributesForElementsInRect:rect] copyItems:YES];
     
     CGFloat centerX = self.collectionView.frame.size.width * 0.5 + self.collectionView.contentOffset.x;
     
@@ -49,7 +49,7 @@
 //        YYLog(@"attrsCenterX=%f\ncenterX=%f", attrs.center.x, centerX);
         
         CGFloat scale = 1 - delta/3500;
-        YYLog(@"%f", scale);
+//        YYLog(@"%f", scale);
         attrs.transform = CGAffineTransformMakeScale(scale, scale);
 
     }

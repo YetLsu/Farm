@@ -55,6 +55,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    //增加标签的View
+    YYSightSpotTagsView *tagsView = [[YYSightSpotTagsView alloc] init];
+    [self.contentView addSubview:tagsView];
+    self.spotTagsView = tagsView;
     
     [self addConstrainsOnSubViews];
     
@@ -150,6 +154,7 @@
    
     self.spotDistanceLabel.text = spotDistanceStr;
     
+    
     CGFloat spotAddressLabelMaxW = kWidthScreen - kX12Margin * 2 - 5 - 14 - 6 - 1 - 6 - spotDistanceLabelW;
     CGFloat spotAddressLabelW = [model.spotAddress calculateWidthStringWithAttr:attr andMaxWidth:spotAddressLabelMaxW andMaxHeight:14];
     [self.spotAddressLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -157,11 +162,6 @@
     }];
     self.spotAddressLabel.text = model.spotAddress;
     
-    
-    //增加标签的View
-    YYSightSpotTagsView *tagsView = [[YYSightSpotTagsView alloc] initWithTagsArray:model.spotTags];
-    [self.contentView addSubview:tagsView];
-    self.spotTagsView = tagsView;
     
     //设置标签
     NSDictionary *tagsAttr = @{
@@ -172,6 +172,8 @@
         make.left.right.bottom.mas_equalTo(self.spotImageView);
         make.height.mas_equalTo(spotTagsViewH);
     }];
+    
+    self.spotTagsView.tagsArray = model.spotTags;
 
     
 }

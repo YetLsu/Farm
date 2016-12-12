@@ -12,5 +12,6 @@
 - (CGFloat)calculateHeightStringWithAttr:(NSDictionary *)attr andMaxWidth:(CGFloat)maxWidth andMaxHeight:(CGFloat)maxHeight;
 
 - (CGFloat)calculateWidthStringWithAttr:(NSDictionary *)attr andMaxWidth:(CGFloat)maxWidth andMaxHeight:(CGFloat)maxHeight;
+
 + (instancetype)distanceStrWithDistanceStr:(NSString *)distanceStr;
 @end

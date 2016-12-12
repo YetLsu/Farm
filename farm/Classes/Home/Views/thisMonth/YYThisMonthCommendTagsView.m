@@ -1,52 +1,51 @@
 //
-//  YYSightSpotTagsView.m
+//  YYThisMonthCommendTagsView.m
 //  farm
 //
-//  Created by wyy on 2016/12/6.
+//  Created by wyy on 2016/12/9.
 //  Copyright © 2016年 WYY. All rights reserved.
 //
 
-#import "YYSightSpotTagsView.h"
-#import "YYSightSpotTagCollectionViewCell.h"
-
-@interface YYSightSpotTagsView ()<UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+#import "YYThisMonthCommendTagsView.h"
+#import "YYThisMonthTagCollectionViewCell.h"
+@interface YYThisMonthCommendTagsView ()<UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
 
 
 @end
+@implementation YYThisMonthCommendTagsView
 
-@implementation YYSightSpotTagsView
-static NSString * const YYSightSpotTagCollectionViewCellID = @"YYSightSpotTagCollectionViewCell";
+static NSString * const YYThisMonthTagCollectionViewCellID = @"YYThisMonthTagCollectionViewCell";
 
-- (instancetype)initWithTagsArray:(NSArray *)tagsArray{
-    if (self = [super initWithFrame:CGRectZero]) {
-        self.tagsArray = tagsArray;
-        [self addSubViewAndSetView];
-        
-    }
-    return self;
+//- (instancetype)initWithTagsArray:(NSArray *)tagsArray{
+//    if (self = [super initWithFrame:CGRectZero]) {
+//        self.tagsArray = tagsArray;
+//        [self addSubViewAndSetView];
+//        
+//    }
+//    return self;
+//}
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    [self addSubViewAndSetView];
 }
-
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self addSubViewAndSetView];
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame{
+//    if (self = [super initWithFrame:frame]) {
+//        [self addSubViewAndSetView];
+//    }
+//    return self;
+//}
 
 - (void)addSubViewAndSetView{
-       
 
-    
     //view的背景颜色
-    self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.5];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
-    layout.sectionInset = UIEdgeInsetsMake(kY12Margin/2.0, kX12Margin, kY12Margin/2.0, kX12Margin);
-    layout.minimumLineSpacing = kY12Margin/2.0;
+    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    layout.minimumInteritemSpacing = kX12Margin;
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     
     [self addSubview:collectionView];
@@ -59,7 +58,7 @@ static NSString * const YYSightSpotTagCollectionViewCellID = @"YYSightSpotTagCol
         make.left.right.top.bottom.mas_equalTo(self);
     }];
     
-    [collectionView registerClass:[YYSightSpotTagCollectionViewCell class] forCellWithReuseIdentifier:YYSightSpotTagCollectionViewCellID];
+    [collectionView registerClass:[YYThisMonthTagCollectionViewCell class] forCellWithReuseIdentifier:YYThisMonthTagCollectionViewCellID];
     
     collectionView.scrollEnabled = NO;
     
@@ -67,21 +66,22 @@ static NSString * const YYSightSpotTagCollectionViewCellID = @"YYSightSpotTagCol
 
 - (void)setTagsArray:(NSArray *)tagsArray{
     _tagsArray = tagsArray;
+ 
     [self.collectionView reloadData];
 }
 
- 
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-//    YYLog(@"%lu",(unsigned long)self.tagsArray.count);
+    //    YYLog(@"%lu",(unsigned long)self.tagsArray.count);
     return self.tagsArray.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    YYSightSpotTagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:YYSightSpotTagCollectionViewCellID forIndexPath:indexPath];
+    YYThisMonthTagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:YYThisMonthTagCollectionViewCellID forIndexPath:indexPath];
     
     cell.tagLabel.text = self.tagsArray[indexPath.item];
     
@@ -98,4 +98,5 @@ static NSString * const YYSightSpotTagCollectionViewCellID = @"YYSightSpotTagCol
     CGFloat width = [str calculateWidthStringWithAttr:attr andMaxWidth:200 andMaxHeight:kHeightText16] + kX12Margin;
     return CGSizeMake(width, 18);
 }
+
 @end
