@@ -14,22 +14,25 @@
 #import "YYHomeMarkCollectionViewTableViewCell.h"
 #import "YYHomeCollectionViewCellModel.h"
 
+#import "YYThisMonthCommendViewController.h"
 #import "YYHomeThisMonthRecommendModel.h"
 #import "YYHomeThisMonthRecommendTableViewCell.h"
-
-#import "YYHomePlayCollectionViewTableViewCell.h"
-
-#import "YYHomeDiscoverModel.h"
-#import "YYHomeDiscoverTableViewCell.h"
 
 #import "YYHomeTravelNotesModel.h"
 #import "YYHomeTravelNotesTableViewCell.h"
 
 #import "YYHomeMarkTableViewController.h"
 
-#import "YYThisMonthCommendViewController.h"
 
 #import "YYHomeTableViewHeaderView.h"
+
+#import "YYThemePlayModel.h"
+#import "YYThemePlayTableViewController.h"
+#import "YYHomePlayCollectionViewTableViewCell.h"
+
+#import "YYHomeDiscoverTableViewController.h"
+#import "YYHomeDiscoverModel.h"
+#import "YYHomeDiscoverTableViewCell.h"
 
 @interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView *tableView;
@@ -90,7 +93,7 @@
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }];
     
-    [self.viewModel getPlayModelsArrayWithParameters:nil andCallBack:^(NSArray<YYHomeCollectionViewCellModel *> *modelsArray, NSError *error) {
+    [self.viewModel getThemePlayModelsArrayWithParameters:nil andCallBack:^(NSArray<YYThemePlayModel *> *modelsArray, NSError *error) {
         if (error) {
             YYLog(@"出错");
         }
@@ -101,7 +104,7 @@
     
     [self.viewModel getDiscoverModelsArrayWithParameters:nil andCallBack:^(NSArray<YYHomeDiscoverModel *> *modelsArray, NSError *error) {
         if (error) {
-            YYLog(@"出错");
+            YYLog(@"出错%ld",(long)error.code);
         }
         self.discoverModelsArray = modelsArray;
         NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:3];
@@ -109,7 +112,7 @@
     }];
     [self.viewModel getTravelNotesModelsArrayWithParameters:nil andCallBack:^(NSArray<YYHomeTravelNotesModel *> *modelsArray, NSError *error) {
         if (error) {
-            YYLog(@"出错");
+            YYLog(@"出错%ld",(long)error.code);
         }
         self.travelNotesrModelsArray = modelsArray;
         NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:4];
@@ -296,7 +299,8 @@
         headerView.detailContent = @"寻找最适合你的主题";
         headerView.arrowHidden = NO;
         [headerView setYYHeaderViewClickBlock:^{
-            YYLog(@"主题游");
+            YYThemePlayTableViewController *VC = [[YYThemePlayTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:VC animated:YES];
         }];
     }
     else if (section == 3){
@@ -304,7 +308,9 @@
         headerView.detailContent = @"为你精选热门新鲜事";
         headerView.arrowHidden = NO;
         [headerView setYYHeaderViewClickBlock:^{
-            YYLog(@"发现");
+            YYHomeDiscoverTableViewController *VC = [[YYHomeDiscoverTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:VC animated:YES];
+
         }];
     }
     else if (section == 4){

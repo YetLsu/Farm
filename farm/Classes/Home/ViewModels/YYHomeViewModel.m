@@ -13,6 +13,7 @@
 #import "YYHomeThisMonthRecommendModel.h"
 #import "YYHomeDiscoverModel.h"
 #import "YYHomeTravelNotesModel.h"
+#import "YYThemePlayModel.h"
 
 #import "YYHomeMarkCollectionViewCell.h"
 
@@ -21,17 +22,23 @@
 @interface YYHomeViewModel ()
 
 
-@property (nonatomic, strong) NSArray *markModelsArray;
+@property (nonatomic, strong) NSMutableArray *markModelsArray;
 
 @property (nonatomic, strong) NSArray *playModelsArray;
 @end
 
 @implementation YYHomeViewModel
-- (instancetype)initCollectionViewModelWithMarkModelsArray:(NSArray *)modelsArray{
-    if (self = [super init]) {
-        self.markModelsArray = modelsArray;
+//- (instancetype)initCollectionViewModelWithMarkModelsArray:(NSArray *)modelsArray{
+//    if (self = [super init]) {
+//        self.markModelsArray = modelsArray;
+//    }
+//    return self;
+//}
+- (NSMutableArray *)markModelsArray{
+    if (!_markModelsArray) {
+        _markModelsArray = [NSMutableArray array];
     }
-    return self;
+    return _markModelsArray;
 }
 #pragma mark 获取景点分类的数据
 - (void)getMarksArrayWithParameters:(NSDictionary *)parameters andCallback:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *, NSError *))callback{
@@ -79,54 +86,49 @@
 /**
  获取主题游的内容
  */
-- (void)getPlayModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *modelsArray,NSError *error)) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+- (void)getThemePlayModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYThemePlayModel *> *modelsArray,NSError *error)) callback{
+    
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/firstpage/getThemeTaglist.do" parameters:nil progress:^(NSProgress *downloadProgress) {
         
-        YYHomeCollectionViewCellModel *model0 = [[YYHomeCollectionViewCellModel alloc] init];
-        model0.markImgUrl = @"home_7";
-        model0.markName = @"农家园林";
-        
-        YYHomeCollectionViewCellModel *model1 = [[YYHomeCollectionViewCellModel alloc] init];
-        model1.markImgUrl = @"home_8";
-        model1.markName = @"花景欣赏";
-        
-        YYHomeCollectionViewCellModel *model2 = [[YYHomeCollectionViewCellModel alloc] init];
-        model2.markImgUrl = @"home_9";
-        model2.markName = @"避暑山庄";
-        
-        
-        self.markModelsArray = @[model0, model1, model2];
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        NSArray *data = responseObject[@"data"];
+        for (NSDictionary *dic in data) {
+            YYThemePlayModel *model = [YYThemePlayModel yy_modelWithDictionary:dic];
+            [self.markModelsArray addObject:model];
+
+        }
         
         callback(self.markModelsArray, nil);
-        
-    });
-
+    }];
+    
 }
 /**
  获取发现的内容
  */
 - (void)getDiscoverModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeDiscoverModel *> *modelsArray,NSError *error)) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/firstpage/getDiscoverlist.do" parameters:nil progress:^(NSProgress *downloadProgress) {
         
-        YYHomeDiscoverModel *model0 = [[YYHomeDiscoverModel alloc] init];
-        model0.title = @"[眼空旷的路骑下去，然后狂欢]";
-        model0.outerImgurl = @"home_10";
-        model0.uploadingTime = [NSDate date];
-        model0.tag = @"猎奇";
-        model0.content = @"每个人内心都会有一种情节它看起来高尚无比 它致你于千里之外却又无处不在它自诩贵族骑士精神 ";
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        YYLog(@"%@", responseObject);
+        NSArray *data = responseObject[@"data"];
+        NSMutableArray *discoverArray = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            YYHomeDiscoverModel *model = [YYHomeDiscoverModel yy_modelWithDictionary:dic];
+            [discoverArray addObject:model];
+            
+        }
         
-        YYHomeDiscoverModel *model1 = [[YYHomeDiscoverModel alloc] init];
-        model1.title = @"[穿梭世界所遇之称]";
-        model1.outerImgurl = @"home_11";
-        model1.uploadingTime = [NSDate date];
-        model1.tag = @"景点";
-        model1.content = @"此次决定独自一人前往英国的原因并非一时冲动可能是受到了电影电视的影响对于欧美文化和建筑总会觉得遥远而又神圣的遥不可及英国一直是我最喜欢的国家之一从了解英国文化到办理签证再到研究每个有意向要去的城市后";
-
-        
-        callback(@[model0, model1], nil);
-        
-    });
-
+        callback(discoverArray, nil);
+    }];
 }
 
 /**

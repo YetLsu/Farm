@@ -8,7 +8,7 @@
 
 #import "YYHomePlayCollectionViewTableViewCell.h"
 
-#import "YYHomePlayCollectionViewCell.h"
+#import "YYHomeThemePlayCollectionViewCell.h"
 
 #import "YYHomeCollectionViewCellModel.h"
 
@@ -49,7 +49,7 @@
             make.left.right.top.mas_equalTo(self.contentView);
             make.height.mas_equalTo(itemH + kY12Margin);
         }];
-        [collectionView registerNib:[UINib nibWithNibName:@"YYHomePlayCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:homePlayCollectionID];
+        [collectionView registerNib:[UINib nibWithNibName:@"YYHomeThemePlayCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:homePlayCollectionID];
         
 
         collectionView.delegate = self;
@@ -77,7 +77,7 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    YYHomePlayCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:homePlayCollectionID forIndexPath:indexPath];
+    YYHomeThemePlayCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:homePlayCollectionID forIndexPath:indexPath];
     cell.model = self.playModelsArray[indexPath.item];
     return cell;
 }

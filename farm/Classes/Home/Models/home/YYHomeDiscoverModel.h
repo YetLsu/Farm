@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface YYHomeDiscoverModel : NSObject
+
+@property (nonatomic, assign) int discoverID;
 //发现标题
 @property (nonatomic, copy) NSString *title;
 //内图地址

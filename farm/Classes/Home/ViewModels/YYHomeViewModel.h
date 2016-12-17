@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class YYHomeCollectionViewCellModel, YYHomeThisMonthRecommendModel, YYHomeDiscoverModel, YYHomeTravelNotesModel;
+@class YYHomeCollectionViewCellModel, YYHomeThisMonthRecommendModel, YYHomeDiscoverModel, YYHomeTravelNotesModel, YYThemePlayModel;
 @interface YYHomeViewModel : NSObject
 
 
-- (instancetype)initCollectionViewModelWithMarkModelsArray:(NSArray *)modelsArray;
+//- (instancetype)initCollectionViewModelWithMarkModelsArray:(NSArray *)modelsArray;
 /**
     获取景点分类的数据
  */
@@ -25,7 +25,7 @@
 /**
     获取主题游的内容
  */
-- (void)getPlayModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *modelsArray,NSError *error)) callback;
+- (void)getThemePlayModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYThemePlayModel *> *modelsArray,NSError *error)) callback;
 
 /**
  获取发现的内容

@@ -9,5 +9,12 @@
 #import "YYHomeDiscoverModel.h"
 
 @implementation YYHomeDiscoverModel
-
++ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper{
+    return @{
+             @"discoverID" : @"id",
+             @"contentUrl" : @"contenturl",
+             @"content" : @"introduction",
+             @"uploadingTime" : @"uploading_time",
+             };
+}
 @end

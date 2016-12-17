@@ -1,22 +1,22 @@
 //
-//  YYHomePlayCollectionViewCell.m
+//  YYHomeThemePlayCollectionViewCell.m
 //  farm
 //
 //  Created by wyy on 2016/12/1.
 //  Copyright © 2016年 WYY. All rights reserved.
 //
 
-#import "YYHomePlayCollectionViewCell.h"
+#import "YYHomeThemePlayCollectionViewCell.h"
 
-#import "YYHomeCollectionViewCellModel.h"
+#import "YYThemePlayModel.h"
 
-@interface YYHomePlayCollectionViewCell ()
+@interface YYHomeThemePlayCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *topImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 @end
-@implementation YYHomePlayCollectionViewCell
+@implementation YYHomeThemePlayCollectionViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -25,12 +25,12 @@
     
     
 }
-- (void)setModel:(YYHomeCollectionViewCellModel *)model{
+- (void)setModel:(YYThemePlayModel *)model{
     _model = model;
+//    YYLog(@"%@", model.homeImgUrl);
+    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:model.homeImgUrl]];
     
-    self.topImageView.image = [UIImage imageNamed:model.markImgUrl];
-    
-    self.bottomLabel.text = model.markName;
+    self.bottomLabel.text = model.themePlayName;
 }
 
 @end

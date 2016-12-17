@@ -137,6 +137,7 @@ static NSString *const YYThisMonthCommendCollectionViewCellID = @"YYThisMonthCom
     if (self.lastIndex != 1 && indexPath.item == 0) {
         return;
     }
+    self.lastIndex = indexPath.item;
     self.pageControl.currentPage = indexPath.item;
     
 }

@@ -54,6 +54,9 @@
 #define kHeightText30 (19.0)
 #define kHeightText40 (25.0)
 
+//错误码
+//没更多数据
+#define kNoMoreTableViewDataCode (10000)
 
 #ifdef DEBUG
 

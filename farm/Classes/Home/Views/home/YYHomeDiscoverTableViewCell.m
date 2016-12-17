@@ -128,14 +128,20 @@
 - (void)setModel:(YYHomeDiscoverModel *)model{
     _model = model;
     
-    self.discoverImageView.image = [UIImage imageNamed:model.outerImgurl];
+    [self.discoverImageView sd_setImageWithURL:[NSURL URLWithString:model.outerImgurl]];
    
     self.discoverTagLabel.text = model.tag;
     
     self.discoverTitleLabel.text = model.title;
     
     if (model.content) {
-         self.discoverTagLabel.backgroundColor = kRGBAColor(149, 132, 149, 1);
+        if ([model.tag isEqualToString:@""] || !model.tag) {
+            self.discoverTagLabel.backgroundColor = [UIColor clearColor];
+        }
+        else{
+           self.discoverTagLabel.backgroundColor = kRGBAColor(149, 132, 149, 1);
+        }
+        
         
         self.timeIconImageView.image = [UIImage imageNamed:@"home_time_icon"];
         
@@ -149,7 +155,7 @@
                                };
         [attributedStr addAttributes:attr range:NSMakeRange(0, attributedStr.length)];
         
-        CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:self.contentLabelMaxW andMaxHeight:self.contentLabelMaxH];
+        CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:self.contentLabelMaxW andMaxHeight:self.contentLabelMaxH] + 0.1;
         [self.discoverContentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(contentLabelH);
         }];
