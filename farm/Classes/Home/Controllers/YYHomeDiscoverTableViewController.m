@@ -9,6 +9,8 @@
 #import "YYHomeDiscoverTableViewController.h"
 
 #import "YYHomeDiscoverViewModel.h"
+#import "YYDiscoverTableViewCell.h"
+#import "YYHomeDiscoverModel.h"
 
 @interface YYHomeDiscoverTableViewController ()
 
@@ -22,8 +24,10 @@
     self.parameters = [NSMutableDictionary dictionary];
     [super viewDidLoad];
     
-    self.title = @"发现";
     self.view.backgroundColor = kViewBGColor;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.title = @"发现";
+
    
 }
 
@@ -35,11 +39,9 @@
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    YYDiscoverTableViewCell *cell = [YYDiscoverTableViewCell discoverTableViewCellWithTableView:tableView];
     
-    cell.textLabel.text = @"saadas";
-    
-    // Configure the cell...
+    cell.model = (YYHomeDiscoverModel *)[self.viewModel getTableViewModelWithIndexPath:indexPath];
     
     return cell;
 }

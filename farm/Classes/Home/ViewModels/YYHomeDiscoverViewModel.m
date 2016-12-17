@@ -11,11 +11,29 @@
 
 @interface YYHomeDiscoverViewModel ()
 
-
+@property (nonatomic, assign) CGFloat bgViewNoContentLabelH;
 @end
 
 @implementation YYHomeDiscoverViewModel
-
+- (instancetype)init{
+    if (self = [super init]) {
+        CGFloat discoverImageViewLeftOffset = kX12Margin;
+        CGFloat discoverImageViewW = kWidthScreen - discoverImageViewLeftOffset * 2;
+        CGFloat scale = discoverImageViewW/(375.0 - 12 * 2);
+        CGFloat discoverImageViewH = 205 * scale;
+        
+        CGFloat discoverTitleLabelTop = kY12Margin;
+        CGFloat discoverTitleLabelH = kHeightText22;
+        
+        CGFloat discoverContentLabelTop = 10 - 2.5;
+        CGFloat discoverContentLabelBootom = 10;
+        
+        CGFloat timeIconImageViewH = 10;
+        
+        self.bgViewNoContentLabelH = discoverImageViewH + discoverTitleLabelTop + discoverTitleLabelH + discoverContentLabelTop + discoverContentLabelBootom + timeIconImageViewH + kY12Margin;
+    }
+    return self;
+}
 
 /**
  获取发现的内容
@@ -59,6 +77,29 @@
     return kY12Margin;
 }
 - (CGFloat)getHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 343;
+    
+    YYHomeDiscoverModel *model = self.modelsArray[indexPath.section];
+    
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:model.content];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 6;
+    NSDictionary *attr = @{
+                           NSFontAttributeName : kText16Font10Height,
+                           NSParagraphStyleAttributeName : paragraphStyle
+                           };
+    [attributedStr addAttributes:attr range:NSMakeRange(0, attributedStr.length)];
+    
+    CGFloat maxContentLabelW = kWidthScreen - kX12Margin * 4;
+    CGFloat maxContentLabelH = 66;
+    
+    CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:maxContentLabelW andMaxHeight:maxContentLabelH] + 0.1;
+    YYLog(@"%f",contentLabelH);
+    
+    return self.bgViewNoContentLabelH + contentLabelH;
 }
+- (YYHomeDiscoverModel *)getTableViewModelWithIndexPath:(NSIndexPath *)indexPath{
+    return self.modelsArray[indexPath.section];
+}
+
 @end

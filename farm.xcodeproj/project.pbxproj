@@ -13,6 +13,10 @@
 		7513245D1DFE550A00B218AE /* YYThemePlayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7513245C1DFE550A00B218AE /* YYThemePlayTableViewController.m */; };
 		751324611DFE553800B218AE /* YYThemePlayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7513245F1DFE553800B218AE /* YYThemePlayTableViewCell.m */; };
 		751324621DFE553800B218AE /* YYThemePlayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 751324601DFE553800B218AE /* YYThemePlayTableViewCell.xib */; };
+		752CB1F71E04E6A2000FF76B /* YYDiscoverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 752CB1F51E04E6A2000FF76B /* YYDiscoverTableViewCell.m */; };
+		752CB1F81E04E6A2000FF76B /* YYDiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752CB1F61E04E6A2000FF76B /* YYDiscoverTableViewCell.xib */; };
+		752CB2011E04EC43000FF76B /* YYHomeDiscoverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 752CB1FF1E04EC43000FF76B /* YYHomeDiscoverTableViewCell.m */; };
+		752CB2021E04EC43000FF76B /* YYHomeDiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752CB2001E04EC43000FF76B /* YYHomeDiscoverTableViewCell.xib */; };
 		753A7EDB1DF805F20009E891 /* YYThisMonthCommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 753A7EDA1DF805F20009E891 /* YYThisMonthCommendViewController.m */; };
 		753A7EDE1DF807D10009E891 /* YYLineCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 753A7EDD1DF807D10009E891 /* YYLineCollectionViewFlowLayout.m */; };
 		753F024E1DFA9D9A00465981 /* YYThisMonthCommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 753F024D1DFA9D9A00465981 /* YYThisMonthCommendViewModel.m */; };
@@ -27,8 +31,6 @@
 		7542BAD01DF0246C00B85FD9 /* YYHomePlayCollectionViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BACF1DF0246C00B85FD9 /* YYHomePlayCollectionViewTableViewCell.m */; };
 		7542BAD41DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BAD21DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.m */; };
 		7542BAD51DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7542BAD31DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.xib */; };
-		755675CD1DF113450050BB66 /* YYHomeDiscoverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675CB1DF113450050BB66 /* YYHomeDiscoverTableViewCell.m */; };
-		755675CE1DF113450050BB66 /* YYHomeDiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755675CC1DF113450050BB66 /* YYHomeDiscoverTableViewCell.xib */; };
 		755675D11DF113850050BB66 /* YYHomeDiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675D01DF113850050BB66 /* YYHomeDiscoverModel.m */; };
 		755675D41DF152630050BB66 /* YYHomeTravelNotesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675D31DF152630050BB66 /* YYHomeTravelNotesModel.m */; };
 		755675D71DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755675D61DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m */; };
@@ -101,6 +103,12 @@
 		7513245E1DFE553800B218AE /* YYThemePlayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYThemePlayTableViewCell.h; sourceTree = "<group>"; };
 		7513245F1DFE553800B218AE /* YYThemePlayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYThemePlayTableViewCell.m; sourceTree = "<group>"; };
 		751324601DFE553800B218AE /* YYThemePlayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYThemePlayTableViewCell.xib; sourceTree = "<group>"; };
+		752CB1F41E04E6A2000FF76B /* YYDiscoverTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiscoverTableViewCell.h; sourceTree = "<group>"; };
+		752CB1F51E04E6A2000FF76B /* YYDiscoverTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiscoverTableViewCell.m; sourceTree = "<group>"; };
+		752CB1F61E04E6A2000FF76B /* YYDiscoverTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYDiscoverTableViewCell.xib; sourceTree = "<group>"; };
+		752CB1FE1E04EC43000FF76B /* YYHomeDiscoverTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeDiscoverTableViewCell.h; sourceTree = "<group>"; };
+		752CB1FF1E04EC43000FF76B /* YYHomeDiscoverTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeDiscoverTableViewCell.m; sourceTree = "<group>"; };
+		752CB2001E04EC43000FF76B /* YYHomeDiscoverTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYHomeDiscoverTableViewCell.xib; sourceTree = "<group>"; };
 		753A7ED91DF805F20009E891 /* YYThisMonthCommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYThisMonthCommendViewController.h; sourceTree = "<group>"; };
 		753A7EDA1DF805F20009E891 /* YYThisMonthCommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYThisMonthCommendViewController.m; sourceTree = "<group>"; };
 		753A7EDC1DF807D10009E891 /* YYLineCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYLineCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -127,9 +135,6 @@
 		7542BAD11DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeThemePlayCollectionViewCell.h; sourceTree = "<group>"; };
 		7542BAD21DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeThemePlayCollectionViewCell.m; sourceTree = "<group>"; };
 		7542BAD31DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYHomeThemePlayCollectionViewCell.xib; sourceTree = "<group>"; };
-		755675CA1DF113450050BB66 /* YYHomeDiscoverTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeDiscoverTableViewCell.h; sourceTree = "<group>"; };
-		755675CB1DF113450050BB66 /* YYHomeDiscoverTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeDiscoverTableViewCell.m; sourceTree = "<group>"; };
-		755675CC1DF113450050BB66 /* YYHomeDiscoverTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYHomeDiscoverTableViewCell.xib; sourceTree = "<group>"; };
 		755675CF1DF113850050BB66 /* YYHomeDiscoverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeDiscoverModel.h; sourceTree = "<group>"; };
 		755675D01DF113850050BB66 /* YYHomeDiscoverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeDiscoverModel.m; sourceTree = "<group>"; };
 		755675D21DF152630050BB66 /* YYHomeTravelNotesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeTravelNotesModel.h; sourceTree = "<group>"; };
@@ -272,6 +277,16 @@
 		752CB1E81E04E059000FF76B /* discover */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = discover;
+			sourceTree = "<group>";
+		};
+		752CB1F31E04E6A2000FF76B /* discover */ = {
+			isa = PBXGroup;
+			children = (
+				752CB1F41E04E6A2000FF76B /* YYDiscoverTableViewCell.h */,
+				752CB1F51E04E6A2000FF76B /* YYDiscoverTableViewCell.m */,
+				752CB1F61E04E6A2000FF76B /* YYDiscoverTableViewCell.xib */,
 			);
 			path = discover;
 			sourceTree = "<group>";
@@ -429,6 +444,7 @@
 		755AE5321DE7E8D5005C2140 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				752CB1F31E04E6A2000FF76B /* discover */,
 				751324531DFE517500B218AE /* themePlay */,
 				75B362841DF90DCB00617D47 /* thisMonth */,
 				757AF1EA1DF5503F004A55C0 /* sightSpot */,
@@ -611,6 +627,9 @@
 		755AE56F1DE8063D005C2140 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				752CB1FE1E04EC43000FF76B /* YYHomeDiscoverTableViewCell.h */,
+				752CB1FF1E04EC43000FF76B /* YYHomeDiscoverTableViewCell.m */,
+				752CB2001E04EC43000FF76B /* YYHomeDiscoverTableViewCell.xib */,
 				755AE5701DE80651005C2140 /* YYHomeNavView.h */,
 				755AE5711DE80651005C2140 /* YYHomeNavView.m */,
 				7574460F1DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.h */,
@@ -628,9 +647,6 @@
 				7542BAD11DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.h */,
 				7542BAD21DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.m */,
 				7542BAD31DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.xib */,
-				755675CA1DF113450050BB66 /* YYHomeDiscoverTableViewCell.h */,
-				755675CB1DF113450050BB66 /* YYHomeDiscoverTableViewCell.m */,
-				755675CC1DF113450050BB66 /* YYHomeDiscoverTableViewCell.xib */,
 				755675D51DF166EA0050BB66 /* YYHomeTravelNotesTableViewCell.h */,
 				755675D61DF166EB0050BB66 /* YYHomeTravelNotesTableViewCell.m */,
 			);
@@ -820,15 +836,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752CB1F81E04E6A2000FF76B /* YYDiscoverTableViewCell.xib in Resources */,
 				755AE4FF1DE7E828005C2140 /* LaunchScreen.storyboard in Resources */,
 				755AE4FA1DE7E828005C2140 /* Main.storyboard in Resources */,
 				751324621DFE553800B218AE /* YYThemePlayTableViewCell.xib in Resources */,
 				7542BAD51DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.xib in Resources */,
 				7542BAC71DEFF03300B85FD9 /* YYHomeThisMonthRecommendTableViewCell.xib in Resources */,
 				757446161DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.xib in Resources */,
-				755675CE1DF113450050BB66 /* YYHomeDiscoverTableViewCell.xib in Resources */,
 				755AE5671DE7E8D5005C2140 /* Assets.xcassets in Resources */,
 				757AF1EF1DF55159004A55C0 /* YYSightSpotTableViewCell.xib in Resources */,
+				752CB2021E04EC43000FF76B /* YYHomeDiscoverTableViewCell.xib in Resources */,
 				755AE5651DE7E8D5005C2140 /* YYProfileViewController.xib in Resources */,
 				75B362891DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib in Resources */,
 			);
@@ -918,6 +935,7 @@
 				755AE5621DE7E8D5005C2140 /* YYUserTool.m in Sources */,
 				7574461A1DEC12990032F5C8 /* YYHomeCollectionViewCellModel.m in Sources */,
 				7513245A1DFE532F00B218AE /* YYThemePlayViewModel.m in Sources */,
+				752CB2011E04EC43000FF76B /* YYHomeDiscoverTableViewCell.m in Sources */,
 				755AE5631DE7E8D5005C2140 /* YYPlayViewController.m in Sources */,
 				753A7EDB1DF805F20009E891 /* YYThisMonthCommendViewController.m in Sources */,
 				755AE5721DE80651005C2140 /* YYHomeNavView.m in Sources */,
@@ -925,7 +943,6 @@
 				755AE5611DE7E8D5005C2140 /* YYLcjFarmTool.m in Sources */,
 				755675D41DF152630050BB66 /* YYHomeTravelNotesModel.m in Sources */,
 				7577A7461DE9569000051C9B /* YYHomeViewModel.m in Sources */,
-				755675CD1DF113450050BB66 /* YYHomeDiscoverTableViewCell.m in Sources */,
 				7542BACA1DF00DEC00B85FD9 /* NSString+YYString.m in Sources */,
 				755A0B6C1DF6B7FE008F6AE8 /* YYSightSpotTagCollectionViewCell.m in Sources */,
 				757446151DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.m in Sources */,
@@ -947,6 +964,7 @@
 				755AE56E1DE804A4005C2140 /* WYYSearchBar.m in Sources */,
 				755AE4F11DE7E828005C2140 /* main.m in Sources */,
 				753A7EDE1DF807D10009E891 /* YYLineCollectionViewFlowLayout.m in Sources */,
+				752CB1F71E04E6A2000FF76B /* YYDiscoverTableViewCell.m in Sources */,
 				755AE5601DE7E8D5005C2140 /* YYUserModel.m in Sources */,
 				751324611DFE553800B218AE /* YYThemePlayTableViewCell.m in Sources */,
 				7542BAC61DEFF03300B85FD9 /* YYHomeThisMonthRecommendTableViewCell.m in Sources */,

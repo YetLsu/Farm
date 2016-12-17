@@ -39,7 +39,7 @@
     
     YYThemePlayTableViewCell *cell = [YYThemePlayTableViewCell themePlayTableViewCellWithTableView:tableView];
     
-    cell.model = self.modelsArray[indexPath.row];
+    cell.model = (YYThemePlayModel *)[self.viewModel getTableViewModelWithIndexPath:indexPath];
     
     return cell;
 }

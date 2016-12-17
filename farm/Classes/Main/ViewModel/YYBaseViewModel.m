@@ -63,4 +63,8 @@
 - (CGFloat)getHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 0;
 }
+//获取一个模型
+- (NSObject *)getTableViewModelWithIndexPath:(NSIndexPath *)indexPath{
+    return nil;
+}
 @end

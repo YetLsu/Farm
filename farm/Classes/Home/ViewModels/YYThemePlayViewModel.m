@@ -55,5 +55,7 @@
 - (CGFloat)getHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 205+ kY12Margin;
 }
-
+- (YYThemePlayModel *)getTableViewModelWithIndexPath:(NSIndexPath *)indexPath{
+    return self.modelsArray[indexPath.row];
+}
 @end

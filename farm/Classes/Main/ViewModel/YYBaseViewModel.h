@@ -35,4 +35,6 @@
 - (CGFloat)getTableViewHeightForFooterInSection:(NSInteger)section;
 //行高
 - (CGFloat)getHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
+//获取一个模型
+- (NSObject *)getTableViewModelWithIndexPath:(NSIndexPath *)indexPath;
 @end
