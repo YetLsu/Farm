@@ -33,6 +33,9 @@
 #import "YYHomeDiscoverTableViewController.h"
 #import "YYHomeDiscoverModel.h"
 #import "YYHomeDiscoverTableViewCell.h"
+#import "YYTravelNotesViewController.h"
+
+#import "YYTravelNotesViewController.h"
 
 @interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView *tableView;
@@ -318,7 +321,8 @@
         headerView.detailContent = @"为你精选热门游记";
         headerView.arrowHidden = NO;
         [headerView setYYHeaderViewClickBlock:^{
-            YYLog(@"游记");
+            YYTravelNotesViewController *VC = [[YYTravelNotesViewController alloc] init];
+            [self.navigationController pushViewController:VC animated:YES];
         }];
     }
     return headerView;

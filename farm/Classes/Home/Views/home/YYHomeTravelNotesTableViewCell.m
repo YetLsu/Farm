@@ -157,26 +157,25 @@
 - (void)setModel:(YYHomeTravelNotesModel *)model{
     _model = model;
     if (model) {
-        if (model.travelTag) {
-            self.travelTagLabel.backgroundColor = kRGBAColor(248, 100, 0, 1);
+        if ([model.travelTag isEqualToString:@""] || !model.travelTag) {
+            self.travelTagLabel.backgroundColor = [UIColor clearColor];
         }
         else{
-            self.travelTagLabel.backgroundColor = [UIColor clearColor];
+            self.travelTagLabel.backgroundColor = kRGBAColor(248, 100, 0, 1);
         }
         self.travelTimeImageView.image = [UIImage imageNamed:@"home_time_icon"];
         self.travelVisitNumImageView.image = [UIImage imageNamed:@"home_visitNum_icon"];
         
         self.travelVisitNumLabel.text = [NSString stringWithFormat:@"%d", model.travelVisitNum];
+        [self.travelOuterImageView sd_setImageWithURL:[NSURL URLWithString:model.travelOuterImgurl]];
+        self.travelTitleLabel.text = model.travelTitle;
+        self.travelTagLabel.text = model.travelTag;
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd hh:mm";
+        self.travelTimeLabel.text = [formatter stringFromDate:model.travelUploadTime];
+
     }
-    self.travelOuterImageView.image = [UIImage imageNamed:model.travelOuterImgurl];
-    self.travelTitleLabel.text = model.travelTitle;
-    self.travelTagLabel.text = model.travelTag;
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd hh:mm";
-    self.travelTimeLabel.text = [formatter stringFromDate:model.travelUploadTime];
-    
-    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

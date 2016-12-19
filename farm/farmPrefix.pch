@@ -28,4 +28,5 @@
 
 static NSString *homeMarkCollectionID = @"YYHomeMarkCollectionViewCell";
 static NSString *homePlayCollectionID = @"YYHomeThemePlayCollectionViewCell";
+static NSString *travelNotesSortCollectionID = @"YYTravelNotesSortCollectionViewCell";
 #endif /* farmPrefix_pch */

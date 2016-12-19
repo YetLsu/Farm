@@ -70,7 +70,10 @@
 		757AF1F21DF56BEF004A55C0 /* YYHomeMarkViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757AF1F11DF56BEF004A55C0 /* YYHomeMarkViewModel.m */; };
 		757EF3FA1E01401F001E000D /* YYHomeDiscoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757EF3F91E01401F001E000D /* YYHomeDiscoverTableViewController.m */; };
 		757EF3FD1E0147A5001E000D /* YYHomeDiscoverViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757EF3FC1E0147A5001E000D /* YYHomeDiscoverViewModel.m */; };
+		75859BEB1E05293B00185CD8 /* YYTravelNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75859BEA1E05293B00185CD8 /* YYTravelNotesViewController.m */; };
+		75AB03DA1E077AAF00A6DBA0 /* YYTravelNotesSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AB03D91E077AAF00A6DBA0 /* YYTravelNotesSortView.m */; };
 		75B362891DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B362871DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib */; };
+		75ECD1321E053B940092DC95 /* YYTravelNotesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ECD1311E053B940092DC95 /* YYTravelNotesViewModel.m */; };
 		75F42C291E0289AD00F22B19 /* YYBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F42C281E0289AD00F22B19 /* YYBaseViewModel.m */; };
 		75F42C2C1E0298CD00F22B19 /* YYBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F42C2B1E0298CD00F22B19 /* YYBaseTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -212,7 +215,13 @@
 		757EF3F91E01401F001E000D /* YYHomeDiscoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeDiscoverTableViewController.m; sourceTree = "<group>"; };
 		757EF3FB1E0147A5001E000D /* YYHomeDiscoverViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeDiscoverViewModel.h; sourceTree = "<group>"; };
 		757EF3FC1E0147A5001E000D /* YYHomeDiscoverViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeDiscoverViewModel.m; sourceTree = "<group>"; };
+		75859BE91E05293B00185CD8 /* YYTravelNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTravelNotesViewController.h; sourceTree = "<group>"; };
+		75859BEA1E05293B00185CD8 /* YYTravelNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTravelNotesViewController.m; sourceTree = "<group>"; };
+		75AB03D81E077AAF00A6DBA0 /* YYTravelNotesSortView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTravelNotesSortView.h; sourceTree = "<group>"; };
+		75AB03D91E077AAF00A6DBA0 /* YYTravelNotesSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTravelNotesSortView.m; sourceTree = "<group>"; };
 		75B362871DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYThisMonthCommendCollectionViewCell.xib; sourceTree = "<group>"; };
+		75ECD1301E053B940092DC95 /* YYTravelNotesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTravelNotesViewModel.h; sourceTree = "<group>"; };
+		75ECD1311E053B940092DC95 /* YYTravelNotesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTravelNotesViewModel.m; sourceTree = "<group>"; };
 		75F42C271E0289AD00F22B19 /* YYBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBaseViewModel.h; sourceTree = "<group>"; };
 		75F42C281E0289AD00F22B19 /* YYBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYBaseViewModel.m; sourceTree = "<group>"; };
 		75F42C2A1E0298CD00F22B19 /* YYBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBaseTableViewController.h; sourceTree = "<group>"; };
@@ -272,13 +281,6 @@
 				751324561DFE523A00B218AE /* YYThemePlayModel.m */,
 			);
 			path = themePlay;
-			sourceTree = "<group>";
-		};
-		752CB1E81E04E059000FF76B /* discover */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = discover;
 			sourceTree = "<group>";
 		};
 		752CB1F31E04E6A2000FF76B /* discover */ = {
@@ -399,6 +401,7 @@
 		755AE52D1DE7E8D5005C2140 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				75859BE81E05290D00185CD8 /* travelNotes */,
 				755AE52E1DE7E8D5005C2140 /* YYHomeTableViewController.h */,
 				755AE52F1DE7E8D5005C2140 /* YYHomeTableViewController.m */,
 				755BE7AC1DF277D2004D3886 /* YYHomeMarkTableViewController.h */,
@@ -416,7 +419,6 @@
 		755AE5301DE7E8D5005C2140 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				752CB1E81E04E059000FF76B /* discover */,
 				751324541DFE518400B218AE /* themePlay */,
 				757AF1E61DF5502E004A55C0 /* sightSpot */,
 				757446171DEC127F0032F5C8 /* home */,
@@ -437,6 +439,8 @@
 				751324591DFE532F00B218AE /* YYThemePlayViewModel.m */,
 				757EF3FB1E0147A5001E000D /* YYHomeDiscoverViewModel.h */,
 				757EF3FC1E0147A5001E000D /* YYHomeDiscoverViewModel.m */,
+				75ECD1301E053B940092DC95 /* YYTravelNotesViewModel.h */,
+				75ECD1311E053B940092DC95 /* YYTravelNotesViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -444,6 +448,7 @@
 		755AE5321DE7E8D5005C2140 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75ECD1331E053BB70092DC95 /* travelNotes */,
 				752CB1F31E04E6A2000FF76B /* discover */,
 				751324531DFE517500B218AE /* themePlay */,
 				75B362841DF90DCB00617D47 /* thisMonth */,
@@ -691,6 +696,15 @@
 			path = sightSpot;
 			sourceTree = "<group>";
 		};
+		75859BE81E05290D00185CD8 /* travelNotes */ = {
+			isa = PBXGroup;
+			children = (
+				75859BE91E05293B00185CD8 /* YYTravelNotesViewController.h */,
+				75859BEA1E05293B00185CD8 /* YYTravelNotesViewController.m */,
+			);
+			path = travelNotes;
+			sourceTree = "<group>";
+		};
 		75B362841DF90DCB00617D47 /* thisMonth */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +717,15 @@
 				753F02561DFAB4C700465981 /* YYThisMonthTagCollectionViewCell.m */,
 			);
 			path = thisMonth;
+			sourceTree = "<group>";
+		};
+		75ECD1331E053BB70092DC95 /* travelNotes */ = {
+			isa = PBXGroup;
+			children = (
+				75AB03D81E077AAF00A6DBA0 /* YYTravelNotesSortView.h */,
+				75AB03D91E077AAF00A6DBA0 /* YYTravelNotesSortView.m */,
+			);
+			path = travelNotes;
 			sourceTree = "<group>";
 		};
 		75F42C261E0288E100F22B19 /* ViewModel */ = {
@@ -922,12 +945,15 @@
 			files = (
 				75F42C291E0289AD00F22B19 /* YYBaseViewModel.m in Sources */,
 				7542BABF1DEFC4D800B85FD9 /* YYHomeTableViewHeaderView.m in Sources */,
+				75ECD1321E053B940092DC95 /* YYTravelNotesViewModel.m in Sources */,
 				753F02511DFAB45200465981 /* YYThisMonthCommendTagsView.m in Sources */,
 				7542BAD01DF0246C00B85FD9 /* YYHomePlayCollectionViewTableViewCell.m in Sources */,
 				757AF1F21DF56BEF004A55C0 /* YYHomeMarkViewModel.m in Sources */,
+				75AB03DA1E077AAF00A6DBA0 /* YYTravelNotesSortView.m in Sources */,
 				755BE7AE1DF277D2004D3886 /* YYHomeMarkTableViewController.m in Sources */,
 				755AE55D1DE7E8D5005C2140 /* YYHomeTableViewController.m in Sources */,
 				7542BAD41DF0254100B85FD9 /* YYHomeThemePlayCollectionViewCell.m in Sources */,
+				75859BEB1E05293B00185CD8 /* YYTravelNotesViewController.m in Sources */,
 				7513245D1DFE550A00B218AE /* YYThemePlayTableViewController.m in Sources */,
 				755AE55F1DE7E8D5005C2140 /* YYTabBarController.m in Sources */,
 				753F02571DFAB4C700465981 /* YYThisMonthTagCollectionViewCell.m in Sources */,

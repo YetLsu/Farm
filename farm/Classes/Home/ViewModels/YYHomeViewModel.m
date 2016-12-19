@@ -118,7 +118,7 @@
             callback(nil, [[NSError alloc] init]);
             return;
         }
-        YYLog(@"%@", responseObject);
+//        YYLog(@"%@", responseObject);
         NSArray *data = responseObject[@"data"];
         NSMutableArray *discoverArray = [NSMutableArray array];
         for (NSDictionary *dic in data) {
@@ -135,23 +135,25 @@
  获取游记的内容
  */
 - (void)getTravelNotesModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeTravelNotesModel *> *modelsArray,NSError *error)) callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        YYHomeTravelNotesModel *model0 = [[YYHomeTravelNotesModel alloc] init];
-        model0.travelTitle = @"[喜马拉雅风景区]";
-        model0.travelOuterImgurl = @"home_12";
-        model0.travelTag = @"精华游记";
-        model0.travelUploadTime = [NSDate date];
-        model0.travelVisitNum = 10002;
+    
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/firstpage/getTravelnoteslist.do" parameters:nil progress:^(NSProgress *downloadProgress) {
         
-        YYHomeTravelNotesModel *model1 = [[YYHomeTravelNotesModel alloc] init];
-        model1.travelTitle = @"蓝色日本毕业之旅";
-        model1.travelOuterImgurl = @"home_13";
-        model1.travelTag = nil;
-        model1.travelUploadTime = [NSDate date];
-        model1.travelVisitNum = 998;
-        
-        callback(@[model0, model1 ], nil);
-    });
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+//        YYLog(@"%@", responseObject);
+        NSArray *data = responseObject[@"data"];
+        NSMutableArray *travelNotesArray = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            YYHomeTravelNotesModel *model = [YYHomeTravelNotesModel yy_modelWithDictionary:dic];
+            [travelNotesArray addObject:model];
+            
+        }
+        callback(travelNotesArray, nil);
+    }];
+
 }
 
 

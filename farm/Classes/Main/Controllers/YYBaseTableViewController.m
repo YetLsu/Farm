@@ -10,6 +10,8 @@
 
 @interface YYBaseTableViewController ()
 
+
+
 @end
 
 @implementation YYBaseTableViewController
@@ -48,7 +50,7 @@
         
     }];
     [self.tableView addFooterRefresh:^{
-        weakSelf.index = (weakSelf.index + 1) * 5;
+        weakSelf.index = (weakSelf.index + 1) * self.viewModel.pageNumber;
         weakSelf.parameters[@"index"] = [NSString stringWithFormat:@"%d", weakSelf.index];
         [weakSelf.viewModel getFooterModelsArrayWithParameters:weakSelf.parameters andCallBack:^(NSArray *modelsArray, NSError *error)  {
             if (error) {

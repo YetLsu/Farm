@@ -9,5 +9,19 @@
 #import "YYHomeTravelNotesModel.h"
 
 @implementation YYHomeTravelNotesModel
++ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper{
+    return @{
+             @"spotID" : @"id",
+             @"travelTitle" : @"title",
+             @"travelInnerImgurl" : @"innerImgurl",
+             @"travelOuterImgurl" : @"outerImgurl",
+             @"travelVisitorName" : @"visitor_name",
+             @"travelVisitorHeadImgurl" : @"visitor_headimgurl",
+             @"travelUploadTime" : @"uploading_time",
+             @"travelContenturl" : @"contenturl",
+             @"travelTag" : @"tag",
+             @"travelVisitNum" : @"visitnum",
+             };
+}
 
 @end
