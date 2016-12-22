@@ -10,6 +10,8 @@
 
 @interface YYHomeThisMonthRecommendModel : NSObject
 
+@property (nonatomic, assign) int thisMonthID;
+
 @property (nonatomic, copy) NSString *imgurl;
 
 @property (nonatomic, copy) NSString *cityName;

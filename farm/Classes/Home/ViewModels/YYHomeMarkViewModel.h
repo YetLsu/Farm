@@ -10,10 +10,9 @@
 
 
 @class YYSightSpotModel;
-@interface YYHomeMarkViewModel : NSObject
+@interface YYHomeMarkViewModel : YYBaseViewModel
 //计算标签View高度
 + (CGFloat)tagsViewHeightWithTagsArray:(NSArray *)tagsArray andAttr:(NSDictionary *)attr andxMargin:(CGFloat)xMargin andItemH:(CGFloat)itemH andyMargin:(CGFloat)yMargin;
 
 
-- (void)getSightSpotModelsArrayWithParameters:(NSDictionary *)parameters andCallback:(void(^)(NSArray <YYSightSpotModel *> *modelsArray, NSError *error))callback;
 @end

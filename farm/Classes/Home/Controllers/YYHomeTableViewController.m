@@ -55,6 +55,10 @@
 @property (nonatomic, strong) YYHomeThisMonthRecommendModel *recommendModel;
 
 @property (nonatomic, assign) BOOL dark;
+
+@property (nonatomic, assign) CGFloat tableViewHeaderViewH;
+
+@property (nonatomic, weak) SDCycleScrollView *topScrollerView;
 @end
 
 @implementation YYHomeTableViewController
@@ -154,21 +158,26 @@
         make.left.right.top.mas_equalTo(self.view);
         make.height.mas_equalTo(64);
     }];
-    
-    self.homeNavView.addressBtn.titleLabel.textColor = [UIColor redColor];
+     
     [homeNavView.addressBtn setTitle:@"绍兴" forState:UIControlStateNormal];
+    
 
 }
 //设置tableView
 - (void)setTableViewHeaderView{
     NSArray *imagesArray = @[[UIImage imageNamed:@"home_1"], [UIImage imageNamed:@"home_1"], [UIImage imageNamed:@"home_1"]];
-    SDCycleScrollView *topScrollerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidthScreen, 400) shouldInfiniteLoop:YES imageNamesGroup:imagesArray];
+    
+    self.tableViewHeaderViewH = 400/603.0 * kNoNavHeight;
+    SDCycleScrollView *topScrollerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidthScreen, self.tableViewHeaderViewH) shouldInfiniteLoop:YES imageNamesGroup:imagesArray];
+    
     topScrollerView.delegate = self;
     topScrollerView.backgroundColor = [UIColor whiteColor];
     topScrollerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
     self.tableView.tableHeaderView = topScrollerView;
     //轮播时间间隔，默认1.0秒，可自定义
     topScrollerView.autoScrollTimeInterval = 2.0;
+    
+    self.topScrollerView = topScrollerView;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -200,7 +209,7 @@
         if (contentOffsetY >0) {//改变颜色
             CGFloat alpha = (contentOffsetY + 20) < 50 ? (contentOffsetY + 20)/50 : 1;
             self.homeNavView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:alpha];
-            self.homeNavView.addressBtn.titleLabel.textColor = kBlack38Color;
+            [self.homeNavView.addressBtn setTitleColor:kBlack38Color forState:UIControlStateNormal];
             [self.homeNavView.richScanBtn setImage:[UIImage imageNamed:@"home_richScan_black"] forState:UIControlStateNormal];
             [self.homeNavView.searchBar setLeftImageViewWithImage:[UIImage imageNamed:@"search_home_icon_black"]];
             [self.homeNavView.searchBar setLabelTextColor:kBlack38Color];
@@ -210,7 +219,9 @@
         else{
             CGFloat alpha = (contentOffsetY + 20) > 0?  (contentOffsetY + 20)/50 : 0;
             self.homeNavView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:alpha];
-            self.homeNavView.addressBtn.titleLabel.textColor = [UIColor whiteColor];
+            
+            [self.homeNavView.addressBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
             [self.homeNavView.richScanBtn setImage:[UIImage imageNamed:@"home_richScan"] forState:UIControlStateNormal];
             [self.homeNavView.searchBar setLeftImageViewWithImage:[UIImage imageNamed:@"search_home_icon"]];
             [self.homeNavView.searchBar setLabelTextColor:[UIColor whiteColor]];
@@ -265,13 +276,16 @@
     }
     else if (indexPath.section == 3){
         YYHomeDiscoverTableViewCell *cell = [YYHomeDiscoverTableViewCell homeDiscoverTableViewCellWithTableView:tableView];
-        cell.model = self.discoverModelsArray[indexPath.row];
-        
+        if (self.discoverModelsArray.count != 0) {
+            cell.model = self.discoverModelsArray[indexPath.row];
+        }
+    
         return cell;
     }
     YYHomeTravelNotesTableViewCell *cell =[YYHomeTravelNotesTableViewCell homeTravelNotesTabelViewCellWithTableView:tableView];
-    
-    cell.model = self.travelNotesrModelsArray[indexPath.row];
+    if (self.travelNotesrModelsArray.count != 0) {
+        cell.model = self.travelNotesrModelsArray[indexPath.row];
+    }
     return cell;
 }
 
@@ -349,4 +363,6 @@
         [self.navigationController pushViewController:thisMonthController animated:YES];
     }
 }
+
+
 @end

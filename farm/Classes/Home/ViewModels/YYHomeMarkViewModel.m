@@ -31,26 +31,63 @@
     return yMargin * (1 + lineNum) + itemH * lineNum;
     
 }
-- (void)getSightSpotModelsArrayWithParameters:(NSDictionary *)parameters andCallback:(void(^)(NSArray <YYSightSpotModel *> *modelsArray, NSError *error))callback{
+- (void)getModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray *, NSError *))callback{
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/tag/getSpotsListAll.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
         
-        YYSightSpotModel *model0 = [[YYSightSpotModel alloc] init];
-        model0.spotOuterImgurl = @"home_14";
-        model0.spotTitle = @"操你妈逼的景点";
-        model0.spotAddress = @"浙江省绍兴市越城区";
-        model0.spotDistance = @"50000.12";
-        model0.spotTags = @[@"操你妈逼操你妈逼",@"妈的纸张"];
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        NSArray *data = responseObject[@"data"];
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            YYSightSpotModel *model = [YYSightSpotModel yy_modelWithDictionary:dic];
+            model.spotTags = [model.spotTagsString componentsSeparatedByString:@"|"];
+            [array addObject:model];
+        }
+        if (array.count < self.pageNumber) {
+            NSError *error = [[NSError alloc] initWithDomain:@"123" code:kNoMoreTableViewDataCode userInfo:nil];
+            callback(array, error);
+        }
+        else{
+            callback(array, nil);
+        }
         
-        
-        YYSightSpotModel *model1 = [[YYSightSpotModel alloc] init];
-        model1.spotOuterImgurl = @"home_15";
-        model1.spotTitle = @"操你妈逼的景点";
-        model1.spotAddress = @"浙江省绍兴市越城区";
-        model1.spotDistance = @"500.12";
-        model1.spotTags = @[@"操你操你妈逼",@"妈的纸张", @"操你妈的妈逼妈的纸张",@"妈的", @"操你妈逼",@"妈的纸张", @"操你妈逼",@"妈的纸张"];
-        
-        callback(@[model0, model1, model0, model1, model0, model1, model0, model1], nil);
-    });
+    }];
+
 }
+
+//获取组数
+- (NSUInteger)getNumberSection{
+    return 1;
+}
+//获取某一组有几个单元格
+- (NSUInteger)getNumberRowsOnSection:(NSUInteger)section{
+    return self.modelsArray.count;
+}
+//组头高度
+- (CGFloat)getTableViewHeightForHeaderInSection:(NSInteger)section{
+    return 0.00001;
+}
+//组尾高度
+- (CGFloat)getTableViewHeightForFooterInSection:(NSInteger)section{
+    return 0.00001;
+}
+//行高
+- (CGFloat)getHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat spotImageViewH = 200/603.0*kNoNavHeight;
+    
+    CGFloat spotTitleLabelH = 14.0;
+    
+    CGFloat iconH = 14;
+    return kX12Margin * 2 + spotImageViewH + 10 * 2 + iconH + spotTitleLabelH;
+
+}
+//获取一个模型
+- (NSObject *)getTableViewModelWithIndexPath:(NSIndexPath *)indexPath{
+    return self.modelsArray[indexPath.row];
+}
+
 @end

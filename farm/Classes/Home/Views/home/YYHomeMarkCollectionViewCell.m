@@ -27,9 +27,11 @@
 }
 - (void)setModel:(YYHomeCollectionViewCellModel *)model{
     _model = model;
+    if (model.markImgUrl) {
+        [self.markImageView sd_setImageWithURL:[NSURL URLWithString:model.markImgUrl]];
+        
+        self.markTitleLabel.text = model.markName;
+    }
     
-    self.markImageView.image = [UIImage imageNamed:model.markImgUrl];
-    
-    self.markTitleLabel.text = model.markName;
 }
 @end

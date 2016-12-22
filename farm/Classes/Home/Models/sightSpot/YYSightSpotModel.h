@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface YYSightSpotModel : NSObject
-//uuid32位唯一编码
-@property (nonatomic, copy) NSString *spotuuid;
+//景点ID
+@property (nonatomic, copy) NSString *spotID;
 //景点名称
 @property (nonatomic, copy) NSString *spotTitle;
 //人均消费
@@ -29,6 +29,8 @@
 @property (nonatomic, assign) float cityLat;
 //标签列表
 @property (nonatomic, strong) NSArray *spotTags;
+//标签列表字符串
+@property (nonatomic, copy) NSString *spotTagsString;
 //景点简介链接地址
 @property (nonatomic, copy) NSString *spotIntroUrl;
 //推荐理由

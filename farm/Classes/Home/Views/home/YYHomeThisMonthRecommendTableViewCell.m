@@ -118,7 +118,7 @@
 }
 - (void)setModel:(YYHomeThisMonthRecommendModel *)model{
     _model = model;
-    self.leftImageView.image = [UIImage imageNamed:model.imgurl];
+    [self.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.imgurl]];
     
     self.cityNameLabel.text = model.cityName;
     

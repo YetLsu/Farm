@@ -28,9 +28,12 @@
 - (void)setModel:(YYThemePlayModel *)model{
     _model = model;
 //    YYLog(@"%@", model.homeImgUrl);
-    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:model.homeImgUrl]];
-    
-    self.bottomLabel.text = model.themePlayName;
-}
+    if (model.homeImgUrl) {
+        [self.topImageView sd_setImageWithURL:[NSURL URLWithString:model.homeImgUrl]];
+        
+        self.bottomLabel.text = model.themePlayName;
+
+    }
+    }
 
 @end

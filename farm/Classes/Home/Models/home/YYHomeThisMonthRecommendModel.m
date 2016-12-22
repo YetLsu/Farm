@@ -9,5 +9,12 @@
 #import "YYHomeThisMonthRecommendModel.h"
 
 @implementation YYHomeThisMonthRecommendModel
-
++ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper{
+    return @{
+             @"thisMonthID" : @"id",
+             @"cityName" : @"area",
+             @"cityMark" : @"title",
+             @"cityContent" : @"intro"
+             };
+}
 @end

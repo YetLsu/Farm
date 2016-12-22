@@ -8,13 +8,37 @@
 
 #import "AppDelegate.h"
 #import "YYTabBarController.h"
+#import <CoreLocation/CoreLocation.h>
+#import "YYMapViewModel.h"
 
 @interface AppDelegate ()
+@property (nonatomic, strong) CLGeocoder *geocoder;
+
+@property (nonatomic, strong) CLLocationManager *manager;
+
+@property (nonatomic, strong) YYMapViewModel *mapViewModel;
 
 @end
 
 @implementation AppDelegate
-
+- (CLGeocoder *)geocoder{
+    if (!_geocoder) {
+        _geocoder = [[CLGeocoder alloc] init];
+    }
+    return _geocoder;
+}
+- (CLLocationManager *)manager{
+    if (!_manager) {
+        _manager = [[CLLocationManager alloc] init];
+    }
+    return _manager;
+}
+- (YYMapViewModel *)mapViewModel{
+    if (!_mapViewModel) {
+        _mapViewModel = [[YYMapViewModel alloc] init];
+    }
+    return _mapViewModel;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -25,6 +49,12 @@
     self.window.rootViewController = tabbar;
     
     
+    if ([self.manager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.manager requestWhenInUseAuthorization];
+    }
+    
+    [self.mapViewModel getNowLocation];
+
     return YES;
 }
 

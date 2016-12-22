@@ -128,45 +128,48 @@
 - (void)setModel:(YYHomeDiscoverModel *)model{
     _model = model;
     
-    [self.discoverImageView sd_setImageWithURL:[NSURL URLWithString:model.outerImgurl]];
-   
-    self.discoverTagLabel.text = model.tag;
-    
-    self.discoverTitleLabel.text = model.title;
-    
-    if (model.content) {
-        if ([model.tag isEqualToString:@""] || !model.tag) {
-            self.discoverTagLabel.backgroundColor = [UIColor clearColor];
+    if (model.outerImgurl) {
+        [self.discoverImageView sd_setImageWithURL:[NSURL URLWithString:model.outerImgurl]];
+        
+        self.discoverTagLabel.text = model.tag;
+        
+        self.discoverTitleLabel.text = model.title;
+        
+        if (model.content) {
+            if ([model.tag isEqualToString:@""] || !model.tag) {
+                self.discoverTagLabel.backgroundColor = [UIColor clearColor];
+            }
+            else{
+                self.discoverTagLabel.backgroundColor = kRGBAColor(149, 132, 149, 1);
+            }
+            
+            
+            self.timeIconImageView.image = [UIImage imageNamed:@"home_time_icon"];
+            
+            NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:model.content];
+            
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            paragraphStyle.lineSpacing = 8.0 - 2.5;
+            NSDictionary *attr = @{
+                                   NSFontAttributeName : kText16Font10Height,
+                                   NSParagraphStyleAttributeName : paragraphStyle
+                                   };
+            [attributedStr addAttributes:attr range:NSMakeRange(0, attributedStr.length)];
+            
+            CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:self.contentLabelMaxW andMaxHeight:self.contentLabelMaxH] + 0.1;
+            [self.discoverContentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(contentLabelH);
+            }];
+            
+            self.discoverContentLabel.attributedText = attributedStr;
         }
-        else{
-           self.discoverTagLabel.backgroundColor = kRGBAColor(149, 132, 149, 1);
-        }
         
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd hh:mm";
         
-        self.timeIconImageView.image = [UIImage imageNamed:@"home_time_icon"];
-        
-        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:model.content];
-        
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineSpacing = 8.0 - 2.5;
-        NSDictionary *attr = @{
-                               NSFontAttributeName : kText16Font10Height,
-                               NSParagraphStyleAttributeName : paragraphStyle
-                               };
-        [attributedStr addAttributes:attr range:NSMakeRange(0, attributedStr.length)];
-        
-        CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:self.contentLabelMaxW andMaxHeight:self.contentLabelMaxH] + 0.1;
-        [self.discoverContentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(contentLabelH);
-        }];
-        
-        self.discoverContentLabel.attributedText = attributedStr;
+        self.timeLabel.text = [formatter stringFromDate:model.uploadingTime];
+
     }
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd hh:mm";
-    
-    self.timeLabel.text = [formatter stringFromDate:model.uploadingTime];
     
     
 }

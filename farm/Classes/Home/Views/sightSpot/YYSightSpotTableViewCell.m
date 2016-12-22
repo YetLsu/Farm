@@ -137,7 +137,7 @@
 - (void)setModel:(YYSightSpotModel *)model{
     _model = model;
     
-    self.spotImageView.image = [UIImage imageNamed:model.spotOuterImgurl];
+    [self.spotImageView sd_setImageWithURL:[NSURL URLWithString:model.spotOuterImgurl]];
     
     self.spotTitleLabel.text = model.spotTitle;
     
@@ -146,7 +146,7 @@
                            };
     NSString *spotDistanceStr = [NSString distanceStrWithDistanceStr:model.spotDistance];
     
-    CGFloat spotDistanceLabelW = [spotDistanceStr calculateWidthStringWithAttr:attr andMaxWidth:100 andMaxHeight:14];
+    CGFloat spotDistanceLabelW = [spotDistanceStr calculateWidthStringWithAttr:attr andMaxWidth:100 andMaxHeight:14] + 1;
     
     [self.spotDistanceLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(spotDistanceLabelW);
@@ -156,7 +156,7 @@
     
     
     CGFloat spotAddressLabelMaxW = kWidthScreen - kX12Margin * 2 - 5 - 14 - 6 - 1 - 6 - spotDistanceLabelW;
-    CGFloat spotAddressLabelW = [model.spotAddress calculateWidthStringWithAttr:attr andMaxWidth:spotAddressLabelMaxW andMaxHeight:14];
+    CGFloat spotAddressLabelW = [model.spotAddress calculateWidthStringWithAttr:attr andMaxWidth:spotAddressLabelMaxW andMaxHeight:14] + 1;
     [self.spotAddressLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(spotAddressLabelW);
     }];
@@ -167,6 +167,7 @@
     NSDictionary *tagsAttr = @{
                            NSFontAttributeName : kText16Font10Height
                            };
+    
     CGFloat spotTagsViewH = [YYHomeMarkViewModel tagsViewHeightWithTagsArray:model.spotTags andAttr:tagsAttr andxMargin:kX12Margin andItemH:18 andyMargin:kY12Margin/2.0];
     [self.spotTagsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self.spotImageView);

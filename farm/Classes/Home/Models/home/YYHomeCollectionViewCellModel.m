@@ -9,5 +9,12 @@
 #import "YYHomeCollectionViewCellModel.h"
 
 @implementation YYHomeCollectionViewCellModel
++ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper{
+    return @{
+             @"modelID" : @"id",
+             @"markImgUrl" : @"imgurl",
+             @"markName" : @"tagname",
+             };
+}
 
 @end

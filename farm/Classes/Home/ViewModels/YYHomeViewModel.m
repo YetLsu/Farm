@@ -22,9 +22,6 @@
 @interface YYHomeViewModel ()
 
 
-@property (nonatomic, strong) NSMutableArray *markModelsArray;
-
-@property (nonatomic, strong) NSArray *playModelsArray;
 @end
 
 @implementation YYHomeViewModel
@@ -34,54 +31,48 @@
 //    }
 //    return self;
 //}
-- (NSMutableArray *)markModelsArray{
-    if (!_markModelsArray) {
-        _markModelsArray = [NSMutableArray array];
-    }
-    return _markModelsArray;
-}
+
 #pragma mark 获取景点分类的数据
 - (void)getMarksArrayWithParameters:(NSDictionary *)parameters andCallback:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *, NSError *))callback{
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/firstpage/getCarrouselTaglist.do" parameters:nil progress:^(NSProgress *downloadProgress) {
         
-        YYHomeCollectionViewCellModel *model0 = [[YYHomeCollectionViewCellModel alloc] init];
-        model0.markImgUrl = @"home_2";
-        model0.markName = @"农家园林";
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        NSArray *data = responseObject[@"data"];
+        NSMutableArray *marksArray = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            YYHomeCollectionViewCellModel *model = [YYHomeCollectionViewCellModel yy_modelWithDictionary:dic];
+            [marksArray addObject:model];
+            
+        }
+        
+        callback(marksArray, nil);
+    }];
 
-        YYHomeCollectionViewCellModel *model1 = [[YYHomeCollectionViewCellModel alloc] init];
-        model1.markImgUrl = @"home_3";
-        model1.markName = @"花景欣赏";
-        
-        YYHomeCollectionViewCellModel *model2 = [[YYHomeCollectionViewCellModel alloc] init];
-        model2.markImgUrl = @"home_4";
-        model2.markName = @"避暑山庄";
-        
-        YYHomeCollectionViewCellModel *model3 = [[YYHomeCollectionViewCellModel alloc] init];
-        model3.markImgUrl = @"home_5";
-        model3.markName = @"花园客栈";
-        
-        self.playModelsArray = @[model0, model1, model2, model3, model0, model1, model2];
-        
-        callback(self.playModelsArray, nil);
-        
-    });
 }
 
 /**
  获取当月推荐的内容
  */
 - (void)getThisMonthRecommendWithParameters:(NSDictionary *)parameters andCallback:(void(^)(YYHomeThisMonthRecommendModel *model, NSError *error))callback{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        YYHomeThisMonthRecommendModel *model = [[YYHomeThisMonthRecommendModel alloc] init];
-        model.imgurl = @"home_6";
-        model.cityName = @"诸暨";
-        model.cityMark = @"人文荟萃.越国故地.西施故里";
-        model.cityContent = @"诸暨位于浙江省中北部，北邻杭州，东接绍兴，南临义乌。诸暨历史悠久、人文荟萃，是越国故地、西施故里";
+    
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/firstpage/getMonthRecommend.do" parameters:nil progress:^(NSProgress *downloadProgress) {
+        
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        NSDictionary *data = responseObject[@"data"];
+        
+        YYHomeThisMonthRecommendModel *model = [YYHomeThisMonthRecommendModel yy_modelWithDictionary:data];
         
         callback(model, nil);
-        
-    });
+    }];
 }
 /**
  获取主题游的内容
@@ -95,14 +86,16 @@
             callback(nil, [[NSError alloc] init]);
             return;
         }
+        
+        NSMutableArray *playsArray = [NSMutableArray array];
         NSArray *data = responseObject[@"data"];
         for (NSDictionary *dic in data) {
             YYThemePlayModel *model = [YYThemePlayModel yy_modelWithDictionary:dic];
-            [self.markModelsArray addObject:model];
+            [playsArray addObject:model];
 
         }
         
-        callback(self.markModelsArray, nil);
+        callback(playsArray, nil);
     }];
     
 }

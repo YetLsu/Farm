@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class YYHomeCollectionViewCellModel;
-@interface YYHomeMarkTableViewController : UITableViewController
+@interface YYHomeMarkTableViewController : YYBaseTableViewController
 
 - (instancetype)initWithMarkCollectionModel:(YYHomeCollectionViewCellModel *)markModel;
 

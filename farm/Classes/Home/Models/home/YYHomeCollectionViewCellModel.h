@@ -10,6 +10,8 @@
 
 @interface YYHomeCollectionViewCellModel : NSObject
 
+@property (nonatomic, assign) int modelID;
+
 @property (nonatomic, copy) NSString *markImgUrl;
 
 @property (nonatomic, copy) NSString *markName;
