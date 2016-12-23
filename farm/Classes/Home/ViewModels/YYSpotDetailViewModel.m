@@ -8,14 +8,23 @@
 
 #import "YYSpotDetailViewModel.h"
 #import "YYSightSpotHeaderView.h"
+#import "YYSightSpotTableViewHeaderView.h"
 
 @interface YYSpotDetailViewModel ()
 
 @property (nonatomic, strong) NSArray *headerBottomModelsArray;
 
+@property (nonatomic, strong) NSArray *tableViewHeaderTitleArray;
+
 @end
 
 @implementation YYSpotDetailViewModel
+- (NSArray *)tableViewHeaderTitleArray{
+    if (!_tableViewHeaderTitleArray) {
+        _tableViewHeaderTitleArray = @[@"推荐理由", @"乡村简介", @"地图", @"农副产品", @"周边推荐"];
+    }
+    return _tableViewHeaderTitleArray;
+}
 - (NSArray *)headerBottomModelsArray{
     if (!_headerBottomModelsArray) {
         YYSightSpotHeaderBottomCollectionViewCellModel *model0 = [[YYSightSpotHeaderBottomCollectionViewCellModel alloc] init];
@@ -38,5 +47,28 @@
 }
 - (YYSightSpotHeaderBottomCollectionViewCellModel *)getHeaderBottomCollectionViewCellModelWithIndexPath:(NSIndexPath *)indexPath{
     return self.headerBottomModelsArray[indexPath.item];
+}
+
+- (NSUInteger)getNumberSection{
+    return 5;
+}
+- (NSUInteger)getNumberRowsOnSection:(NSUInteger)section{
+    if (section == 3) {
+        return 2;
+    }
+    return 1;
+}
+//组头的View
+- (YYSightSpotTableViewHeaderView *)getTableViewHeaderViewWithSection:(NSInteger)section{
+    
+    YYSightSpotTableViewHeaderView *headerView = [[YYSightSpotTableViewHeaderView alloc] initWithTitle:self.tableViewHeaderTitleArray[section] andHeaderViewH:(kY12Margin + 40)];
+    
+    return headerView;
+}
+- (CGFloat)getTableViewHeightForHeaderInSection:(NSInteger)section{
+    return kY12Margin + 40;
+}
+- (CGFloat)getTableViewHeightForFooterInSection:(NSInteger)section{
+    return 0.00001;
 }
 @end

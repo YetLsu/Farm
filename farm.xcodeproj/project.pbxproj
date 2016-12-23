@@ -81,6 +81,8 @@
 		75ECD1321E053B940092DC95 /* YYTravelNotesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ECD1311E053B940092DC95 /* YYTravelNotesViewModel.m */; };
 		75F42C291E0289AD00F22B19 /* YYBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F42C281E0289AD00F22B19 /* YYBaseViewModel.m */; };
 		75F42C2C1E0298CD00F22B19 /* YYBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F42C2B1E0298CD00F22B19 /* YYBaseTableViewController.m */; };
+		75FDE6381E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FDE6371E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m */; };
+		75FE385B1E0B7C46005428A3 /* YYSightSpotRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE385A1E0B7C46005428A3 /* YYSightSpotRightView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +243,10 @@
 		75F42C281E0289AD00F22B19 /* YYBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYBaseViewModel.m; sourceTree = "<group>"; };
 		75F42C2A1E0298CD00F22B19 /* YYBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBaseTableViewController.h; sourceTree = "<group>"; };
 		75F42C2B1E0298CD00F22B19 /* YYBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYBaseTableViewController.m; sourceTree = "<group>"; };
+		75FDE6361E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotTableViewHeaderView.h; sourceTree = "<group>"; };
+		75FDE6371E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotTableViewHeaderView.m; sourceTree = "<group>"; };
+		75FE38591E0B7C46005428A3 /* YYSightSpotRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotRightView.h; sourceTree = "<group>"; };
+		75FE385A1E0B7C46005428A3 /* YYSightSpotRightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotRightView.m; sourceTree = "<group>"; };
 		7DF4E4D71A42A44F1F4ADA25 /* libPods-farm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-farm.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8038A765B8736386CEAB73 /* Pods-farm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-farm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-farm/Pods-farm.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -715,6 +721,10 @@
 				75394E111E09239A00B34A13 /* YYSightSpotNavView.m */,
 				755B7E841E0A219100FBA81B /* YYSightSpotHeaderView.h */,
 				755B7E851E0A219100FBA81B /* YYSightSpotHeaderView.m */,
+				75FE38591E0B7C46005428A3 /* YYSightSpotRightView.h */,
+				75FE385A1E0B7C46005428A3 /* YYSightSpotRightView.m */,
+				75FDE6361E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.h */,
+				75FDE6371E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m */,
 			);
 			path = sightSpot;
 			sourceTree = "<group>";
@@ -985,6 +995,7 @@
 				755AE55F1DE7E8D5005C2140 /* YYTabBarController.m in Sources */,
 				753F02571DFAB4C700465981 /* YYThisMonthTagCollectionViewCell.m in Sources */,
 				755AE55C1DE7E8D5005C2140 /* UIView+Extension.m in Sources */,
+				75FE385B1E0B7C46005428A3 /* YYSightSpotRightView.m in Sources */,
 				755AE5621DE7E8D5005C2140 /* YYUserTool.m in Sources */,
 				7574461A1DEC12990032F5C8 /* YYHomeCollectionViewCellModel.m in Sources */,
 				7513245A1DFE532F00B218AE /* YYThemePlayViewModel.m in Sources */,
@@ -1006,6 +1017,7 @@
 				757EF3FD1E0147A5001E000D /* YYHomeDiscoverViewModel.m in Sources */,
 				753F02541DFAB4BA00465981 /* YYThisMonthCommendCollectionViewCell.m in Sources */,
 				753F024E1DFA9D9A00465981 /* YYThisMonthCommendViewModel.m in Sources */,
+				75FDE6381E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m in Sources */,
 				757446111DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m in Sources */,
 				7542BAC21DEFEEFE00B85FD9 /* YYHomeThisMonthRecommendModel.m in Sources */,
 				755AE5661DE7E8D5005C2140 /* AppDelegate.m in Sources */,

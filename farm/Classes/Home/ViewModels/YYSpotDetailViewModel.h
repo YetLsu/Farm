@@ -8,8 +8,10 @@
 
 #import "YYBaseViewModel.h"
 
-@class YYSightSpotHeaderBottomCollectionViewCellModel;
+@class YYSightSpotHeaderBottomCollectionViewCellModel, YYSightSpotTableViewHeaderView;
 @interface YYSpotDetailViewModel : YYBaseViewModel
 //获取tableViewHeaderView中的模型
 - (YYSightSpotHeaderBottomCollectionViewCellModel *)getHeaderBottomCollectionViewCellModelWithIndexPath:(NSIndexPath *)indexPath;
+//组头的View
+- (YYSightSpotTableViewHeaderView *)getTableViewHeaderViewWithSection:(NSInteger)section;
 @end

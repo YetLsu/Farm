@@ -11,6 +11,8 @@
 #import "YYSightSpotModel.h"
 #import "YYSightSpotNavView.h"
 #import "YYSightSpotHeaderView.h"
+#import "YYSightSpotRightView.h"
+#import "YYSightSpotTableViewHeaderView.h"
 
 @interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -28,11 +30,37 @@
 
 @property (nonatomic, assign) BOOL black;
 
-@property (nonatomic, weak) UIView *rightView;
+@property (nonatomic, weak) YYSightSpotRightView *rightView;
+@property (nonatomic, assign) CGFloat rightViewW;
+//右边的页面是否显示
+@property (nonatomic, assign) BOOL rightViewShow;
+
+@property (nonatomic, strong) UIButton *tableViewCoverView;
 
 @end
 
 @implementation YYSpotDetailViewController
+- (UIButton *)tableViewCoverView{
+    if (!_tableViewCoverView) {
+        _tableViewCoverView = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, kWidthScreen - self.rightViewW, kNoNavHeight)];
+        [_tableViewCoverView bk_addEventHandler:^(id sender) {
+            [UIView animateWithDuration:0.2 animations:^{
+                [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.left.mas_equalTo(self.view);
+                }];
+                [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.left.mas_equalTo(self.view.mas_right);
+                }];
+                
+                [self.view layoutIfNeeded];
+                [_tableViewCoverView removeFromSuperview];
+                self.rightViewShow = NO;
+            }];
+        } forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _tableViewCoverView;
+}
+
 - (instancetype)initWithSpotModel:(YYSightSpotModel *)model{
     if (self = [super init]) {
         self.model = model;
@@ -57,6 +85,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
 }
+- (void)tableViewClick{
+   
+}
 #pragma mark 添加子控件
 /**
  添加子控件
@@ -68,9 +99,7 @@
     self.tableView = tableView;
     tableView.backgroundColor = kViewBGColor;
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).mas_offset(-20);
-        make.bottom.mas_equalTo(self.view);
+        make.left.right.top.bottom.mas_equalTo(self.view);
     }];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -91,12 +120,32 @@
     }];
     
     [navView.leftBtn bk_addEventHandler:^(id sender) {
+        if (self.rightViewShow) {
+            [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.view.mas_right);
+            }];
+            [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.view);
+            }];
+        }
         [self.navigationController popViewControllerAnimated:YES];
     } forControlEvents:UIControlEventTouchUpInside];
     
     [navView.rightBtn bk_addEventHandler:^(id sender) {
         YYLog(@"分享按钮被点击");
     } forControlEvents:UIControlEventTouchUpInside];
+    
+    //增加右边的策划栏
+    self.rightViewW = 125 + kX12Margin;
+    YYSightSpotRightView *rightView = [[YYSightSpotRightView alloc] initWithTitleArray:@[@"概况", @"乡村简介", @"地图", @"周边推荐"] andViewW:self.rightViewW];
+    [self.view addSubview:rightView];
+    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_right);
+        make.top.bottom.mas_equalTo(self.view);
+        make.width.mas_equalTo(self.rightViewW);
+    }];
+    self.rightView = rightView;
+    
     //增加回到顶部的按钮
     UIButton *topBtn = [[UIButton alloc] init];
     [self.view addSubview:topBtn];
@@ -112,6 +161,7 @@
         [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
         
     } forControlEvents:UIControlEventTouchUpInside];
+    
     //增加调出侧边栏的按钮
     UIButton *rightAllBtn = [[UIButton alloc] init];
     [self.view addSubview:rightAllBtn];
@@ -122,25 +172,21 @@
     }];
     [rightAllBtn setImage:[UIImage imageNamed:@"spot_rightAll"] forState:UIControlStateNormal];
     [rightAllBtn bk_addEventHandler:^(id sender) {
-        [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.view.mas_right).mas_offset(-100);
-        }];
-        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.view).mas_offset(-100);
-        }];
-        YYLog(@"qqwe");
-    } forControlEvents:UIControlEventTouchUpInside];
+        self.rightViewShow = YES;
+
+        [self.view addSubview:self.tableViewCoverView];
+        [UIView animateWithDuration:0.2 animations:^{
+            [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.view.mas_right).mas_offset(-self.rightViewW );
+            }];
+            [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.view).mas_offset(-self.rightViewW );
+            }];
     
-    //增加右边的策划栏
-    UIView *rightView = [[UIView alloc] init];
-    rightView.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:rightView];
-    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_right);
-        make.top.bottom.mas_equalTo(self.view);
-        make.width.mas_equalTo(100);
-    }];
-    self.rightView = rightView;
+            [self.view layoutIfNeeded];
+        }];
+
+    } forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setTableViewHeaderView{
@@ -172,10 +218,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return [self.viewModel getNumberSection];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 30;
+    return [self.viewModel getNumberRowsOnSection:section];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -185,17 +231,25 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.00001;
+    return [self.viewModel getTableViewHeightForFooterInSection:section];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.00001;
+    return [self.viewModel getTableViewHeightForHeaderInSection:section];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    YYSightSpotTableViewHeaderView *headerView = [self.viewModel getTableViewHeaderViewWithSection:section];
+    [headerView.headerBtn bk_addEventHandler:^(id sender) {
+        YYLog(@"headerView被点击");
+    } forControlEvents:UIControlEventTouchUpInside];
+    return headerView;
+    
 }
 #pragma mark 通过KVO监听tableView的滚动
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([@"contentOffset" isEqualToString:keyPath]) {
         UITableView *tableView = (UITableView *)object;
         CGFloat contentOffsetY = tableView.contentOffset.y;
-        
+//        YYLog(@"%f",contentOffsetY);
         if (contentOffsetY >20) {//改变颜色
             CGFloat alpha = contentOffsetY < 50 ? contentOffsetY/50 : 1;
             self.navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:alpha];
@@ -207,10 +261,10 @@
         }
         else{
             if (contentOffsetY < 0) {
-                [self.headerView.headerImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(self.headerView).mas_offset(contentOffsetY);
-                    make.height.mas_equalTo(self.tableViewHeaderImageViewH - contentOffsetY);
-                }];
+                CGFloat scale = (self.tableViewHeaderImageViewH - contentOffsetY)/self.tableViewHeaderImageViewH;
+                CGFloat imageViewW = scale * kWidthScreen;
+                CGFloat imageViewX = (kWidthScreen - imageViewW)/2.0;
+                self.headerView.headerImageView.frame = CGRectMake(imageViewX, contentOffsetY, imageViewW, self.tableViewHeaderImageViewH - contentOffsetY);
             }
             CGFloat alpha = contentOffsetY > 0 ?  contentOffsetY/50 : 0;
             self.navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:alpha];
@@ -233,6 +287,7 @@
     [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
+#pragma mark tableView的headerView中的collectionView的数据源方法
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }

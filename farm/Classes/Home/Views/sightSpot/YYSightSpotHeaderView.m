@@ -34,7 +34,7 @@
     if (self = [super initWithFrame:CGRectMake(0, 0, kWidthScreen, headerImageViewH + bottomViewH)]) {
         self.bottomViewH = bottomViewH;
         self.headerImageViewH = headerImageViewH;
-        
+        self.backgroundColor = [UIColor clearColor];
         [self addSubViews];
         
         [self setConstraintsOnSubViews];
@@ -88,10 +88,8 @@
     
 }
 - (void)setConstraintsOnSubViews{
-    [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(self);
-        make.height.mas_equalTo(self.headerImageViewH);
-    }];
+    self.headerImageView.frame = CGRectMake(0, 0, kWidthScreen, self.headerImageViewH);
+//    self.headerImageView.contentMode = UIViewContentModeCenter;
     
     CGFloat collectBtnW = 35;
     CGFloat collectBtnH = 35;
@@ -143,6 +141,7 @@
 }
 
 - (void)setViews{
+    
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.font = kText40Font25Height;
     

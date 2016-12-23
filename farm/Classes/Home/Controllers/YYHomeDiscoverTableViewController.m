@@ -28,7 +28,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.title = @"发现";
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+    
    
 }
 
