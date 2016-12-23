@@ -14,6 +14,12 @@
 #import "YYSightSpotRightView.h"
 #import "YYSightSpotTableViewHeaderView.h"
 
+#import "YYSightSpotRecommendTableViewCell.h"
+
+#import "YYSightSpotProductTableViewCell.h"
+#import "YYSightSpotProductModel.h"
+
+
 @interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) YYSightSpotModel *model;
@@ -36,6 +42,10 @@
 @property (nonatomic, assign) BOOL rightViewShow;
 
 @property (nonatomic, strong) UIButton *tableViewCoverView;
+
+@property (nonatomic, strong) UIWebView *introWebView;
+
+@property (nonatomic, strong) NSArray <YYSightSpotProductModel *>*productModelsArray;
 
 @end
 
@@ -64,12 +74,25 @@
 - (instancetype)initWithSpotModel:(YYSightSpotModel *)model{
     if (self = [super init]) {
         self.model = model;
-        self.viewModel = [[YYSpotDetailViewModel alloc] init];
+        
+        self.viewModel = [[YYSpotDetailViewModel alloc] initWithModel:self.model];
+        __weak typeof(self) weakSelf = self;
+        [self.viewModel setYYWebViewFinshedBlock:^(CGFloat cellH) {
+            weakSelf.introWebView.height = cellH;
+            NSIndexSet *set = [NSIndexSet indexSetWithIndex:1];
+            [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+        }];
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.introWebView = [[UIWebView alloc] initWithFrame:CGRectMake(kX12Margin, 0, kWidthScreen - kX12Margin * 2, 1)];
+    self.introWebView.delegate = self.viewModel;
+    self.introWebView.scrollView.scrollEnabled = NO;
+    [self.introWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.model.spotIntroUrl]]];
+    self.introWebView.userInteractionEnabled = NO;
     
     self.view.backgroundColor = kViewBGColor;
     
@@ -78,6 +101,16 @@
     [self addSubViews];
     
     [self setTableViewHeaderView];
+    
+    [self.viewModel getProductModelsArrayWithSpotID:self.model.spotID andCallBack:^(NSArray *modelsArray, NSError *error) {
+        if (error) {
+            YYLog(@"出错");
+            return;
+        }
+        self.productModelsArray = modelsArray;
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:3];
+        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+    }];
     
     //增加KVO
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:NULL];
@@ -224,6 +257,32 @@
     return [self.viewModel getNumberRowsOnSection:section];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        YYSightSpotRecommendTableViewCell *cell = [YYSightSpotRecommendTableViewCell sightSpotRecommendTableViewCellWithTableView:tableView];
+        cell.model = self.model;
+        return cell;
+    }
+    else if (indexPath.section == 1){
+        static NSString *ID = @"YYSightSpotIntroWebTableViewCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+            [cell.contentView addSubview:self.introWebView];
+            cell.backgroundColor = kViewBGColor;
+        }
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+    }
+    else if (indexPath.section == 3){
+        YYSightSpotProductTableViewCell *cell = [YYSightSpotProductTableViewCell sightSpotProductTableViewCellWithTableView:tableView];
+        
+        cell.model = [self.viewModel getProductModelWithIndexPath:indexPath];
+        if (indexPath.row == self.productModelsArray.count - 1) {
+            cell.lineView.hidden = YES;
+        }
+        
+        return cell;
+    }
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.textLabel.text = @"123";
     cell.backgroundColor = [UIColor redColor];
@@ -235,6 +294,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return [self.viewModel getTableViewHeightForHeaderInSection:section];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [self.viewModel getHeightForRowAtIndexPath:indexPath];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     YYSightSpotTableViewHeaderView *headerView = [self.viewModel getTableViewHeaderViewWithSection:section];

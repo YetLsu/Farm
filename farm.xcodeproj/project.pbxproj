@@ -74,10 +74,14 @@
 		757EF3FA1E01401F001E000D /* YYHomeDiscoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757EF3F91E01401F001E000D /* YYHomeDiscoverTableViewController.m */; };
 		757EF3FD1E0147A5001E000D /* YYHomeDiscoverViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757EF3FC1E0147A5001E000D /* YYHomeDiscoverViewModel.m */; };
 		75859BEB1E05293B00185CD8 /* YYTravelNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75859BEA1E05293B00185CD8 /* YYTravelNotesViewController.m */; };
+		75918AE91E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75918AE81E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.m */; };
 		75AB03DA1E077AAF00A6DBA0 /* YYTravelNotesSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AB03D91E077AAF00A6DBA0 /* YYTravelNotesSortView.m */; };
 		75AFD0B01E08D8AD008943E8 /* YYSpotDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AFD0AF1E08D8AD008943E8 /* YYSpotDetailViewController.m */; };
 		75AFD0B31E08D8CB008943E8 /* YYSpotDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AFD0B21E08D8CB008943E8 /* YYSpotDetailViewModel.m */; };
 		75B362891DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B362871DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib */; };
+		75D14FF71E0D1E12000B9530 /* YYSightSpotProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D14FF51E0D1E12000B9530 /* YYSightSpotProductTableViewCell.m */; };
+		75D14FF81E0D1E12000B9530 /* YYSightSpotProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D14FF61E0D1E12000B9530 /* YYSightSpotProductTableViewCell.xib */; };
+		75D14FFB1E0D23C0000B9530 /* YYSightSpotProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D14FFA1E0D23C0000B9530 /* YYSightSpotProductModel.m */; };
 		75ECD1321E053B940092DC95 /* YYTravelNotesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ECD1311E053B940092DC95 /* YYTravelNotesViewModel.m */; };
 		75F42C291E0289AD00F22B19 /* YYBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F42C281E0289AD00F22B19 /* YYBaseViewModel.m */; };
 		75F42C2C1E0298CD00F22B19 /* YYBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F42C2B1E0298CD00F22B19 /* YYBaseTableViewController.m */; };
@@ -230,6 +234,8 @@
 		757EF3FC1E0147A5001E000D /* YYHomeDiscoverViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeDiscoverViewModel.m; sourceTree = "<group>"; };
 		75859BE91E05293B00185CD8 /* YYTravelNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTravelNotesViewController.h; sourceTree = "<group>"; };
 		75859BEA1E05293B00185CD8 /* YYTravelNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTravelNotesViewController.m; sourceTree = "<group>"; };
+		75918AE71E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotRecommendTableViewCell.h; sourceTree = "<group>"; };
+		75918AE81E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotRecommendTableViewCell.m; sourceTree = "<group>"; };
 		75AB03D81E077AAF00A6DBA0 /* YYTravelNotesSortView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTravelNotesSortView.h; sourceTree = "<group>"; };
 		75AB03D91E077AAF00A6DBA0 /* YYTravelNotesSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTravelNotesSortView.m; sourceTree = "<group>"; };
 		75AFD0AE1E08D8AD008943E8 /* YYSpotDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpotDetailViewController.h; sourceTree = "<group>"; };
@@ -237,6 +243,11 @@
 		75AFD0B11E08D8CB008943E8 /* YYSpotDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpotDetailViewModel.h; sourceTree = "<group>"; };
 		75AFD0B21E08D8CB008943E8 /* YYSpotDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSpotDetailViewModel.m; sourceTree = "<group>"; };
 		75B362871DF90E5E00617D47 /* YYThisMonthCommendCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYThisMonthCommendCollectionViewCell.xib; sourceTree = "<group>"; };
+		75D14FF41E0D1E12000B9530 /* YYSightSpotProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotProductTableViewCell.h; sourceTree = "<group>"; };
+		75D14FF51E0D1E12000B9530 /* YYSightSpotProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotProductTableViewCell.m; sourceTree = "<group>"; };
+		75D14FF61E0D1E12000B9530 /* YYSightSpotProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYSightSpotProductTableViewCell.xib; sourceTree = "<group>"; };
+		75D14FF91E0D23C0000B9530 /* YYSightSpotProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotProductModel.h; sourceTree = "<group>"; };
+		75D14FFA1E0D23C0000B9530 /* YYSightSpotProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotProductModel.m; sourceTree = "<group>"; };
 		75ECD1301E053B940092DC95 /* YYTravelNotesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTravelNotesViewModel.h; sourceTree = "<group>"; };
 		75ECD1311E053B940092DC95 /* YYTravelNotesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTravelNotesViewModel.m; sourceTree = "<group>"; };
 		75F42C271E0289AD00F22B19 /* YYBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYBaseViewModel.h; sourceTree = "<group>"; };
@@ -703,6 +714,8 @@
 			children = (
 				757AF1E71DF5502E004A55C0 /* YYSightSpotModel.h */,
 				757AF1E81DF5502E004A55C0 /* YYSightSpotModel.m */,
+				75D14FF91E0D23C0000B9530 /* YYSightSpotProductModel.h */,
+				75D14FFA1E0D23C0000B9530 /* YYSightSpotProductModel.m */,
 			);
 			path = sightSpot;
 			sourceTree = "<group>";
@@ -725,6 +738,11 @@
 				75FE385A1E0B7C46005428A3 /* YYSightSpotRightView.m */,
 				75FDE6361E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.h */,
 				75FDE6371E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m */,
+				75918AE71E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.h */,
+				75918AE81E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.m */,
+				75D14FF41E0D1E12000B9530 /* YYSightSpotProductTableViewCell.h */,
+				75D14FF51E0D1E12000B9530 /* YYSightSpotProductTableViewCell.m */,
+				75D14FF61E0D1E12000B9530 /* YYSightSpotProductTableViewCell.xib */,
 			);
 			path = sightSpot;
 			sourceTree = "<group>";
@@ -902,6 +920,7 @@
 				7542BAC71DEFF03300B85FD9 /* YYHomeThisMonthRecommendTableViewCell.xib in Resources */,
 				757446161DEC10CB0032F5C8 /* YYHomeMarkCollectionViewCell.xib in Resources */,
 				755AE5671DE7E8D5005C2140 /* Assets.xcassets in Resources */,
+				75D14FF81E0D1E12000B9530 /* YYSightSpotProductTableViewCell.xib in Resources */,
 				757AF1EF1DF55159004A55C0 /* YYSightSpotTableViewCell.xib in Resources */,
 				752CB2021E04EC43000FF76B /* YYHomeDiscoverTableViewCell.xib in Resources */,
 				755AE5651DE7E8D5005C2140 /* YYProfileViewController.xib in Resources */,
@@ -986,6 +1005,7 @@
 				757AF1F21DF56BEF004A55C0 /* YYHomeMarkViewModel.m in Sources */,
 				75AB03DA1E077AAF00A6DBA0 /* YYTravelNotesSortView.m in Sources */,
 				755BE7AE1DF277D2004D3886 /* YYHomeMarkTableViewController.m in Sources */,
+				75918AE91E0CBBAA001DB97C /* YYSightSpotRecommendTableViewCell.m in Sources */,
 				75394E121E09239A00B34A13 /* YYSightSpotNavView.m in Sources */,
 				755AE55D1DE7E8D5005C2140 /* YYHomeTableViewController.m in Sources */,
 				75AFD0B31E08D8CB008943E8 /* YYSpotDetailViewModel.m in Sources */,
@@ -1006,6 +1026,7 @@
 				757AF1EE1DF55159004A55C0 /* YYSightSpotTableViewCell.m in Sources */,
 				755AE5611DE7E8D5005C2140 /* YYLcjFarmTool.m in Sources */,
 				755675D41DF152630050BB66 /* YYHomeTravelNotesModel.m in Sources */,
+				75D14FFB1E0D23C0000B9530 /* YYSightSpotProductModel.m in Sources */,
 				7577A7461DE9569000051C9B /* YYHomeViewModel.m in Sources */,
 				755B7E861E0A219100FBA81B /* YYSightSpotHeaderView.m in Sources */,
 				75AFD0B01E08D8AD008943E8 /* YYSpotDetailViewController.m in Sources */,
@@ -1021,6 +1042,7 @@
 				757446111DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m in Sources */,
 				7542BAC21DEFEEFE00B85FD9 /* YYHomeThisMonthRecommendModel.m in Sources */,
 				755AE5661DE7E8D5005C2140 /* AppDelegate.m in Sources */,
+				75D14FF71E0D1E12000B9530 /* YYSightSpotProductTableViewCell.m in Sources */,
 				757EF3FA1E01401F001E000D /* YYHomeDiscoverTableViewController.m in Sources */,
 				75F42C2C1E0298CD00F22B19 /* YYBaseTableViewController.m in Sources */,
 				757AF1E91DF5502E004A55C0 /* YYSightSpotModel.m in Sources */,
