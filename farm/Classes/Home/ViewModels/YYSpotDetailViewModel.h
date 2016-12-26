@@ -25,4 +25,6 @@
 - (void)getProductModelsArrayWithSpotID:(NSString *)spotID andCallBack:(void (^)(NSArray *modelsArray,NSError *error)) callback;
 //获取农副产品的模型
 - (YYSightSpotProductModel *)getProductModelWithIndexPath:(NSIndexPath *)indexPath;
+//获取周边推荐
+- (void)getNearbyModelsArrayWithCallback:(void (^)(NSArray *modelsArray, NSError *error)) callback;
 @end

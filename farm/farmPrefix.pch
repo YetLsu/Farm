@@ -31,4 +31,6 @@ static NSString *homeMarkCollectionID = @"YYHomeMarkCollectionViewCell";
 static NSString *homePlayCollectionID = @"YYHomeThemePlayCollectionViewCell";
 static NSString *travelNotesSortCollectionID = @"YYTravelNotesSortCollectionViewCell";
 static NSString *sightSpotHeaderBottomCollectionViewCellID = @"YYSightSpotHeaderBottomCollectionViewCell";
+static NSString *sightSpotNearbyTableViewCellCollectionViewCellID = @"YYSightSpotNearbyTableViewCellCollectionViewCell";
+
 #endif /* farmPrefix_pch */

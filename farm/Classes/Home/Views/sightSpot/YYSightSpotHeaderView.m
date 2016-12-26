@@ -35,6 +35,7 @@
         self.bottomViewH = bottomViewH;
         self.headerImageViewH = headerImageViewH;
         self.backgroundColor = [UIColor clearColor];
+        
         [self addSubViews];
         
         [self setConstraintsOnSubViews];
@@ -94,12 +95,14 @@
     CGFloat collectBtnW = 35;
     CGFloat collectBtnH = 35;
     CGFloat collectBtnY = kY12Margin * 2 + 64;
-    [self.collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self).mas_offset(-kX12Margin);
-        make.size.mas_equalTo(CGSizeMake(collectBtnW, collectBtnH));
-        make.top.mas_equalTo(self).mas_offset(collectBtnY);
-    }];
-
+    CGFloat collectBtnX = kWidthScreen - kX12Margin - collectBtnW;
+    self.collectBtn.frame = CGRectMake(collectBtnX, collectBtnY, collectBtnW, collectBtnH);
+//    [self.collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(self).mas_offset(-kX12Margin);
+//        make.size.mas_equalTo(CGSizeMake(collectBtnW, collectBtnH));
+//        make.top.mas_equalTo(self).mas_offset(collectBtnY);
+//    }];
+//
     CGFloat titleLabelH = kHeightText40;
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).mas_offset(kX12Margin);

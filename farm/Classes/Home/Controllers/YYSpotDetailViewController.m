@@ -19,6 +19,9 @@
 #import "YYSightSpotProductTableViewCell.h"
 #import "YYSightSpotProductModel.h"
 
+#import "YYSightSpotNearbyTableViewCell.h"
+
+
 
 @interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -47,9 +50,21 @@
 
 @property (nonatomic, strong) NSArray <YYSightSpotProductModel *>*productModelsArray;
 
+@property (nonatomic, strong) NSArray <YYSightSpotModel *>* nearbyModelsArray;
+
+@property (nonatomic, strong) UITableViewCell *introWebViewTableViewCell;
 @end
 
 @implementation YYSpotDetailViewController
+- (UITableViewCell *)introWebViewTableViewCell{
+    if (!_introWebViewTableViewCell) {
+        _introWebViewTableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        [_introWebViewTableViewCell.contentView addSubview:self.introWebView];
+        _introWebViewTableViewCell.backgroundColor = kViewBGColor;
+        [_introWebViewTableViewCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    return _introWebViewTableViewCell;
+}
 - (UIButton *)tableViewCoverView{
     if (!_tableViewCoverView) {
         _tableViewCoverView = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, kWidthScreen - self.rightViewW, kNoNavHeight)];
@@ -80,7 +95,7 @@
         [self.viewModel setYYWebViewFinshedBlock:^(CGFloat cellH) {
             weakSelf.introWebView.height = cellH;
             NSIndexSet *set = [NSIndexSet indexSetWithIndex:1];
-            [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+            [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
         }];
     }
     return self;
@@ -109,6 +124,12 @@
         }
         self.productModelsArray = modelsArray;
         NSIndexSet *set = [NSIndexSet indexSetWithIndex:3];
+        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    
+    [self.viewModel getNearbyModelsArrayWithCallback:^(NSArray *modelsArray, NSError *error) {
+        self.nearbyModelsArray = modelsArray;
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:4];
         [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
     }];
     
@@ -227,6 +248,9 @@
     self.tableViewHeaderImageViewH = 365.0/603*kNoNavHeight;
     CGFloat bottomViewH = 40;
     YYSightSpotHeaderView *headerView = [[YYSightSpotHeaderView alloc] initWithHeight:self.tableViewHeaderImageViewH andBottomViewH:bottomViewH];
+    
+    [headerView.collectBtn setImage:[UIImage imageNamed:@"spot_collect_yes"] forState:UIControlStateNormal];
+    
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
     self.headerView.model = self.model;
@@ -263,15 +287,7 @@
         return cell;
     }
     else if (indexPath.section == 1){
-        static NSString *ID = @"YYSightSpotIntroWebTableViewCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-            [cell.contentView addSubview:self.introWebView];
-            cell.backgroundColor = kViewBGColor;
-        }
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        return cell;
+        return self.introWebViewTableViewCell;
     }
     else if (indexPath.section == 3){
         YYSightSpotProductTableViewCell *cell = [YYSightSpotProductTableViewCell sightSpotProductTableViewCellWithTableView:tableView];
@@ -280,8 +296,15 @@
         if (indexPath.row == self.productModelsArray.count - 1) {
             cell.lineView.hidden = YES;
         }
-        
         return cell;
+    }
+    if (indexPath.section == 4) {
+        YYSightSpotNearbyTableViewCell *cell = [YYSightSpotNearbyTableViewCell sightSpotNearbyTableViewCellWithTableView:tableView];
+        
+        cell.modelsArray = self.nearbyModelsArray;
+
+        return cell;
+
     }
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.textLabel.text = @"123";
@@ -339,6 +362,7 @@
         [self setNeedsStatusBarAppearanceUpdate];
     }
 }
+
 - (UIStatusBarStyle)preferredStatusBarStyle{
     if (self.black) {
         return UIStatusBarStyleDefault;

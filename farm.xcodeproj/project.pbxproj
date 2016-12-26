@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B23C6A63170BC6DAF0CFBD9 /* libPods-farm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4E4D71A42A44F1F4ADA25 /* libPods-farm.a */; };
+		750B1E721E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 750B1E711E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.m */; };
 		751324571DFE523A00B218AE /* YYThemePlayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 751324561DFE523A00B218AE /* YYThemePlayModel.m */; };
 		7513245A1DFE532F00B218AE /* YYThemePlayViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 751324591DFE532F00B218AE /* YYThemePlayViewModel.m */; };
 		7513245D1DFE550A00B218AE /* YYThemePlayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7513245C1DFE550A00B218AE /* YYThemePlayTableViewController.m */; };
@@ -108,6 +109,8 @@
 
 /* Begin PBXFileReference section */
 		69D141E76773EF179569496B /* Pods-farm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-farm.release.xcconfig"; path = "Pods/Target Support Files/Pods-farm/Pods-farm.release.xcconfig"; sourceTree = "<group>"; };
+		750B1E701E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSightSpotNearbyTableViewCell.h; sourceTree = "<group>"; };
+		750B1E711E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotNearbyTableViewCell.m; sourceTree = "<group>"; };
 		751324551DFE523A00B218AE /* YYThemePlayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYThemePlayModel.h; sourceTree = "<group>"; };
 		751324561DFE523A00B218AE /* YYThemePlayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYThemePlayModel.m; sourceTree = "<group>"; };
 		751324581DFE532F00B218AE /* YYThemePlayViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYThemePlayViewModel.h; sourceTree = "<group>"; };
@@ -743,6 +746,8 @@
 				75D14FF41E0D1E12000B9530 /* YYSightSpotProductTableViewCell.h */,
 				75D14FF51E0D1E12000B9530 /* YYSightSpotProductTableViewCell.m */,
 				75D14FF61E0D1E12000B9530 /* YYSightSpotProductTableViewCell.xib */,
+				750B1E701E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.h */,
+				750B1E711E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.m */,
 			);
 			path = sightSpot;
 			sourceTree = "<group>";
@@ -1013,6 +1018,7 @@
 				75859BEB1E05293B00185CD8 /* YYTravelNotesViewController.m in Sources */,
 				7513245D1DFE550A00B218AE /* YYThemePlayTableViewController.m in Sources */,
 				755AE55F1DE7E8D5005C2140 /* YYTabBarController.m in Sources */,
+				750B1E721E0E20C600BD16BD /* YYSightSpotNearbyTableViewCell.m in Sources */,
 				753F02571DFAB4C700465981 /* YYThisMonthTagCollectionViewCell.m in Sources */,
 				755AE55C1DE7E8D5005C2140 /* UIView+Extension.m in Sources */,
 				75FE385B1E0B7C46005428A3 /* YYSightSpotRightView.m in Sources */,

@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) NSMutableArray <YYSightSpotProductModel *> *productModelsArray;
 
+
 @end
 
 @implementation YYSpotDetailViewModel
@@ -66,7 +67,7 @@
 }
 //获取农副产品列表
 - (void)getProductModelsArrayWithSpotID:(NSString *)spotID andCallBack:(void (^)(NSArray *modelsArray,NSError *error)) callback{
-    YYLog(@"%@", spotID);
+//    YYLog(@"%@", spotID);
     NSDictionary *parameters = @{
                                  @"spotid" : spotID,
                                  };
@@ -88,6 +89,34 @@
             
         }
         callback(self.productModelsArray, error);
+    }];
+}
+//获取周边推荐
+- (void)getNearbyModelsArrayWithCallback:(void (^)(NSArray *modelsArray, NSError *error)) callback{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    YYUserModel *userModel = [YYUserTool userModel];
+    parameters[@"lon"] = userModel.lon;
+    parameters[@"lat"] = userModel.lat;
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/spot/getAroundSpotsAll.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
+        
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        if (error) {
+            callback(nil, error);
+            return;
+        }
+        NSArray *data = responseObject[@"data"];
+        NSMutableArray *modelsArray = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            YYSightSpotModel *model = [YYSightSpotModel yy_modelWithDictionary:dic];
+            [modelsArray addObject:model];
+            
+        }
+        callback(modelsArray, error);
+//        YYLog(@"%@", responseObject);
     }];
 }
 //获取农副产品的模型
@@ -138,6 +167,9 @@
     }
     else if (indexPath.section == 3){
         cellH = 80 + kY12Margin * 2;
+    }
+    else if (indexPath.section == 4){
+        cellH = 154;
     }
     return cellH;
 }
