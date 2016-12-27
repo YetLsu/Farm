@@ -22,9 +22,15 @@
 
 @property (nonatomic, strong) NSArray *tableViewHeaderTitleArray;
 
-@property (nonatomic, assign) CGFloat webViewH;
-
 @property (nonatomic, strong) NSMutableArray <YYSightSpotProductModel *> *productModelsArray;
+
+@property (nonatomic, assign) CGFloat tableViewSectionHeaderViewH;
+
+@property (nonatomic, assign) CGFloat section0H;
+
+@property (nonatomic, assign) CGFloat section1WebH;
+
+@property (nonatomic, assign) CGFloat section2MapH;
 
 
 @end
@@ -34,7 +40,7 @@
 - (instancetype)initWithModel:(YYSightSpotModel *)model{
     if (self = [super init]) {
         self.model = model;
-        
+        self.tableViewSectionHeaderViewH = kY12Margin + 40;
         self.productModelsArray = [NSMutableArray array];
     }
     return self;
@@ -139,12 +145,12 @@
 //组头的View
 - (YYSightSpotTableViewHeaderView *)getTableViewHeaderViewWithSection:(NSInteger)section{
     
-    YYSightSpotTableViewHeaderView *headerView = [[YYSightSpotTableViewHeaderView alloc] initWithTitle:self.tableViewHeaderTitleArray[section] andHeaderViewH:(kY12Margin + 40)];
+    YYSightSpotTableViewHeaderView *headerView = [[YYSightSpotTableViewHeaderView alloc] initWithTitle:self.tableViewHeaderTitleArray[section] andHeaderViewH:self.tableViewSectionHeaderViewH];
     
     return headerView;
 }
 - (CGFloat)getTableViewHeightForHeaderInSection:(NSInteger)section{
-    return kY12Margin + 40;
+    return self.tableViewSectionHeaderViewH;
 }
 - (CGFloat)getTableViewHeightForFooterInSection:(NSInteger)section{
     return 0.00001;
@@ -161,9 +167,15 @@
                                };
         CGFloat maxW = kWidthScreen - kX12Margin * 4;
         cellH = kY12Margin + kY12Margin + [self.model.spotRecommendResult calculateHeightStringWithAttr:attr andMaxWidth:maxW andMaxHeight:CGFLOAT_MAX] + 1;
+        self.section0H = cellH;
     }
     else if (indexPath.section == 1){
-        return self.webViewH;
+        return self.section1WebH;
+    }
+    else if (indexPath.section == 2){
+        CGFloat scale = kWidthScreen / 375.0;
+        self.section2MapH = 200 * scale;
+        return self.section2MapH;
     }
     else if (indexPath.section == 3){
         cellH = 80 + kY12Margin * 2;
@@ -173,11 +185,30 @@
     }
     return cellH;
 }
-
+//根据第几组计算需要滚动的距离
+- (CGFloat)getScrollContentOffsetYWithSection:(NSInteger)section{
+    CGFloat contentY = 0;
+    if (section == 0) {
+        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH - 64;
+    }
+    else if (section == 1){
+        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.tableViewSectionHeaderViewH + self.section0H - 64;
+    }
+    else if (section == 2){
+        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.section0H + self.section1WebH + self.tableViewSectionHeaderViewH * 2 - 64;
+    }
+    else if (section == 3){
+        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.section0H + self.section1WebH + self.section2MapH + self.tableViewSectionHeaderViewH * 3 - 64;
+    }
+    else if (section == 4){
+        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.section0H + self.section1WebH + self.section2MapH + self.tableViewSectionHeaderViewH * 3 - 64;
+    }
+    return contentY;
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    self.webViewH = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
+    self.section1WebH = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
     if (self.YYWebViewFinshedBlock) {
-        self.YYWebViewFinshedBlock(self.webViewH);
+        self.YYWebViewFinshedBlock(self.section1WebH);
     }
 }
 @end

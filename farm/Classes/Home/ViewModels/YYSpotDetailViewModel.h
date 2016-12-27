@@ -12,6 +12,11 @@
 
 @interface YYSpotDetailViewModel : YYBaseViewModel<UIWebViewDelegate>
 
+//tableViewHeaderView上半部分高度
+@property (nonatomic, assign) CGFloat tableViewHeaderTopViewH;
+//tableViewHeaderView下半部分高度
+@property (nonatomic, assign) CGFloat tableViewHeaderBottomViewH;
+
 - (instancetype)initWithModel:(YYSightSpotModel *)model;
 
 @property (nonatomic, copy) void (^YYWebViewFinshedBlock)(CGFloat cellH);
@@ -27,4 +32,6 @@
 - (YYSightSpotProductModel *)getProductModelWithIndexPath:(NSIndexPath *)indexPath;
 //获取周边推荐
 - (void)getNearbyModelsArrayWithCallback:(void (^)(NSArray *modelsArray, NSError *error)) callback;
+//根据第几组计算需要滚动的距离
+- (CGFloat)getScrollContentOffsetYWithSection:(NSInteger)section;
 @end

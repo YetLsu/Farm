@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) NSArray <YYSightSpotModel *>*modelsArray;
 
+@property (nonatomic, copy) void (^YYCollectionViewCellBlock) (YYSightSpotModel *model);
+
 + (instancetype)sightSpotNearbyTableViewCellWithTableView:(UITableView *)tableView;
 
 @end

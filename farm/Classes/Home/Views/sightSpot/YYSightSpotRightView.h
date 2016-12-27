@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface YYSightSpotRightView : UIView
+
 - (instancetype)initWithTitleArray:(NSArray *)titleArray andViewW:(CGFloat)viewW;
+
+@property (nonatomic, copy) void (^YYSightSpotRightViewBlock) (NSInteger index);
 @end
 
 @interface YYSightSpotRightTableViewCell : UITableViewCell

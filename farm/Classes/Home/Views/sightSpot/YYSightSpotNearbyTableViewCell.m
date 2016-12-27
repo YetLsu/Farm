@@ -78,6 +78,12 @@
     
     return cell;
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.YYCollectionViewCellBlock) {
+        YYSightSpotModel *model = self.modelsArray[indexPath.item];
+        self.YYCollectionViewCellBlock(model);
+    }
+}
 @end
 
 @interface YYSightSpotNearbyTableViewCellCollectionViewCell ()

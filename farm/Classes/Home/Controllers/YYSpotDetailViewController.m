@@ -21,9 +21,13 @@
 
 #import "YYSightSpotNearbyTableViewCell.h"
 
+#import "YYSightSpotMapTableViewCell.h"
+
+#import <MapKit/MapKit.h>
 
 
-@interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
+
+@interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) YYSightSpotModel *model;
 
@@ -36,6 +40,8 @@
 @property (nonatomic, weak) YYSightSpotHeaderView *headerView;
 
 @property (nonatomic, assign) CGFloat tableViewHeaderImageViewH;
+
+@property (nonatomic, assign) CGFloat tableViewBottomViewH;
 
 @property (nonatomic, assign) BOOL black;
 
@@ -53,11 +59,70 @@
 @property (nonatomic, strong) NSArray <YYSightSpotModel *>* nearbyModelsArray;
 
 @property (nonatomic, strong) UITableViewCell *introWebViewTableViewCell;
+
+@property (nonatomic, strong) YYSightSpotMapTableViewCell *mapTableViewCell;
+
+@property (nonatomic, strong) CLGeocoder *geocoder;
 @end
 
 @implementation YYSpotDetailViewController
+- (CLGeocoder *)geocoder{
+    if (!_geocoder) {
+        _geocoder = [[CLGeocoder alloc] init];
+    }
+    return _geocoder;
+}
+- (YYSightSpotMapTableViewCell *)mapTableViewCell{
+    if (!_mapTableViewCell) {
+        _mapTableViewCell = [[YYSightSpotMapTableViewCell alloc] initWithSpotModel:self.model];
+        _mapTableViewCell.backgroundColor = kViewBGColor;
+        [_mapTableViewCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        __weak typeof(self) weakSelf = self;
+        
+        [_mapTableViewCell setYYMapBlock:^{
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择导航方式" delegate:weakSelf cancelButtonTitle:@"取消" destructiveButtonTitle:@"苹果地图" otherButtonTitles:nil];
+           
+            [sheet showInView:weakSelf.view];
+        }];
+    }
+    
+    return _mapTableViewCell;
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        CLLocationCoordinate2D destCoordinate = CLLocationCoordinate2DMake(self.model.cityLat, self.model.cityLon);
+        CLLocation *destLocation = [[CLLocation alloc] initWithLatitude:destCoordinate.latitude longitude:destCoordinate.longitude];
+        [self.geocoder reverseGeocodeLocation:destLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+            CLPlacemark *destCp = [placemarks firstObject];
+            MKPlacemark *destMp = [[MKPlacemark alloc] initWithPlacemark:destCp];
+            MKMapItem *destItem = [[MKMapItem alloc] initWithPlacemark:destMp];
+            //获取当前位置
+            MKMapItem *sourceItem = [MKMapItem mapItemForCurrentLocation];
+            
+            
+            // 1.将起点和终点item放入数组中
+            NSArray *items = @[sourceItem, destItem];
+            
+            // 2.设置Options参数(字典)
+            NSDictionary *options = @{
+                                      MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking,
+                                      MKLaunchOptionsMapTypeKey : @(MKMapTypeStandard),
+                                      MKLaunchOptionsShowsTrafficKey : @YES
+                                      };
+            
+            [MKMapItem openMapsWithItems:items launchOptions:options];
+
+        }];
+    }
+}
 - (UITableViewCell *)introWebViewTableViewCell{
     if (!_introWebViewTableViewCell) {
+        self.introWebView = [[UIWebView alloc] initWithFrame:CGRectMake(kX12Margin, 0, kWidthScreen - kX12Margin * 2, 1)];
+        self.introWebView.delegate = self.viewModel;
+        self.introWebView.scrollView.scrollEnabled = NO;
+        [self.introWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.model.spotIntroUrl]]];
+        self.introWebView.userInteractionEnabled = NO;
         _introWebViewTableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         [_introWebViewTableViewCell.contentView addSubview:self.introWebView];
         _introWebViewTableViewCell.backgroundColor = kViewBGColor;
@@ -70,14 +135,8 @@
         _tableViewCoverView = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, kWidthScreen - self.rightViewW, kNoNavHeight)];
         [_tableViewCoverView bk_addEventHandler:^(id sender) {
             [UIView animateWithDuration:0.2 animations:^{
-                [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.left.mas_equalTo(self.view);
-                }];
-                [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.left.mas_equalTo(self.view.mas_right);
-                }];
-                
-                [self.view layoutIfNeeded];
+                self.tableView.x = 0;
+                self.rightView.x = kWidthScreen;
                 [_tableViewCoverView removeFromSuperview];
                 self.rightViewShow = NO;
             }];
@@ -91,6 +150,10 @@
         self.model = model;
         
         self.viewModel = [[YYSpotDetailViewModel alloc] initWithModel:self.model];
+        self.tableViewHeaderImageViewH = 365.0/603*kNoNavHeight;
+        self.tableViewBottomViewH = 40;
+        self.viewModel.tableViewHeaderTopViewH = self.tableViewHeaderImageViewH;
+        self.viewModel.tableViewHeaderBottomViewH = self.tableViewBottomViewH;
         __weak typeof(self) weakSelf = self;
         [self.viewModel setYYWebViewFinshedBlock:^(CGFloat cellH) {
             weakSelf.introWebView.height = cellH;
@@ -102,12 +165,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.introWebView = [[UIWebView alloc] initWithFrame:CGRectMake(kX12Margin, 0, kWidthScreen - kX12Margin * 2, 1)];
-    self.introWebView.delegate = self.viewModel;
-    self.introWebView.scrollView.scrollEnabled = NO;
-    [self.introWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.model.spotIntroUrl]]];
-    self.introWebView.userInteractionEnabled = NO;
     
     self.view.backgroundColor = kViewBGColor;
     
@@ -139,9 +196,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
 }
-- (void)tableViewClick{
-   
-}
+
 #pragma mark 添加子控件
 /**
  添加子控件
@@ -152,9 +207,8 @@
     [self.view addSubview: tableView];
     self.tableView = tableView;
     tableView.backgroundColor = kViewBGColor;
-    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(self.view);
-    }];
+
+    tableView.frame = [UIScreen mainScreen].bounds;
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -191,14 +245,16 @@
     
     //增加右边的策划栏
     self.rightViewW = 125 + kX12Margin;
-    YYSightSpotRightView *rightView = [[YYSightSpotRightView alloc] initWithTitleArray:@[@"概况", @"乡村简介", @"地图", @"周边推荐"] andViewW:self.rightViewW];
+    YYSightSpotRightView *rightView = [[YYSightSpotRightView alloc] initWithTitleArray:@[@"推荐理由", @"乡村简介", @"地图", @"农副产品", @"周边推荐"] andViewW:self.rightViewW];
     [self.view addSubview:rightView];
-    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_right);
-        make.top.bottom.mas_equalTo(self.view);
-        make.width.mas_equalTo(self.rightViewW);
-    }];
+    rightView.frame = CGRectMake(kWidthScreen, 0, self.rightViewW, kHeightScreen);
+
     self.rightView = rightView;
+    
+    [self.rightView setYYSightSpotRightViewBlock:^(NSInteger section) {
+        
+        [self.tableView setContentOffset:CGPointMake(0, [self.viewModel getScrollContentOffsetYWithSection:section]) animated:YES];
+    }];
     
     //增加回到顶部的按钮
     UIButton *topBtn = [[UIButton alloc] init];
@@ -230,14 +286,9 @@
 
         [self.view addSubview:self.tableViewCoverView];
         [UIView animateWithDuration:0.2 animations:^{
-            [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.view.mas_right).mas_offset(-self.rightViewW );
-            }];
-            [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.view).mas_offset(-self.rightViewW );
-            }];
-    
-            [self.view layoutIfNeeded];
+
+            self.tableView.x = - self.rightViewW;
+            self.rightView.x = kWidthScreen - self.rightViewW;
         }];
 
     } forControlEvents:UIControlEventTouchUpInside];
@@ -245,11 +296,13 @@
 
 - (void)setTableViewHeaderView{
     
-    self.tableViewHeaderImageViewH = 365.0/603*kNoNavHeight;
-    CGFloat bottomViewH = 40;
-    YYSightSpotHeaderView *headerView = [[YYSightSpotHeaderView alloc] initWithHeight:self.tableViewHeaderImageViewH andBottomViewH:bottomViewH];
+    
+    YYSightSpotHeaderView *headerView = [[YYSightSpotHeaderView alloc] initWithHeight:self.tableViewHeaderImageViewH andBottomViewH:self.tableViewBottomViewH];
     
     [headerView.collectBtn setImage:[UIImage imageNamed:@"spot_collect_yes"] forState:UIControlStateNormal];
+    [headerView.collectBtn bk_addEventHandler:^(id sender) {
+        YYLog(@"收藏按钮被点击");
+    } forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
@@ -289,6 +342,9 @@
     else if (indexPath.section == 1){
         return self.introWebViewTableViewCell;
     }
+    else if (indexPath.section == 2){
+        return self.mapTableViewCell;
+    }
     else if (indexPath.section == 3){
         YYSightSpotProductTableViewCell *cell = [YYSightSpotProductTableViewCell sightSpotProductTableViewCellWithTableView:tableView];
         
@@ -302,15 +358,17 @@
         YYSightSpotNearbyTableViewCell *cell = [YYSightSpotNearbyTableViewCell sightSpotNearbyTableViewCellWithTableView:tableView];
         
         cell.modelsArray = self.nearbyModelsArray;
+        
+        [cell setYYCollectionViewCellBlock:^(YYSightSpotModel *model) {
+            YYLog(@"%@", model.spotTitle);
+            
+        }];
 
         return cell;
 
     }
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = @"123";
-    cell.backgroundColor = [UIColor redColor];
     
-    return cell;
+    return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return [self.viewModel getTableViewHeightForFooterInSection:section];

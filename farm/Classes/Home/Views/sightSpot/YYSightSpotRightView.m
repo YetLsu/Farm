@@ -108,6 +108,11 @@
     return 0.00001;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.YYSightSpotRightViewBlock) {
+        self.YYSightSpotRightViewBlock(indexPath.row);
+    }
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
