@@ -53,6 +53,7 @@
 @property (nonatomic, strong) UIButton *tableViewCoverView;
 
 @property (nonatomic, strong) UIWebView *introWebView;
+@property (nonatomic, assign) CGFloat introWebViewH;
 
 @property (nonatomic, strong) NSArray <YYSightSpotProductModel *>*productModelsArray;
 
@@ -150,12 +151,17 @@
         self.model = model;
         
         self.viewModel = [[YYSpotDetailViewModel alloc] initWithModel:self.model];
+        self.viewModel.foldArray = [NSMutableArray array];
+        [NSNumber numberWithBool:NO];
+        [self.viewModel.foldArray addObjectsFromArray:@[[NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO]]];
+        
         self.tableViewHeaderImageViewH = 365.0/603*kNoNavHeight;
         self.tableViewBottomViewH = 40;
         self.viewModel.tableViewHeaderTopViewH = self.tableViewHeaderImageViewH;
         self.viewModel.tableViewHeaderBottomViewH = self.tableViewBottomViewH;
         __weak typeof(self) weakSelf = self;
         [self.viewModel setYYWebViewFinshedBlock:^(CGFloat cellH) {
+            weakSelf.introWebViewH = cellH;
             weakSelf.introWebView.height = cellH;
             NSIndexSet *set = [NSIndexSet indexSetWithIndex:1];
             [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
@@ -167,7 +173,6 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = kViewBGColor;
-    
     
     //添加子控件
     [self addSubViews];
@@ -253,7 +258,20 @@
     
     [self.rightView setYYSightSpotRightViewBlock:^(NSInteger section) {
         
+        NSNumber *foldNumber = self.viewModel.foldArray[section];
+        BOOL fold = foldNumber.boolValue;
+        if (fold) {
+            [self.viewModel.foldArray replaceObjectAtIndex:section withObject:[NSNumber numberWithBool:NO]];
+            NSIndexSet *set = [NSIndexSet indexSetWithIndex:section];
+            [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+        }
+        if (section == 1) {
+            self.introWebView.height = self.introWebViewH;
+        }
+        
         [self.tableView setContentOffset:CGPointMake(0, [self.viewModel getScrollContentOffsetYWithSection:section]) animated:YES];
+        
+        
     }];
     
     //增加回到顶部的按钮
@@ -382,8 +400,39 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     YYSightSpotTableViewHeaderView *headerView = [self.viewModel getTableViewHeaderViewWithSection:section];
     [headerView.headerBtn bk_addEventHandler:^(id sender) {
-        YYLog(@"headerView被点击");
+        NSNumber *number = self.viewModel.foldArray[section];
+        if (number.boolValue) {
+            //需要展开
+            if (section == 1) {
+                self.introWebView.height = self.introWebViewH;
+            }
+            
+            [self.viewModel.foldArray replaceObjectAtIndex:section withObject:[NSNumber numberWithBool:NO]];
+            
+            headerView.rightIconImageView.image = [UIImage imageNamed:@"spot_detail_header_right_icon_fold"];
+            
+        }
+        else{
+            if (section == 1) {
+                self.introWebView.height = 0;
+            }
+            
+            [self.viewModel.foldArray replaceObjectAtIndex:section withObject:[NSNumber numberWithBool:YES]];
+            
+            headerView.rightIconImageView.image = [UIImage imageNamed:@"spot_detail_header_right_icon"];
+        }
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:section];
+        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
     } forControlEvents:UIControlEventTouchUpInside];
+    NSNumber *number = self.viewModel.foldArray[section];
+    if (number.boolValue) {
+        //需要展开
+        headerView.rightIconImageView.image = [UIImage imageNamed:@"spot_detail_header_right_icon_fold"];
+    }
+    else{
+        headerView.rightIconImageView.image = [UIImage imageNamed:@"spot_detail_header_right_icon"];
+    }
+
     return headerView;
     
 }

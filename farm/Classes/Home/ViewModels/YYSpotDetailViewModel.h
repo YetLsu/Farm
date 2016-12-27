@@ -34,4 +34,6 @@
 - (void)getNearbyModelsArrayWithCallback:(void (^)(NSArray *modelsArray, NSError *error)) callback;
 //根据第几组计算需要滚动的距离
 - (CGFloat)getScrollContentOffsetYWithSection:(NSInteger)section;
+
+@property (nonatomic, strong) NSMutableArray *foldArray;
 @end

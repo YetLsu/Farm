@@ -34,6 +34,7 @@
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.contentView.backgroundColor = kViewBGColor;
     [self.contentView removeConstraints:[self.contentView constraints]];
@@ -44,9 +45,9 @@
 }
 - (void)addConstraints{
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).mas_offset(kX12Margin);
-        make.right.mas_equalTo(self).mas_offset(-kX12Margin);
-        make.top.bottom.mas_equalTo(self);
+        make.left.mas_equalTo(self.contentView).mas_offset(kX12Margin);
+        make.right.mas_equalTo(self.contentView).mas_offset(-kX12Margin);
+        make.top.bottom.mas_equalTo(self.contentView);
     }];
     
     CGFloat imageViewW = 130;

@@ -136,12 +136,19 @@
 - (NSUInteger)getNumberSection{
     return 5;
 }
+
 - (NSUInteger)getNumberRowsOnSection:(NSUInteger)section{
+    NSUInteger rows = 1;
     if (section == 3) {
-        return self.productModelsArray.count;
+        rows = self.productModelsArray.count;
     }
-    return 1;
+    NSNumber *sectionRows = self.foldArray[section];
+    if (sectionRows.boolValue) {
+        rows = 0;
+    }
+    return rows;
 }
+
 //组头的View
 - (YYSightSpotTableViewHeaderView *)getTableViewHeaderViewWithSection:(NSInteger)section{
     
@@ -167,15 +174,14 @@
                                };
         CGFloat maxW = kWidthScreen - kX12Margin * 4;
         cellH = kY12Margin + kY12Margin + [self.model.spotRecommendResult calculateHeightStringWithAttr:attr andMaxWidth:maxW andMaxHeight:CGFLOAT_MAX] + 1;
-        self.section0H = cellH;
     }
     else if (indexPath.section == 1){
-        return self.section1WebH;
+        cellH = self.section1WebH;
     }
     else if (indexPath.section == 2){
         CGFloat scale = kWidthScreen / 375.0;
         self.section2MapH = 200 * scale;
-        return self.section2MapH;
+        cellH = self.section2MapH;
     }
     else if (indexPath.section == 3){
         cellH = 80 + kY12Margin * 2;
@@ -191,17 +197,37 @@
     if (section == 0) {
         contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH - 64;
     }
-    else if (section == 1){
-        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.tableViewSectionHeaderViewH + self.section0H - 64;
-    }
-    else if (section == 2){
-        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.section0H + self.section1WebH + self.tableViewSectionHeaderViewH * 2 - 64;
-    }
-    else if (section == 3){
-        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.section0H + self.section1WebH + self.section2MapH + self.tableViewSectionHeaderViewH * 3 - 64;
-    }
-    else if (section == 4){
-        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.section0H + self.section1WebH + self.section2MapH + self.tableViewSectionHeaderViewH * 3 - 64;
+    else if (section >= 1){
+        contentY = self.tableViewHeaderTopViewH + self.tableViewHeaderBottomViewH + self.tableViewSectionHeaderViewH - 64;
+        
+        NSNumber *section0Rows = self.foldArray[0];
+        if (!section0Rows.boolValue) {
+            contentY += self.section0H;
+        }
+        if (section >= 2) {
+            contentY += self.tableViewSectionHeaderViewH;
+            NSNumber *section1Rows = self.foldArray[1];
+            if (!section1Rows.boolValue) {
+                contentY += self.section1WebH;
+            }
+            
+            if (section >= 3) {
+                contentY += self.tableViewSectionHeaderViewH;
+                NSNumber *section2Rows = self.foldArray[2];
+                if (!section2Rows.boolValue) {
+                    contentY += self.section2MapH;
+                }
+                
+//                if (section == 4) {
+//                    contentY += self.tableViewSectionHeaderViewH;
+//                    
+//                    NSNumber *section3Rows = self.foldArray[3];
+//                    if (!section3Rows.boolValue) {
+//                        contentY += self.section2MapH;
+//                    }
+//                }
+            }
+        }
     }
     return contentY;
 }

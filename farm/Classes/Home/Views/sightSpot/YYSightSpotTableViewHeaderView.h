@@ -10,6 +10,7 @@
 
 @interface YYSightSpotTableViewHeaderView : UIView
 
+
 @property (nonatomic, weak) UIImageView *rightIconImageView;
 
 @property (nonatomic, weak) UIButton *headerBtn;
