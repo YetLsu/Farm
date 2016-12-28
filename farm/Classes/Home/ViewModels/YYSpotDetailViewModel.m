@@ -91,6 +91,7 @@
         NSArray *data = responseObject[@"data"];
         for (NSDictionary *dic in data) {
             YYSightSpotProductModel *model = [YYSightSpotProductModel yy_modelWithDictionary:dic];
+            model.imgListArray = [model.productInnerImgList componentsSeparatedByString:@"|"];
             [self.productModelsArray addObject:model];
             
         }

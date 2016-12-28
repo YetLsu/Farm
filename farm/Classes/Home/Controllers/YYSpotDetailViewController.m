@@ -25,6 +25,7 @@
 
 #import <MapKit/MapKit.h>
 
+#import "YYSightSpotProductViewController.h"
 
 
 @interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
@@ -435,6 +436,13 @@
 
     return headerView;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 3) {
+        YYSightSpotProductViewController *controller = [[YYSightSpotProductViewController alloc] initWithModel:self.productModelsArray[indexPath.row]];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 #pragma mark 通过KVO监听tableView的滚动
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
