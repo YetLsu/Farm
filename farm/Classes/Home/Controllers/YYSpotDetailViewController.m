@@ -26,6 +26,7 @@
 #import <MapKit/MapKit.h>
 
 #import "YYSightSpotProductViewController.h"
+#import "YYTripReadTableViewController.h"
 
 
 @interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
@@ -503,8 +504,14 @@
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    YYSightSpotHeaderBottomCollectionViewCellModel *model = [self.viewModel getHeaderBottomCollectionViewCellModelWithIndexPath:indexPath];
-    YYLog(@"%@", model.title);
+    
+//    YYSightSpotHeaderBottomCollectionViewCellModel *model = [self.viewModel getHeaderBottomCollectionViewCellModelWithIndexPath:indexPath];
+    
+    if (indexPath.row == 0) {
+        YYTripReadTableViewController *VC = [[YYTripReadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
+//    YYLog(@"%@", model.title);
 }
 /*
 #pragma mark - Navigation

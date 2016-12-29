@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *parameters;
 
+@property (nonatomic, assign) BOOL noNeedRefresh;
 - (void)setHeaderAndFooter;
 
 

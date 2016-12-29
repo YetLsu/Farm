@@ -76,8 +76,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (!self.noNeedRefresh) {
+        [self setHeaderAndFooter];
+    }
     
-    [self setHeaderAndFooter];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
