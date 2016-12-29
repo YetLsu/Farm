@@ -39,7 +39,7 @@
  获取发现的内容
  */
 - (void)getModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray *, NSError *))callback{
-    [NSObject GET:@"http://nc.guonongda.com:8808/app/discover/getDiscoverList.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/discover/getDiscoverListback1.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
         
     } completionHandler:^(id responseObject, NSError *error) {
         if ([responseObject isEqual:[NSNull null]]) {
@@ -94,7 +94,7 @@
     CGFloat maxContentLabelH = 66;
     
     CGFloat contentLabelH = [model.content calculateHeightStringWithAttr:attr andMaxWidth:maxContentLabelW andMaxHeight:maxContentLabelH] + 0.1;
-    YYLog(@"%f",contentLabelH);
+//    YYLog(@"%f",contentLabelH);
     
     return self.bgViewNoContentLabelH + contentLabelH;
 }

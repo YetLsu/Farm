@@ -25,4 +25,10 @@
 @property (nonatomic, copy) NSString *tag;
 //内容
 @property (nonatomic, copy) NSString *content;
+//点赞
+@property (nonatomic, copy) NSString *praise;
+@property (nonatomic, assign) int praisenum;
+
+@property (nonatomic, assign) int commentnum;
+
 @end

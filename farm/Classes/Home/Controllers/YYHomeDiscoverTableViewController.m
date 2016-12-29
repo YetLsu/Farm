@@ -12,6 +12,8 @@
 #import "YYDiscoverTableViewCell.h"
 #import "YYHomeDiscoverModel.h"
 
+#import "YYDiscoverViewController.h"
+
 @interface YYHomeDiscoverTableViewController ()
 
 @end
@@ -22,6 +24,9 @@
     self.viewModel = [[YYHomeDiscoverViewModel alloc] init];
     self.viewModel.pageNumber = 10;
     self.parameters = [NSMutableDictionary dictionary];
+    YYUserModel *userModel = [YYUserTool userModel];
+    NSString *userName = userModel.name;
+    self.parameters[@"username"] = userName;
     [super viewDidLoad];
     
     self.view.backgroundColor = kViewBGColor;
@@ -48,4 +53,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    YYHomeDiscoverModel *model = (YYHomeDiscoverModel *)[self.viewModel getTableViewModelWithIndexPath:indexPath];
+    
+    YYDiscoverViewController *VC = [[YYDiscoverViewController alloc] initWithModel:model];
+    [self.navigationController pushViewController:VC animated:YES];
+}
 @end

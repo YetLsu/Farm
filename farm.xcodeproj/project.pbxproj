@@ -63,6 +63,8 @@
 		755AE5721DE80651005C2140 /* YYHomeNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 755AE5711DE80651005C2140 /* YYHomeNavView.m */; };
 		755B7E861E0A219100FBA81B /* YYSightSpotHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 755B7E851E0A219100FBA81B /* YYSightSpotHeaderView.m */; };
 		755BE7AE1DF277D2004D3886 /* YYHomeMarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755BE7AD1DF277D2004D3886 /* YYHomeMarkTableViewController.m */; };
+		7565A3E51E14AD4A00958CB4 /* YYDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7565A3E41E14AD4A00958CB4 /* YYDiscoverViewController.m */; };
+		7565A3E81E14AFF200958CB4 /* YYDiscoverBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7565A3E71E14AFF200958CB4 /* YYDiscoverBottomView.m */; };
 		75681E031E13B92D00EF326C /* YYProductDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75681E021E13B92D00EF326C /* YYProductDetailTableViewCell.m */; };
 		75681E061E13C6F000EF326C /* YYProductDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75681E051E13C6F000EF326C /* YYProductDetailBottomView.m */; };
 		75681E091E13CE5F00EF326C /* YYTripReadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75681E081E13CE5F00EF326C /* YYTripReadTableViewController.m */; };
@@ -223,6 +225,10 @@
 		755B7E851E0A219100FBA81B /* YYSightSpotHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSightSpotHeaderView.m; sourceTree = "<group>"; };
 		755BE7AC1DF277D2004D3886 /* YYHomeMarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHomeMarkTableViewController.h; sourceTree = "<group>"; };
 		755BE7AD1DF277D2004D3886 /* YYHomeMarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHomeMarkTableViewController.m; sourceTree = "<group>"; };
+		7565A3E31E14AD4A00958CB4 /* YYDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiscoverViewController.h; sourceTree = "<group>"; };
+		7565A3E41E14AD4A00958CB4 /* YYDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiscoverViewController.m; sourceTree = "<group>"; };
+		7565A3E61E14AFF200958CB4 /* YYDiscoverBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiscoverBottomView.h; sourceTree = "<group>"; };
+		7565A3E71E14AFF200958CB4 /* YYDiscoverBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiscoverBottomView.m; sourceTree = "<group>"; };
 		75681E011E13B92D00EF326C /* YYProductDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYProductDetailTableViewCell.h; sourceTree = "<group>"; };
 		75681E021E13B92D00EF326C /* YYProductDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYProductDetailTableViewCell.m; sourceTree = "<group>"; };
 		75681E041E13C6F000EF326C /* YYProductDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYProductDetailBottomView.h; sourceTree = "<group>"; };
@@ -348,6 +354,8 @@
 				752CB1F41E04E6A2000FF76B /* YYDiscoverTableViewCell.h */,
 				752CB1F51E04E6A2000FF76B /* YYDiscoverTableViewCell.m */,
 				752CB1F61E04E6A2000FF76B /* YYDiscoverTableViewCell.xib */,
+				7565A3E61E14AFF200958CB4 /* YYDiscoverBottomView.h */,
+				7565A3E71E14AFF200958CB4 /* YYDiscoverBottomView.m */,
 			);
 			path = discover;
 			sourceTree = "<group>";
@@ -477,6 +485,8 @@
 				75E483451E126BD8003C0B38 /* YYSightSpotProductViewController.m */,
 				75681E071E13CE5F00EF326C /* YYTripReadTableViewController.h */,
 				75681E081E13CE5F00EF326C /* YYTripReadTableViewController.m */,
+				7565A3E31E14AD4A00958CB4 /* YYDiscoverViewController.h */,
+				7565A3E41E14AD4A00958CB4 /* YYDiscoverViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1063,6 +1073,7 @@
 				7542BABF1DEFC4D800B85FD9 /* YYHomeTableViewHeaderView.m in Sources */,
 				75E483431E1245A6003C0B38 /* YYProductTableViewHeaderView.m in Sources */,
 				75ECD1321E053B940092DC95 /* YYTravelNotesViewModel.m in Sources */,
+				7565A3E51E14AD4A00958CB4 /* YYDiscoverViewController.m in Sources */,
 				753F02511DFAB45200465981 /* YYThisMonthCommendTagsView.m in Sources */,
 				7542BAD01DF0246C00B85FD9 /* YYHomePlayCollectionViewTableViewCell.m in Sources */,
 				757AF1F21DF56BEF004A55C0 /* YYHomeMarkViewModel.m in Sources */,
@@ -1106,6 +1117,7 @@
 				753F02541DFAB4BA00465981 /* YYThisMonthCommendCollectionViewCell.m in Sources */,
 				753F024E1DFA9D9A00465981 /* YYThisMonthCommendViewModel.m in Sources */,
 				75FDE6381E0BCA6B002CA8E0 /* YYSightSpotTableViewHeaderView.m in Sources */,
+				7565A3E81E14AFF200958CB4 /* YYDiscoverBottomView.m in Sources */,
 				757446111DEC101E0032F5C8 /* YYHomeMarkCollectionViewTableViewCell.m in Sources */,
 				7542BAC21DEFEEFE00B85FD9 /* YYHomeThisMonthRecommendModel.m in Sources */,
 				755AE5661DE7E8D5005C2140 /* AppDelegate.m in Sources */,
