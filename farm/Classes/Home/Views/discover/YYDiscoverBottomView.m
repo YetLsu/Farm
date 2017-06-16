@@ -9,20 +9,23 @@
 #import "YYDiscoverBottomView.h"
 
 @interface YYDiscoverBottomView ()
-
+@property (nonatomic, weak) UIImageView *commentImageView;
+@property (nonatomic, weak) UIImageView *praiseImgaeView;
 @property (nonatomic, weak) UILabel *commentNumLabel;
 
 @property (nonatomic, weak) UILabel *praiseNumLabel;
 
-@property (nonatomic, weak) UIView *commentBtnView;
-@property (nonatomic, weak) UIView *praiseBtnView;
+@property (nonatomic, weak) UIButton *commentBtnView;
+@property (nonatomic, weak) UIButton *praiseBtnView;
 
+@property (nonatomic, weak) UIView *centerLineView;
 @end
 
 @implementation YYDiscoverBottomView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        
         
         self.backgroundColor = kGreen34Color;
         
@@ -38,7 +41,7 @@
             }
         } forControlEvents:UIControlEventTouchUpInside];
         
-        UIView *commentBtnView = [self creatViewWithLeftImage:[UIImage imageNamed:@"discover_comment_white"] andRightTitle:nil andRightTitleLabelTag:0];
+        UIButton *commentBtnView = [self creatViewWithLeftImage:[UIImage imageNamed:@"discover_comment_white"] andRightTitle:nil andRightTitleLabelTag:0];
         [commentBtn addSubview:commentBtnView];
         self.commentBtnView = commentBtnView;
         CGFloat btnViewH = 20;
@@ -56,6 +59,8 @@
             make.width.mas_equalTo(1);
             make.left.mas_equalTo(commentBtn.mas_right);
         }];
+        self.centerLineView = lineView;
+        
         
         UIButton *praiseBtn = [[UIButton alloc] init];
         [self addSubview:praiseBtn];
@@ -70,24 +75,35 @@
             }
         } forControlEvents:UIControlEventTouchUpInside];
         
-        UIView *praiseBtnView = [self creatViewWithLeftImage:[UIImage imageNamed:@"discover_praise_white"] andRightTitle:nil andRightTitleLabelTag:1];
+        UIButton *praiseBtnView = [self creatViewWithLeftImage:[UIImage imageNamed:@"discover_praise_white"] andRightTitle:nil andRightTitleLabelTag:1];
         [praiseBtn addSubview:praiseBtnView];
         self.praiseBtnView = praiseBtnView;
         [praiseBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.centerY.mas_equalTo(praiseBtn);
             make.height.mas_equalTo(btnViewH);
         }];
+        
+        UIView *topLineView = [[UIView alloc] init];
+        [self addSubview:topLineView];
+        [topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(self);
+            make.height.mas_equalTo(0.5);
+        }];
+        topLineView.backgroundColor = kGrayLine225Color;
     }
     return self;
 }
 
-- (UIView *)creatViewWithLeftImage:(UIImage *)leftImage andRightTitle:(NSString *)rightTitle andRightTitleLabelTag:(NSInteger )tag{
-    UIView *btnView = [[UIView alloc] init];
+- (UIButton *)creatViewWithLeftImage:(UIImage *)leftImage andRightTitle:(NSString *)rightTitle andRightTitleLabelTag:(NSInteger )tag{
+    UIButton *btnView = [[UIButton alloc] init];
+    btnView.userInteractionEnabled = NO;
+//    btnView.userInteractionEnabled = YES;
     
     CGFloat leftImageViewW = 20;
     UIImageView *leftImageView = [[UIImageView alloc] init];
     [btnView addSubview:leftImageView];
     leftImageView.image = leftImage;
+//    leftImageView.userInteractionEnabled = YES;
     
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.mas_equalTo(btnView);
@@ -95,6 +111,7 @@
     }];
     
     UILabel *rightTitleLabel = [[UILabel alloc] init];
+//    rightTitleLabel.userInteractionEnabled = YES;
     [btnView addSubview:rightTitleLabel];
     [rightTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.top.bottom.mas_equalTo(btnView);
@@ -102,13 +119,17 @@
     }];
     if (tag == 0) {
         self.commentNumLabel = rightTitleLabel;
+        self.commentImageView = leftImageView;
     }
     else{
         self.praiseNumLabel = rightTitleLabel;
+        self.praiseImgaeView = leftImageView;
     }
     rightTitleLabel.textColor = [UIColor whiteColor];
     rightTitleLabel.font = kText18Font11Height;
 //    rightTitleLabel.backgroundColor = [UIColor blueColor];
+    
+
     return btnView;
     
 }
@@ -147,6 +168,23 @@
     }];
     self.commentNumLabel.text = commentNumStr;
 
+}
+- (void)setCenterLineViewColor:(UIColor *)centerLineViewColor{
+    _centerLineViewColor = centerLineViewColor;
+    self.centerLineView.backgroundColor = centerLineViewColor;
+}
+- (void)setTitleColor:(UIColor *)titleColor{
+    _titleColor = titleColor;
+    self.commentNumLabel.textColor = titleColor;
+    self.praiseNumLabel.textColor = titleColor;
+}
+- (void)setCommentImage:(UIImage *)commentImage{
+    _commentImage = commentImage;
+    self.commentImageView.image = commentImage;
+}
+- (void)setPraiseImage:(UIImage *)praiseImage{
+    _praiseImage = praiseImage;
+    self.praiseImgaeView.image = praiseImage;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

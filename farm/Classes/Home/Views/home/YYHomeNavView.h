@@ -10,6 +10,12 @@
 
 #import "WYYSearchBar.h"
 
+@protocol YYHomeNavViewDelegate <NSObject>
+
+- (void)pushWithViewController:(UIViewController *)viewController;
+
+@end
+
 @interface YYHomeNavView : UIView
 
 @property (nonatomic, weak) UIButton *addressBtn;
@@ -17,6 +23,8 @@
 @property (nonatomic, weak) WYYSearchBar *searchBar;
 
 @property (nonatomic, weak) UIButton *richScanBtn;
+
+@property (nonatomic, assign) id<YYHomeNavViewDelegate> delegate;
 
 + (instancetype)homeNavViewWithTextFieldDelegate:(id<UITextFieldDelegate>)VC;
 @end

@@ -37,7 +37,13 @@
 
 #import "YYTravelNotesViewController.h"
 
-@interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+#import "YYSpotDetailViewController.h"
+
+#import "YYDiscoverViewController.h"
+
+#import "YYTravelNotesDetailViewController.h"
+
+@interface YYHomeTableViewController ()<UITextFieldDelegate, SDCycleScrollViewDelegate, UITableViewDataSource, UITableViewDelegate,YYHomeNavViewDelegate,YYHomePlayCollectionViewTableViewCellDelegate>
 @property (nonatomic, weak) UITableView *tableView;
 
 @property (nonatomic, weak) YYHomeNavView *homeNavView;
@@ -59,6 +65,8 @@
 @property (nonatomic, assign) CGFloat tableViewHeaderViewH;
 
 @property (nonatomic, weak) SDCycleScrollView *topScrollerView;
+
+@property (nonatomic, strong) NSArray *bannerModelsArray;
 @end
 
 @implementation YYHomeTableViewController
@@ -83,6 +91,17 @@
     
     //设置tableView
     [self setTableViewHeaderView];
+    [self.viewModel getBannerArrayCallBack:^(NSArray *modelsArray, NSError *error) {
+        if (error) {
+            return ;
+        }
+        self.bannerModelsArray = modelsArray;
+        NSMutableArray *bannerStrArray = [NSMutableArray array];
+        for (YYHomeBannerModel *model in modelsArray) {
+            [bannerStrArray addObject:model.imgUrl];
+        }
+        self.topScrollerView.imageURLStringsGroup = bannerStrArray;
+    }];
     [self.viewModel getMarksArrayWithParameters:nil andCallback:^(NSArray<YYHomeCollectionViewCellModel *> *modelsArray, NSError *error) {
         self.markModelsArray = modelsArray;
         if (error) {
@@ -104,6 +123,7 @@
         if (error) {
             YYLog(@"出错");
         }
+#pragma mark - 主题游的数据
         self.playModelsArray = modelsArray;
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -113,6 +133,7 @@
         if (error) {
             YYLog(@"出错%ld",(long)error.code);
         }
+#pragma mark - 发现数据
         self.discoverModelsArray = modelsArray;
         NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:3];
         [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
@@ -121,6 +142,7 @@
         if (error) {
             YYLog(@"出错%ld",(long)error.code);
         }
+#pragma mark - 游记数据
         self.travelNotesrModelsArray = modelsArray;
         NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:4];
         [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
@@ -149,6 +171,7 @@
     //增加导航栏
 
     YYHomeNavView *homeNavView = [YYHomeNavView homeNavViewWithTextFieldDelegate:self];
+    homeNavView.delegate = self;
     [self.view addSubview:homeNavView];
     self.homeNavView = homeNavView;
     homeNavView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
@@ -165,11 +188,11 @@
 }
 //设置tableView
 - (void)setTableViewHeaderView{
-    NSArray *imagesArray = @[[UIImage imageNamed:@"home_1"], [UIImage imageNamed:@"home_1"], [UIImage imageNamed:@"home_1"]];
     
     self.tableViewHeaderViewH = 400/603.0 * kNoNavHeight;
-    SDCycleScrollView *topScrollerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidthScreen, self.tableViewHeaderViewH) shouldInfiniteLoop:YES imageNamesGroup:imagesArray];
+    SDCycleScrollView *topScrollerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidthScreen, self.tableViewHeaderViewH) shouldInfiniteLoop:YES imageNamesGroup:nil];
     
+    topScrollerView.delegate = self;
     topScrollerView.delegate = self;
     topScrollerView.backgroundColor = [UIColor whiteColor];
     topScrollerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
@@ -178,6 +201,14 @@
     topScrollerView.autoScrollTimeInterval = 2.0;
     
     self.topScrollerView = topScrollerView;
+}
+/** 点击图片回调 */
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+#warning TODO 轮播图的点击事件
+//    YYHomeBannerModel *model = self.bannerModelsArray[index];
+//    YYSpotDetailViewController *VC = [[YYSpotDetailViewController alloc] initWithSpodID:model.spotID];
+//    [self.navigationController pushViewController:VC animated:YES];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -272,10 +303,13 @@
     }
     else if (indexPath.section == 2){
         YYHomePlayCollectionViewTableViewCell *cell = [[YYHomePlayCollectionViewTableViewCell alloc] initWithModelsArray:self.playModelsArray];
+#warning 增加了cell 的代理
+        cell.delegate = self;
         return cell;
     }
     else if (indexPath.section == 3){
         YYHomeDiscoverTableViewCell *cell = [YYHomeDiscoverTableViewCell homeDiscoverTableViewCellWithTableView:tableView];
+        
         if (self.discoverModelsArray.count != 0) {
             cell.model = self.discoverModelsArray[indexPath.row];
         }
@@ -359,10 +393,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
-        YYThisMonthCommendViewController *thisMonthController = [[YYThisMonthCommendViewController alloc] init];
+        YYThisMonthCommendViewController *thisMonthController = [[YYThisMonthCommendViewController alloc] initWithModel:self.recommendModel];
         [self.navigationController pushViewController:thisMonthController animated:YES];
     }
+    if(indexPath.section == 3){
+#pragma mark - 首页发现cell点击跳转到内页
+        YYHomeDiscoverModel *model = _discoverModelsArray[indexPath.row];
+        YYDiscoverViewController *vc = [[YYDiscoverViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if(indexPath.section == 4){
+#pragma mark - 首页游记cell点击跳转到内页
+         YYHomeTravelNotesModel *model = _travelNotesrModelsArray[indexPath.row];
+        YYTravelNotesDetailViewController *vc = [[YYTravelNotesDetailViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
+#pragma mark - YYHomeNavViewDelegate
+- (void)pushWithViewController:(UIViewController *)viewController{
+    [self.navigationController pushViewController:viewController animated:YES];
+
+}
+#pragma mark - YYHomeCollectionViewCellDelegate
+- (void)pushWithModel:(YYThemePlayModel *)model{
+    
+    YYHomeMarkTableViewController *VC = [[YYHomeMarkTableViewController alloc] initWithCollectionViewCellModel:model];
+    
+    [self.navigationController pushViewController:VC animated:YES];
+}
 
 @end

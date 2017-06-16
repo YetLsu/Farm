@@ -106,7 +106,7 @@
 - (void)setModel:(YYSightSpotModel *)model{
     _model = model;
     
-    self.topImageView.image = [UIImage imageNamed:model.spotOuterImgurl];
+    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:model.spotOuterImgurl]];
     self.nameLabel.text = model.spotTitle;
     
     NSString *distance = [NSString distanceStrWithDistanceStr:model.spotDistance];

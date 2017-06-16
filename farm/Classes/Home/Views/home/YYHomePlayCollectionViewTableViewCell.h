@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@class YYHomeCollectionViewCellModel;
+@class YYHomeCollectionViewCellModel,YYThemePlayModel;
+
+@protocol YYHomePlayCollectionViewTableViewCellDelegate <NSObject>
+
+- (void)pushWithModel:(YYThemePlayModel *)model;
+
+@end
+
+
 @interface YYHomePlayCollectionViewTableViewCell : UITableViewCell
 
+@property (nonatomic, assign) id<YYHomePlayCollectionViewTableViewCellDelegate> delegate;
+
 - (instancetype)initWithModelsArray:(NSArray <YYHomeCollectionViewCellModel *>*)modelsArray;
+
+
+
 @end

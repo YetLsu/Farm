@@ -25,6 +25,13 @@
 #import "YYBaseViewModel.h"
 #import "YYBaseTableViewController.h"
 #import "YYUserTool.h"
+#import "AFNetWorking.h"
+#import "UINavigationBar+Awesome.h"
+#import "NFCheckPhone.h"
+#import "NFUtils.h"
+#import "NFAccountTool.h"
+#import "NFAccount.h"
+
 
 
 static NSString *homeMarkCollectionID = @"YYHomeMarkCollectionViewCell";
@@ -32,5 +39,7 @@ static NSString *homePlayCollectionID = @"YYHomeThemePlayCollectionViewCell";
 static NSString *travelNotesSortCollectionID = @"YYTravelNotesSortCollectionViewCell";
 static NSString *sightSpotHeaderBottomCollectionViewCellID = @"YYSightSpotHeaderBottomCollectionViewCell";
 static NSString *sightSpotNearbyTableViewCellCollectionViewCellID = @"YYSightSpotNearbyTableViewCellCollectionViewCell";
+static NSString *userLoginNotificationName = @"userLoginNotificationName";
+
 
 #endif /* farmPrefix_pch */

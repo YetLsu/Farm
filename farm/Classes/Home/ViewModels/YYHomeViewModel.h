@@ -10,7 +10,8 @@
 
 @class YYHomeCollectionViewCellModel, YYHomeThisMonthRecommendModel, YYHomeDiscoverModel, YYHomeTravelNotesModel, YYThemePlayModel;
 @interface YYHomeViewModel : NSObject
-
+//获取banner图数据
+- (void)getBannerArrayCallBack:(void (^)(NSArray *modelsArray,NSError *error)) callback;
 
 //- (instancetype)initCollectionViewModelWithMarkModelsArray:(NSArray *)modelsArray;
 /**
@@ -37,4 +38,10 @@
 - (void)getTravelNotesModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray<YYHomeTravelNotesModel *> *modelsArray,NSError *error)) callback;
 @property (nonatomic, copy) void (^YYCollectionViewCellClickBlock)();
 
+@end
+
+@interface YYHomeBannerModel : NSObject
+@property (nonatomic, copy) NSString *spotID;
+
+@property (nonatomic, copy) NSString *imgUrl;
 @end

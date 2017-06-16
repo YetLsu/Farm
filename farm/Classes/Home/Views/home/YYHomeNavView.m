@@ -8,6 +8,7 @@
 
 #import "YYHomeNavView.h"
 #import "WYYSearchBar.h"
+#import "NFQRCodeReadViewController.h"
 
 @interface YYHomeNavView (){
     
@@ -57,6 +58,11 @@ id _VC;
         }];
         [richScanBtn bk_addEventHandler:^(id sender) {
             YYLog(@"扫一扫被点击");
+            NFQRCodeReadViewController *qrCodeReaderVc = [[NFQRCodeReadViewController alloc] init];
+            if ([self.delegate respondsToSelector:@selector(pushWithViewController:)]) {
+                [self.delegate performSelector:@selector(pushWithViewController:) withObject:qrCodeReaderVc];
+            }
+            
         } forControlEvents:UIControlEventTouchUpInside];
         
         //添加搜索框

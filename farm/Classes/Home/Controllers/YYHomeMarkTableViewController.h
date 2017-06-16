@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class YYHomeCollectionViewCellModel;
+@class YYHomeCollectionViewCellModel,YYThemePlayModel;
 @interface YYHomeMarkTableViewController : YYBaseTableViewController
 
 - (instancetype)initWithMarkCollectionModel:(YYHomeCollectionViewCellModel *)markModel;
-
+#warning TODO 增加了初始化方法
+- (instancetype)initWithCollectionViewCellModel:(YYThemePlayModel *)themePlayModel;
 @end

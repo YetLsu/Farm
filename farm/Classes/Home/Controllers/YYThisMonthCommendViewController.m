@@ -14,6 +14,10 @@
 
 #import "YYThisMonthCommendViewModel.h"
 
+#import "YYHomeThisMonthRecommendModel.h"
+
+#import "YYSpotDetailViewController.h"
+
 @interface YYThisMonthCommendViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *modelsArray;
@@ -27,12 +31,19 @@
 @property (nonatomic, weak) UIPageControl *pageControl;
 
 @property (nonatomic, assign) NSInteger lastIndex;
+
+@property (nonatomic, strong) YYHomeThisMonthRecommendModel *model;
 @end
 
 @implementation YYThisMonthCommendViewController
 
 static NSString *const YYThisMonthCommendCollectionViewCellID = @"YYThisMonthCommendCollectionViewCell";
-
+- (instancetype)initWithModel:(YYHomeThisMonthRecommendModel *)model{
+    if (self = [super init]) {
+        self.model = model;
+    }
+    return self;
+}
 - (YYThisMonthCommendViewModel *)viewModel{
     if (!_viewModel) {
         _viewModel = [[YYThisMonthCommendViewModel alloc] init];
@@ -48,7 +59,23 @@ static NSString *const YYThisMonthCommendCollectionViewCellID = @"YYThisMonthCom
     
     [self addCollectionViewAndPageControl];
     
-    [self.viewModel getThisMonthCommendModelsArrayWithParameters:nil andCallback:^(NSArray<YYSightSpotModel *> *modelsArray, NSError *error) {
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"area"] = self.model.cityName;
+    YYUserModel *userModel = [YYUserTool userModel];
+    if (userModel.lon) {
+        parameters[@"lon"] = userModel.lon;
+        parameters[@"lat"] = userModel.lat;
+    }
+    else{
+        parameters[@"lon"] = @"120";
+        parameters[@"lat"] = @"30";
+ 
+    }
+    parameters[@"username"] = userModel.name;
+    [self.viewModel getThisMonthCommendModelsArrayWithParameters:parameters andCallback:^(NSArray<YYSightSpotModel *> *modelsArray, NSError *error) {
+        if (error) {
+            return ;
+        }
         self.modelsArray = modelsArray;
     
         [self.collectionView reloadData];
@@ -112,7 +139,6 @@ static NSString *const YYThisMonthCommendCollectionViewCellID = @"YYThisMonthCom
     pageControl.currentPageIndicatorTintColor = kGreen34Color;
     self.pageControl = pageControl;
 
-    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -144,6 +170,11 @@ static NSString *const YYThisMonthCommendCollectionViewCellID = @"YYThisMonthCom
 
 - (nullable NSIndexPath *)indexPathForItemAtPoint:(CGPoint)point{
     return nil;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    YYSightSpotModel *model = self.modelsArray[indexPath.item];
+    YYSpotDetailViewController *VC = [[YYSpotDetailViewController alloc] initWithSpotModel:model];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

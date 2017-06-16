@@ -19,6 +19,7 @@
 
 #import "NSDate+YYWeek.h"
 
+
 @interface YYHomeViewModel ()
 
 
@@ -32,6 +33,28 @@
 //    return self;
 //}
 
+- (void)getBannerArrayCallBack:(void (^)(NSArray *modelsArray,NSError *error)) callback{
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/firstpage/getBanner.do" parameters:nil progress:^(NSProgress *downloadProgress) {
+        
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        if (error) {
+            callback(nil, error);
+            return;
+        }
+        NSArray *data = responseObject[@"data"];
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            YYHomeBannerModel *model = [YYHomeBannerModel yy_modelWithDictionary:dic];
+            [array addObject:model];
+        }
+        
+        callback(array, nil);
+    }];
+}
 #pragma mark 获取景点分类的数据
 - (void)getMarksArrayWithParameters:(NSDictionary *)parameters andCallback:(void (^)(NSArray<YYHomeCollectionViewCellModel *> *, NSError *))callback{
     
@@ -40,6 +63,10 @@
     } completionHandler:^(id responseObject, NSError *error) {
         if ([responseObject isEqual:[NSNull null]]) {
             callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        if (error) {
+            callback(nil, error);
             return;
         }
         NSArray *data = responseObject[@"data"];
@@ -67,6 +94,10 @@
             callback(nil, [[NSError alloc] init]);
             return;
         }
+        if (error) {
+            callback(nil, error);
+            return;
+        }
         NSDictionary *data = responseObject[@"data"];
         
         YYHomeThisMonthRecommendModel *model = [YYHomeThisMonthRecommendModel yy_modelWithDictionary:data];
@@ -86,7 +117,10 @@
             callback(nil, [[NSError alloc] init]);
             return;
         }
-        
+        if (error) {
+            callback(nil, error);
+            return;
+        }
         NSMutableArray *playsArray = [NSMutableArray array];
         NSArray *data = responseObject[@"data"];
         for (NSDictionary *dic in data) {
@@ -109,6 +143,10 @@
     } completionHandler:^(id responseObject, NSError *error) {
         if ([responseObject isEqual:[NSNull null]]) {
             callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        if (error) {
+            callback(nil, error);
             return;
         }
 //        YYLog(@"%@", responseObject);
@@ -136,6 +174,10 @@
             callback(nil, [[NSError alloc] init]);
             return;
         }
+        if (error) {
+            callback(nil, error);
+            return;
+        }
 //        YYLog(@"%@", responseObject);
         NSArray *data = responseObject[@"data"];
         NSMutableArray *travelNotesArray = [NSMutableArray array];
@@ -150,4 +192,14 @@
 }
 
 
+@end
+
+@implementation YYHomeBannerModel
+
++ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper{
+    return @{
+             @"spotID" : @"spotid",
+             @"imgUrl" : @"imgurl",
+             };
+}
 @end

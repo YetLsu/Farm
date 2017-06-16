@@ -12,6 +12,9 @@
 
 #import "YYHomeCollectionViewCellModel.h"
 
+#import "YYThemePlayModel.h"
+
+
 @interface YYHomePlayCollectionViewTableViewCell ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
@@ -83,9 +86,13 @@
 }
 #pragma mark 第一个单元格中的collectionView的代理方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    YYHomeCollectionViewCellModel *model = self.playModelsArray[indexPath.item];
-    //    YYLog(@"%@", model.markName);
-
+#warning TODO 首页主题游下面的小图点击跳转！
+    
+     YYThemePlayModel *model = self.playModelsArray[indexPath.item];
+    if ([self.delegate respondsToSelector:@selector(pushWithModel:)]) {
+        [self.delegate performSelector:@selector(pushWithModel:) withObject:model];
+    }
+    
 }
 
 @end

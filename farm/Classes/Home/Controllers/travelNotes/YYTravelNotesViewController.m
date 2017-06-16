@@ -10,6 +10,7 @@
 #import "YYTravelNotesSortView.h"
 #import "YYTravelNotesViewModel.h"
 #import "YYHomeTravelNotesTableViewCell.h"
+#import "YYTravelNotesDetailViewController.h"
 
 @interface YYTravelNotesViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -31,6 +32,8 @@
 - (void)viewDidLoad {
     
     self.parameters = [NSMutableDictionary dictionary];
+    YYUserModel *userModel = [YYUserTool userModel];
+    self.parameters[@"username"] = userModel.name;
     self.viewModel = [[YYTravelNotesViewModel alloc] initWithSortsArray:@[@"全部", @"精华游记", @"最新发布"]];
     self.viewModel.pageNumber = 10;
     
@@ -159,6 +162,11 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return [self.viewModel getTableViewHeightForHeaderInSection:section];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    YYTravelNotesDetailViewController *VC = [[YYTravelNotesDetailViewController alloc] initWithModel:(YYHomeTravelNotesModel *)[self.viewModel getTableViewModelWithIndexPath:indexPath]];
+    
+    [self.navigationController pushViewController:VC animated:YES];
 }
 /*
 #pragma mark - Navigation

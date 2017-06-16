@@ -24,7 +24,16 @@
     self.markImageView.layer.masksToBounds = YES;
     
     self.markTitleLabel.textColor = kBlack56Color;
+    
+//    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+//    [self.markImageView addGestureRecognizer:tapGR];
+    
 }
+
+//- (void)tapAction{
+//    NSLog(@"xxxx");
+//}
+
 - (void)setModel:(YYHomeCollectionViewCellModel *)model{
     _model = model;
     if (model.markImgUrl) {

@@ -31,9 +31,11 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YYDiscoverTableViewCell" owner:nil options:nil] lastObject];
     }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     
@@ -169,8 +171,10 @@
     
     self.timeLabel.text = [formatter stringFromDate:model.uploadingTime];
 
-    
 }
+
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

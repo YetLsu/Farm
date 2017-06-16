@@ -21,6 +21,7 @@
 
 @property (nonatomic, copy) void (^YYWebViewFinshedBlock)(CGFloat cellH);
 
+- (void)getThisSpotModelWithSpotID:(NSString *)spotID andCallBack:(void (^)(YYSightSpotModel *model, NSError *error))callback;
 //获取tableViewHeaderView中的模型
 - (YYSightSpotHeaderBottomCollectionViewCellModel *)getHeaderBottomCollectionViewCellModelWithIndexPath:(NSIndexPath *)indexPath;
 //组头的View

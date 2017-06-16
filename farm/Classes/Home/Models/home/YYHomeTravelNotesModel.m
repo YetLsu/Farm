@@ -21,6 +21,8 @@
              @"travelContenturl" : @"contenturl",
              @"travelTag" : @"tag",
              @"travelVisitNum" : @"visitnum",
+             @"commentNum" : @"commentnum",
+             @"praiseNum" : @"praisenum",
              };
 }
 

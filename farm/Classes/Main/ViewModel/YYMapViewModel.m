@@ -51,6 +51,7 @@
             return ;
         }
         CLPlacemark *placemark = [placemarks firstObject];
+//        NSLog(@"%@",placemark.addressDictionary);
         if (placemark.name) {
             NSString *cityName = placemark.locality;
       

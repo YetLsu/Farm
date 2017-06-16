@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class YYHomeThisMonthRecommendModel;
 @interface YYThisMonthCommendViewController : UIViewController
 
+- (instancetype)initWithModel:(YYHomeThisMonthRecommendModel *)model;
 @end

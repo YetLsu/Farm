@@ -37,7 +37,6 @@
  */
 - (void)addFooterRefresh:(MJRefreshComponentRefreshingBlock) refreshBlock{
     self.footer  = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:refreshBlock];
-    
     [self.footer setTitle:@"没有更多数据" forState:MJRefreshStateNoMoreData];
     [self.footer setTitle:@"点击加载更多数据" forState:MJRefreshStateIdle];
     self.mj_footer = self.footer;

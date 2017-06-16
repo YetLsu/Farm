@@ -54,6 +54,7 @@
         
         [self addAnnotation];
     }
+    
     return self;
 
 }

@@ -13,4 +13,5 @@
 
 - (instancetype)initWithSpotModel:(YYSightSpotModel *)model;
 
+- (instancetype)initWithSpodID:(NSString *)spotID;
 @end

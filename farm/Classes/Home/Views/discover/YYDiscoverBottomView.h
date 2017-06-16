@@ -14,5 +14,15 @@
 
 @property (nonatomic, copy) NSString *praiseNumStr;
 
+@property (nonatomic, strong) UIColor *centerLineViewColor;
+
+@property (nonatomic, strong) UIColor *titleColor;
+
+@property (nonatomic, strong) UIImage *commentImage;
+
+@property (nonatomic, strong) UIImage *praiseImage;
+
 @property (nonatomic, copy) void (^YYBtnClick) (NSInteger tag);
+
+
 @end

@@ -12,10 +12,16 @@
 #import <WebKit/WebKit.h>
 
 #import "YYDiscoverBottomView.h"
+#import "NFCommnetViewController.h"
 
 @interface YYDiscoverViewController ()
 
 @property (nonatomic, strong) YYHomeDiscoverModel *model;
+@property (nonatomic, strong) YYDiscoverBottomView *bottomView;
+@property (nonatomic, strong) NFAccount *account;
+
+//是否点赞
+@property (nonatomic, assign) BOOL isPraise;
 
 @end
 
@@ -29,9 +35,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     self.title = @"发现详情";
     self.view.backgroundColor = kViewBGColor;
-    
+    NFAccount *account = [NFAccountTool account];
+    self.account = account;
     CGFloat bottomViewH = 46;
     YYDiscoverBottomView *bottomView = [[YYDiscoverBottomView alloc] init];
     [self.view addSubview:bottomView];
@@ -39,11 +47,15 @@
         make.left.right.bottom.mas_equalTo(self.view);
         make.height.mas_equalTo(bottomViewH);
     }];
-    bottomView.commentNumStr = [NSString stringWithFormat:@"%d", self.model.commentnum];
-    bottomView.praiseNumStr = [NSString stringWithFormat:@"%d", self.model.praisenum];
+//    bottomView.commentNumStr = [NSString stringWithFormat:@"%d", 7];
+//    bottomView.praiseNumStr = [NSString stringWithFormat:@"%d", 89];
+    self.bottomView = bottomView;
     [bottomView setYYBtnClick:^(NSInteger tag) {
         if (tag == 0) {
             YYLog(@"评论");
+            NFCommnetViewController *vc = [[NFCommnetViewController alloc] init];
+            vc.discoverid = self.model.discoverID;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if (tag == 1) {
             YYLog(@"点赞");
@@ -60,6 +72,29 @@
         make.left.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(bottomView.mas_top);
     }];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    
+    parameters[@"username"] = _account.username;
+    parameters[@"discoverid"] = [NSString stringWithFormat:@"%d",self.model.discoverID];
+    
+    
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/discover/getCommentAndPraise.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
+        
+    } completionHandler:^(id responseObject, NSError *error) {
+//        NSLog(@"%@",responseObject);
+        NSString *commentNum = [NSString stringWithFormat:@"%@",responseObject[@"commentnum"]];
+        NSString *praiseNum = [NSString stringWithFormat:@"%@",responseObject[@"praisenum"]];
+        _bottomView.commentNumStr = commentNum;
+        _bottomView.praiseNumStr = praiseNum;
+        if ([responseObject[@"praise"] intValue] == 900) {
+            _isPraise = YES;
+        }else{
+            _isPraise = NO;
+        }
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

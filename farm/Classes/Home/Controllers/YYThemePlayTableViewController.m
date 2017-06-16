@@ -11,6 +11,8 @@
 #import "YYThemePlayViewModel.h"
 #import "YYThemePlayTableViewCell.h"
 
+#import "YYHomeMarkTableViewController.h"
+
 @interface YYThemePlayTableViewController ()
 
 @end
@@ -38,10 +40,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YYThemePlayTableViewCell *cell = [YYThemePlayTableViewCell themePlayTableViewCellWithTableView:tableView];
-    
     cell.model = (YYThemePlayModel *)[self.viewModel getTableViewModelWithIndexPath:indexPath];
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    YYThemePlayModel *model = (YYThemePlayModel *)[self.viewModel getTableViewModelWithIndexPath:indexPath];
+    YYHomeMarkTableViewController *markVc = [[YYHomeMarkTableViewController alloc] initWithCollectionViewCellModel:model];
+    [self.navigationController pushViewController:markVc animated:YES];
+
+}
+
+
+
 
 @end

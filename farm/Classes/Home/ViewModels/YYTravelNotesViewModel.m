@@ -33,7 +33,7 @@
  */
 - (void)getModelsArrayWithParameters:(NSDictionary *)parameters andCallBack:(void (^)(NSArray *, NSError *))callback{
     self.sortName = parameters[@"tag"];
-    [NSObject GET:@"http://nc.guonongda.com:8808/app/travelnotes/getTravelNotesList.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/travelnotes/getTravelNotesListback1.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
         
     } completionHandler:^(id responseObject, NSError *error) {
         if ([responseObject isEqual:[NSNull null]]) {

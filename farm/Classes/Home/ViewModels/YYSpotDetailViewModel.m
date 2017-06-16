@@ -51,6 +51,37 @@
     }
     return _tableViewHeaderTitleArray;
 }
+- (void)getThisSpotModelWithSpotID:(NSString *)spotID andCallBack:(void (^)(YYSightSpotModel *model, NSError *error))callback{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"spotid"] = spotID;
+    YYUserModel *userModel = [YYUserTool userModel];
+    if (userModel.lon) {
+        parameters[@"lon"] = userModel.lon;
+        parameters[@"lat"] = userModel.lat;
+    }
+    else{
+        parameters[@"lon"] = @"120";
+        parameters[@"lat"] = @"30";
+    }
+    [NSObject GET:@"http://nc.guonongda.com:8808/app/banner/getScenicSpotsBySpotid.do" parameters:parameters progress:^(NSProgress *downloadProgress) {
+        
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject isEqual:[NSNull null]]) {
+            callback(nil, [[NSError alloc] init]);
+            return;
+        }
+        if (error) {
+            callback(nil, error);
+            return;
+        }
+        NSDictionary *dic = responseObject[@"data"];
+        YYSightSpotModel *model = [YYSightSpotModel yy_modelWithDictionary:dic];
+        model.spotTags = [model.spotTagsString componentsSeparatedByString:@"|"];
+        self.model = model;
+        callback(model,nil);
+
+    }];
+}
 - (NSArray *)headerBottomModelsArray{
     if (!_headerBottomModelsArray) {
         YYSightSpotHeaderBottomCollectionViewCellModel *model0 = [[YYSightSpotHeaderBottomCollectionViewCellModel alloc] init];

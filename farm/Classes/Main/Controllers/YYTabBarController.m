@@ -11,6 +11,7 @@
 #import "YYPlayViewController.h"
 #import "YYProfileViewController.h"
 #import "YYNavigationController.h"
+#import "NFMeViewController.h"
 
 @interface YYTabBarController ()
 
@@ -29,8 +30,10 @@
     YYPlayViewController *discover = [[YYPlayViewController alloc] init];
     [self addChildControllerWithChildController:discover image:[UIImage imageNamed:@"tabbar_play_nor"] selectImage:[UIImage imageNamed:@"tabbar_play_sel"] title:@"发现"];
     
-    YYProfileViewController *profile = [[YYProfileViewController alloc] init];
-    [self addChildControllerWithChildController:profile image:[UIImage imageNamed:@"tabbar_profile_nor"] selectImage:[UIImage imageNamed:@"tabbar_profile_sel"] title:@"我的"];
+//    YYProfileViewController *profile = [[YYProfileViewController alloc] init];
+    
+    NFMeViewController *me = [[NFMeViewController alloc] init];
+    [self addChildControllerWithChildController:me image:[UIImage imageNamed:@"tabbar_profile_nor"] selectImage:[UIImage imageNamed:@"tabbar_profile_sel"] title:@"我的"];
     
     
     

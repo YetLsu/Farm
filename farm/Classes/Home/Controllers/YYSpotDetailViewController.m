@@ -8,6 +8,7 @@
 
 #import "YYSpotDetailViewController.h"
 #import "YYSpotDetailViewModel.h"
+
 #import "YYSightSpotModel.h"
 #import "YYSightSpotNavView.h"
 #import "YYSightSpotHeaderView.h"
@@ -27,7 +28,11 @@
 
 #import "YYSightSpotProductViewController.h"
 #import "YYTripReadTableViewController.h"
+#import "NFReadFirstViewController.h"
+#import "NFHowToGoViewController.h"
+#import "NFTuristViewController.h"
 
+#import "NFAccount.h"
 
 @interface YYSpotDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
@@ -66,6 +71,8 @@
 @property (nonatomic, strong) YYSightSpotMapTableViewCell *mapTableViewCell;
 
 @property (nonatomic, strong) CLGeocoder *geocoder;
+
+@property (nonatomic, strong) NFAccount *account;
 @end
 
 @implementation YYSpotDetailViewController
@@ -77,6 +84,9 @@
 }
 - (YYSightSpotMapTableViewCell *)mapTableViewCell{
     if (!_mapTableViewCell) {
+        if (self.model.cityLon == 0) {
+            return nil;
+        }
         _mapTableViewCell = [[YYSightSpotMapTableViewCell alloc] initWithSpotModel:self.model];
         _mapTableViewCell.backgroundColor = kViewBGColor;
         [_mapTableViewCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -171,11 +181,48 @@
     }
     return self;
 }
+- (instancetype)initWithSpodID:(NSString *)spotID{
+    if (self = [super init]) {
+        
+        self.viewModel = [[YYSpotDetailViewModel alloc] initWithModel:nil];
+        self.viewModel.foldArray = [NSMutableArray array];
+        
+        [NSNumber numberWithBool:NO];
+        [self.viewModel.foldArray addObjectsFromArray:@[[NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO]]];
+        
+        self.tableViewHeaderImageViewH = 365.0/603*kNoNavHeight;
+        self.tableViewBottomViewH = 40;
+        self.viewModel.tableViewHeaderTopViewH = self.tableViewHeaderImageViewH;
+        self.viewModel.tableViewHeaderBottomViewH = self.tableViewBottomViewH;
+        
+        self.model = [[YYSightSpotModel alloc] init];
+        self.model.spotID = spotID;
+        
+        [self.viewModel getThisSpotModelWithSpotID:spotID andCallBack:^(YYSightSpotModel *model, NSError *error) {
+            if (error) {
+                return ;
+            }
+            self.model = model;
+            __weak typeof(self) weakSelf = self;
+            [self.viewModel setYYWebViewFinshedBlock:^(CGFloat cellH) {
+                weakSelf.introWebViewH = cellH;
+                weakSelf.introWebView.height = cellH;
+                NSIndexSet *set = [NSIndexSet indexSetWithIndex:1];
+                [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
+            }];
+            [self.tableView reloadData];
+
+        }];
+    }
+    return self;
+}
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.view.backgroundColor = kViewBGColor;
     
+    self.account = [NFAccountTool account];
     //添加子控件
     [self addSubViews];
     
@@ -319,10 +366,13 @@
     
     YYSightSpotHeaderView *headerView = [[YYSightSpotHeaderView alloc] initWithHeight:self.tableViewHeaderImageViewH andBottomViewH:self.tableViewBottomViewH];
     
-    [headerView.collectBtn setImage:[UIImage imageNamed:@"spot_collect_yes"] forState:UIControlStateNormal];
-    [headerView.collectBtn bk_addEventHandler:^(id sender) {
-        YYLog(@"收藏按钮被点击");
-    } forControlEvents:UIControlEventTouchUpInside];
+    [headerView.collectBtn setImage:[UIImage imageNamed:@"spot_collect_no"] forState:UIControlStateNormal];
+    [headerView.collectBtn setImage:[UIImage imageNamed:@"spot_collect_yes"] forState:UIControlStateSelected];
+    [headerView.collectBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [headerView.collectBtn bk_addEventHandler:^(id sender) {
+//#warning TODO 收藏按钮
+//        YYLog(@"收藏按钮被点击");
+//    } forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
@@ -333,12 +383,48 @@
 
 }
 
+#pragma mark －收藏点击的方法
+- (void)likeAction:(UIButton *)button{
+//    NFAccount *account = [NFAccountTool account];
+    if (!_account.username) {
+        UIAlertController *controller = [NFUtils creatAlertWithMessage:@"你还没登录呢"];
+        [self presentViewController:controller animated:YES completion:nil];
+        return;
+    }
+    button.selected = !button.selected;
+    [self collecteSpot:button.selected];
+}
+
+- (void)collecteSpot:(BOOL)yorn{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"spotid"] = self.model.spotID;
+    parameters[@"username"] = self.account.username;
+    NSString *url = nil;
+    NSString *message = nil;
+    if (yorn) {
+        message = @"收藏成功";
+        url = @"http://nc.guonongda.com:8808/app/collect/saveSpotCollection.do";
+    }else{
+        message = @"收藏取消成功";
+        url = @"http://nc.guonongda.com:8808/app/collect/cancelSpotCollection.do";
+    }
+    [NSObject POST:url parameters:parameters progress:^(NSProgress *downloadProgress) {
+        
+    } completionHandler:^(id responseObject, NSError *error) {
+        if ([responseObject[@"status"] intValue] == 800) {
+            UIAlertController *controller = [NFUtils creatAlertWithMessage: message];
+            [self presentViewController:controller animated:YES completion:nil];
+        }
+    }];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
@@ -378,10 +464,11 @@
         YYSightSpotNearbyTableViewCell *cell = [YYSightSpotNearbyTableViewCell sightSpotNearbyTableViewCellWithTableView:tableView];
         
         cell.modelsArray = self.nearbyModelsArray;
-        
+        __weak typeof (self)weakself = self;
         [cell setYYCollectionViewCellBlock:^(YYSightSpotModel *model) {
-            YYLog(@"%@", model.spotTitle);
-            
+//            YYLog(@"%@", model.spotTitle);
+            YYSpotDetailViewController *vc = [[YYSpotDetailViewController alloc] initWithSpotModel:model];
+            [weakself.navigationController pushViewController:vc animated:YES];
         }];
 
         return cell;
@@ -444,7 +531,13 @@
         YYSightSpotProductViewController *controller = [[YYSightSpotProductViewController alloc] initWithModel:self.productModelsArray[indexPath.row]];
         [self.navigationController pushViewController:controller animated:YES];
     }
+    
+    
+    
 }
+
+
+
 #pragma mark 通过KVO监听tableView的滚动
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([@"contentOffset" isEqualToString:keyPath]) {
@@ -508,9 +601,20 @@
 //    YYSightSpotHeaderBottomCollectionViewCellModel *model = [self.viewModel getHeaderBottomCollectionViewCellModelWithIndexPath:indexPath];
     
     if (indexPath.row == 0) {
-        YYTripReadTableViewController *VC = [[YYTripReadTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        NFReadFirstViewController *VC = [[NFReadFirstViewController alloc] init];
+        VC.model = self.model;
+        
+        [self.navigationController pushViewController:VC animated:YES];
+    }else if (indexPath.row == 1){
+        NFHowToGoViewController *VC = [[NFHowToGoViewController alloc] init];
+        VC.model = self.model;
+        [self.navigationController pushViewController:VC animated:YES];
+    }else{
+        NFTuristViewController *VC = [[NFTuristViewController alloc] initWithNibName:@"NFTuristViewController" bundle:nil];
+        VC.spotid = self.model.spotID;
         [self.navigationController pushViewController:VC animated:YES];
     }
+        
 //    YYLog(@"%@", model.title);
 }
 /*

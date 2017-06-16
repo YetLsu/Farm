@@ -32,7 +32,7 @@
     self.title = @"出行必读";
     self.view.backgroundColor = kViewBGColor;
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 

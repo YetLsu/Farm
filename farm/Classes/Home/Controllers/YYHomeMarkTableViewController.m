@@ -10,6 +10,7 @@
 #import "YYHomeCollectionViewCellModel.h"
 
 #import "YYHomeMarkViewModel.h"
+#import "YYThemePlayModel.h"
 
 #import "YYSightSpotModel.h"
 #import "YYSightSpotTableViewCell.h"
@@ -30,6 +31,15 @@
     }
     return self;
 }
+- (instancetype)initWithCollectionViewCellModel:(YYThemePlayModel *)themePlayModel{
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
+        
+        self.title = themePlayModel.themePlayName;
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     self.viewModel = [[YYHomeMarkViewModel alloc] init];
     self.viewModel.pageNumber = 10;

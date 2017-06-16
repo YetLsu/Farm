@@ -14,10 +14,11 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *themePlayImageView;
 @end
-
+static NSString *ID = @"YYThemePlayTableViewCell";
 @implementation YYThemePlayTableViewCell
 + (instancetype)themePlayTableViewCellWithTableView:(UITableView *)tableView{
-    static NSString *ID = @"YYThemePlayTableViewCell";
+    
+
     YYThemePlayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YYThemePlayTableViewCell" owner:nil options:nil] lastObject];

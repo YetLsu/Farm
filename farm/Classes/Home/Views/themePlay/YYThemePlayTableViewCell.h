@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class YYThemePlayModel;
+
 @interface YYThemePlayTableViewCell : UITableViewCell
 
 + (instancetype)themePlayTableViewCellWithTableView:(UITableView *)tableView;

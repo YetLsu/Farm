@@ -31,4 +31,7 @@
 //访问量
 @property (nonatomic, assign) int travelVisitNum;
 
+@property (nonatomic, assign) int commentNum;
+
+@property (nonatomic, assign) int praiseNum;
 @end
